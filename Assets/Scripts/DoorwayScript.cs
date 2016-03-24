@@ -55,7 +55,6 @@ public class DoorwayScript : MonoBehaviour {
                                                     GetComponentInParent<Transform>().position.y,
                                                     cameraTransform.position.z);
             cameraFollow.zoomEndValue = cameraZoom / camera.aspect;
-            Debug.Log(camera.aspect);
             currentRoom = true;           
         }
         else
