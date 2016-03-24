@@ -40,6 +40,8 @@ public class EnemyAI : MonoBehaviour
         isWaiting = false;
         seePlayer = false;
         isCircular = true;
+
+
         
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
@@ -85,13 +87,16 @@ public class EnemyAI : MonoBehaviour
         else if (currentEnemyState == EnemyState.Collapsed)
         {
             speed = 0f;
+            
         }
         else if (currentEnemyState == EnemyState.Suspicious)
         {
+            
             speed = 4f;
         }
         else
         {
+            
             speed = 1f;
         }
     }

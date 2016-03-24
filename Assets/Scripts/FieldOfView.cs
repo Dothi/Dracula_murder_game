@@ -9,6 +9,7 @@ public class FieldOfView : MonoBehaviour
     public float sightDist;
     float timer;
     EnemyAI AI;
+    PlayerStatusScript playerStatus;
     
     public RaycastHit2D[] hits;
 
@@ -26,6 +27,7 @@ public class FieldOfView : MonoBehaviour
         AI = GetComponent<EnemyAI>();
         sightDist = 6f;
         currentFacingState = FacingState.UP;
+        playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatusScript>();
         
     }
 
@@ -33,6 +35,11 @@ public class FieldOfView : MonoBehaviour
     {
         Facing();
         Investigate();
+
+        if (AI.seePlayer && playerStatus.currentPlayerStatus == PlayerStatusScript.PlayerStatus.Suspicious)
+        {
+            Debug.Log("ded");
+        }
 
     }
 
@@ -93,28 +100,28 @@ public class FieldOfView : MonoBehaviour
                 if (hit1 && hit1.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 
                 if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit3 && hit3.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit4 && hit4.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                   
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else
                 {
@@ -142,27 +149,27 @@ public class FieldOfView : MonoBehaviour
                 if (hit1 && hit1.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit3 && hit3.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit4 && hit4.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                   
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                 
                 }
                 else
                 {
@@ -187,27 +194,27 @@ public class FieldOfView : MonoBehaviour
                 if (hit1 && hit1.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit3 && hit3.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit4 && hit4.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else
                 {
@@ -232,27 +239,27 @@ public class FieldOfView : MonoBehaviour
              if (hit1 && hit1.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                   
                 }
                 else if (hit3 && hit3.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit4 && hit4.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    Debug.Log("Player hit");
+                    
                 }
                 else
                 {
