@@ -2,25 +2,43 @@
 using UnityEngine.UI;
 using UnityEngine.Events;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
     public bool gameOver = false;
+    public bool gameWon = false;
     GameObject playAgainButton;
+    public List<GameObject> enemies;
 
 	void Start ()
     {
         playAgainButton = GameObject.Find("Button_PlayAgain");
+        enemies = new List<GameObject>();
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
 	}
 	
 
 	void Update ()
     {
-        if (gameOver && Time.timeScale != 0)
+        if (gameOver)
         {
-            playAgainButton.SetActive(true);
-            playAgainButton.GetComponentInChildren<Text>().text = "You Lose - Play Again";
-            Time.timeScale = 0;
+            if (Time.timeScale != 0)
+            {
+                Time.timeScale = 0;
+            }
+            if (!playAgainButton.activeInHierarchy)
+            {
+                playAgainButton.SetActive(true);
+            }
+            if (gameWon)
+            {
+                playAgainButton.GetComponentInChildren<Text>().text = "You Win! - Play Again";
+            }
+            else
+            {
+                playAgainButton.GetComponentInChildren<Text>().text = "You Lose - Play Again";
+            }            
         }
         else if (!gameOver)
         {

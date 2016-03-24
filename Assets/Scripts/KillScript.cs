@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class KillScript : MonoBehaviour {
 
     BloodBar bloodBar;
+    GameController gameController;
 
     List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject killTarget = null;
@@ -15,6 +16,7 @@ public class KillScript : MonoBehaviour {
     void Start()
     {
         bloodBar = GetComponent<BloodBar>();
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -91,9 +93,19 @@ public class KillScript : MonoBehaviour {
     }
 
     void KillEnemy(GameObject target)
-    {
+    {       
         target.SetActive(false);
         enemiesInRange.Remove(target);
+        CheckWinForZeroEnemies(target);
+    }
+    void CheckWinForZeroEnemies(GameObject target)
+    {
+        gameController.enemies.Remove(target);
+        if (gameController.enemies.Count < 1)
+        {
+            gameController.gameOver = true;
+            gameController.gameWon = true;
+        }
     }
 }
 
