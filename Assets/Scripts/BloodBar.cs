@@ -4,6 +4,7 @@ using System.Collections;
 
 public class BloodBar : MonoBehaviour {
 
+    GameController gameController;
     KillScript killScript;
     Slider bloodBar;
 
@@ -15,6 +16,7 @@ public class BloodBar : MonoBehaviour {
 	void Start ()
     {
         currentBlood = maxBlood;
+        gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         killScript = GetComponent<KillScript>();
         bloodBar = GameObject.Find("BloodSlider").GetComponent<Slider>();
 	}
@@ -32,9 +34,14 @@ public class BloodBar : MonoBehaviour {
         {
             currentBlood = maxBlood;
         }
-        if (currentBlood < 0)
+        if (currentBlood <= 0)
         {
             currentBlood = 0;
+            if (!gameController.gameOver)
+            {
+                gameController.gameOver = true;
+                Debug.Log("Game Over");
+            }
         }
 	}
 
