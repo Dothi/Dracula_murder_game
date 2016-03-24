@@ -13,7 +13,7 @@ public class EnemyAI : MonoBehaviour
     private Waypoint currentWaypoint;
     public int currentIndex;
     private float speedStorage;
-    public bool isDead;
+    
     bool isWaiting;
     public bool seePlayer;
     GameObject player;
@@ -40,7 +40,7 @@ public class EnemyAI : MonoBehaviour
         isWaiting = false;
         seePlayer = false;
         isCircular = true;
-        isDead = false;
+        
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
         if (waypoints.Length > 0)
