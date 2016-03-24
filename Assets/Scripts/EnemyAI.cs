@@ -11,8 +11,9 @@ public class EnemyAI : MonoBehaviour
     public int randomizer { get { return Random.Range(0, waypoints.Length); } }
 
     private Waypoint currentWaypoint;
-    private int currentIndex;
+    public int currentIndex;
     private float speedStorage;
+    public bool isDead;
     bool isWaiting;
     public bool seePlayer;
     GameObject player;
@@ -39,11 +40,12 @@ public class EnemyAI : MonoBehaviour
         isWaiting = false;
         seePlayer = false;
         isCircular = true;
+        isDead = false;
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
         if (waypoints.Length > 0)
         {
-            currentWaypoint = waypoints[randomizer];
+            currentWaypoint = waypoints[0];
         }
     }
 
@@ -62,7 +64,10 @@ public class EnemyAI : MonoBehaviour
 
     void Pause()
     {
-        isWaiting = !isWaiting;
+        if (currentEnemyState == EnemyState.Patrolling)
+        {
+            isWaiting = !isWaiting;
+        }
     }
     void isBeingKilled()
     {
@@ -71,14 +76,19 @@ public class EnemyAI : MonoBehaviour
         {
             currentEnemyState = EnemyState.IsBeingKilled;
         }
-        else
-        {
-            currentEnemyState = EnemyState.Patrolling;
-        }
+        
 
-        if (currentEnemyState == EnemyState.IsBeingKilled)
+        if (currentEnemyState == EnemyState.IsBeingKilled) 
         {
             speed = 0f;
+        }
+        else if (currentEnemyState == EnemyState.Collapsed)
+        {
+            speed = 0f;
+        }
+        else if (currentEnemyState == EnemyState.Suspicious)
+        {
+            speed = 4f;
         }
         else
         {
@@ -104,12 +114,13 @@ public class EnemyAI : MonoBehaviour
 
         else
         {
-
-            if (currentWaypoint.waitSeconds > 0)
-            {
-                Pause();
-                Invoke("Pause", currentWaypoint.waitSeconds);
-            }
+            
+                if (currentWaypoint.waitSeconds > 0)
+                {
+                    Pause();
+                    Invoke("Pause", currentWaypoint.waitSeconds);
+                }
+            
 
             if (currentWaypoint.speedOut > 0)
             {
@@ -136,21 +147,24 @@ public class EnemyAI : MonoBehaviour
         {
             if (!inReverse)
             {
-                foreach (var wp in waypoints)
-                {
-                    wp.waitSeconds = wp.randomizer;
-                }
-                currentIndex = randomizer;
+                
+                
+                    foreach (var wp in waypoints)
+                    {
+                        wp.waitSeconds = wp.randomizer;
+                    }
+                    currentIndex = randomizer;
+                
 
             }
-            else
+           /* else
             {
                 if ((!inReverse && currentIndex + 1 >= waypoints.Length) || (inReverse && currentIndex == 0))
                 {
                     inReverse = !inReverse;
                 }
-                currentIndex = (!inReverse) ? currentIndex + 1 : currentIndex - 1;
-            }
+                currentIndex = randomizer;
+            }*/
             currentWaypoint = waypoints[currentIndex];
 
         }
