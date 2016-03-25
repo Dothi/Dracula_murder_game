@@ -25,7 +25,8 @@ public class EnemyAI : MonoBehaviour
         Waiting,
         Suspicious,
         IsBeingKilled,
-        Collapsed
+        Collapsed,
+        Dead
     };
 
     public EnemyState currentEnemyState;
@@ -55,13 +56,10 @@ public class EnemyAI : MonoBehaviour
     {
         isBeingKilled();
 
-
         if (currentWaypoint != null && !isWaiting)
         {
             MoveTowardsWaypoint();
         }
-        
-
     }
 
     void Pause()
@@ -76,7 +74,10 @@ public class EnemyAI : MonoBehaviour
         
         if (ks.isSuckingBlood && this.gameObject == ks.killTarget)
         {
-            currentEnemyState = EnemyState.IsBeingKilled;
+            if (currentEnemyState != EnemyState.Dead)
+            {
+                currentEnemyState = EnemyState.IsBeingKilled;
+            }          
         }
         
 
@@ -86,17 +87,19 @@ public class EnemyAI : MonoBehaviour
         }
         else if (currentEnemyState == EnemyState.Collapsed)
         {
+            speed = 0f;  
+        }
+        else if (currentEnemyState == EnemyState.Dead)
+        {
             speed = 0f;
-            
+            Debug.Log("ei kävele");
         }
         else if (currentEnemyState == EnemyState.Suspicious)
-        {
-            
+        { 
             speed = 4f;
         }
         else
-        {
-            
+        {   
             speed = 1f;
         }
     }
@@ -119,13 +122,11 @@ public class EnemyAI : MonoBehaviour
 
         else
         {
-            
-                if (currentWaypoint.waitSeconds > 0)
-                {
-                    Pause();
-                    Invoke("Pause", currentWaypoint.waitSeconds);
-                }
-            
+            if (currentWaypoint.waitSeconds > 0)
+            {
+                Pause();
+                Invoke("Pause", currentWaypoint.waitSeconds);
+            }
 
             if (currentWaypoint.speedOut > 0)
             {
@@ -141,26 +142,19 @@ public class EnemyAI : MonoBehaviour
             NextWaypoint();
 
         }
-
-
     }
 
     private void NextWaypoint()
     {
-
         if (isCircular)
         {
             if (!inReverse)
-            {
-                
-                
+            { 
                     foreach (var wp in waypoints)
                     {
                         wp.waitSeconds = wp.randomizer;
                     }
                     currentIndex = randomizer;
-                
-
             }
            /* else
             {
@@ -171,7 +165,6 @@ public class EnemyAI : MonoBehaviour
                 currentIndex = randomizer;
             }*/
             currentWaypoint = waypoints[currentIndex];
-
         }
     }
 }

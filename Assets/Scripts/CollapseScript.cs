@@ -19,41 +19,38 @@ public class CollapseScript : MonoBehaviour {
 
     void Update()
     {
-        if (isCollapsed)
+        if (AI.currentEnemyState != EnemyAI.EnemyState.Dead)
         {
-            AI.currentEnemyState = EnemyAI.EnemyState.Collapsed;
-            transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.gray;
-            collapseTime += 10 * Time.deltaTime;
-            if (collapseTime >= collapseDuration)
+            if (isCollapsed)
             {
-                isCollapsed = false;
-                collapseTime = 0;
-                isSuspicious = true;
-
-            
+                AI.currentEnemyState = EnemyAI.EnemyState.Collapsed;
+                transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.gray;
+                collapseTime += 10 * Time.deltaTime;
+                if (collapseTime >= collapseDuration)
+                {
+                    isCollapsed = false;
+                    collapseTime = 0;
+                    isSuspicious = true;
+                }
+            }
+            else
+            {
+                transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.red;
+            }
+            if (isSuspicious && !isCollapsed)
+            {
+                suspiciousTime += 10 * Time.deltaTime;
+                AI.currentEnemyState = EnemyAI.EnemyState.Suspicious;
+                if (suspiciousTime >= suspiciousDuration)
+                {
+                    isSuspicious = false;
+                    suspiciousTime = 0;
+                }
+            }
+            else if (!isSuspicious && !isCollapsed)
+            {
+                AI.currentEnemyState = EnemyAI.EnemyState.Patrolling;
             }
         }
-        else
-        {
-
-            transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.red;
-        }
-        if (isSuspicious && !isCollapsed)
-        {
-            suspiciousTime += 10 * Time.deltaTime;
-            AI.currentEnemyState = EnemyAI.EnemyState.Suspicious;
-            if (suspiciousTime >= suspiciousDuration)
-            {
-                isSuspicious = false;
-                suspiciousTime = 0;
-            }
-        }
-        else if (!isSuspicious && !isCollapsed)
-        {
-            AI.currentEnemyState = EnemyAI.EnemyState.Patrolling;
-        }
-        
-        
-
     }
 }

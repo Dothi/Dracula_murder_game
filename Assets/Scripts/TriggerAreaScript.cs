@@ -39,10 +39,12 @@ public class TriggerAreaScript : MonoBehaviour
             if (other.gameObject.tag == "Player")
             {
                 if (AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
-                {
-                    
+                {                    
                     playerstatus.currentPlayerStatus = PlayerStatusScript.PlayerStatus.Suspicious;
-
+                }
+                else if (AI.currentEnemyState == EnemyAI.EnemyState.Dead)
+                {
+                    playerstatus.currentPlayerStatus = PlayerStatusScript.PlayerStatus.Caught;
                 }
             }
 
@@ -57,7 +59,6 @@ public class TriggerAreaScript : MonoBehaviour
                 }
             }
         }
-        
     }
     void OnTriggerExit2D(Collider2D other)
     {

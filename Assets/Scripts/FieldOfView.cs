@@ -10,6 +10,7 @@ public class FieldOfView : MonoBehaviour
     float timer;
     EnemyAI AI;
     PlayerStatusScript playerStatus;
+    List<GameObject> enemiesInFOV;
     
     public RaycastHit2D[] hits;
 
@@ -28,13 +29,21 @@ public class FieldOfView : MonoBehaviour
         sightDist = 6f;
         currentFacingState = FacingState.UP;
         playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatusScript>();
+        enemiesInFOV = new List<GameObject>();
         
     }
 
     public void Update()
     {
         Facing();
-        Investigate();
+        if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed)
+        {
+            Investigate();
+        }
+        else
+        {
+            AI.seePlayer = false;
+        }      
 
         if (AI.seePlayer && playerStatus.currentPlayerStatus == PlayerStatusScript.PlayerStatus.Suspicious)
         {
@@ -92,18 +101,12 @@ public class FieldOfView : MonoBehaviour
                 Debug.DrawRay(transform.position, (transform.up + transform.right + new Vector3(-.65f, 0, 0)) * sightDist, Color.green);
                 Debug.DrawRay(transform.position, transform.up * (sightDist + .2f), Color.green);
 
-                    
-               
-                
-                
-                
+                //See player                                                                 
                 if (hit1 && hit1.collider.tag == "Player")
                 {
-                    AI.seePlayer = true;
-                    
-                }
-                
-                if (hit2 && hit2.collider.tag == "Player")
+                    AI.seePlayer = true;                    
+                }                
+                else if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
                     
@@ -125,12 +128,56 @@ public class FieldOfView : MonoBehaviour
                 }
                 else
                 {
-                    AI.seePlayer = false;
-                    
+                    AI.seePlayer = false;                    
                 }
-                
-                
-                
+
+                //See enemies
+                if (hit1 && hit1.collider.tag == "Enemy")
+                {
+                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                    {
+                        enemiesInFOV.Add(hit1.collider.gameObject);
+                    }
+                }
+                /*
+                else
+                {
+                    if (enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                    {
+                        enemiesInFOV.Add(hit1.collider.gameObject);
+                    }
+                }*/
+                if (hit2 && hit2.collider.tag == "Enemy")
+                {
+                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                    {
+                        enemiesInFOV.Add(hit1.collider.gameObject);
+                    }
+                }
+                if (hit3 && hit3.collider.tag == "Enemy")
+                {
+                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                    {
+                        enemiesInFOV.Add(hit1.collider.gameObject);
+                    }
+                }
+                if (hit4 && hit4.collider.tag == "Enemy")
+                {
+                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                    {
+                        enemiesInFOV.Add(hit1.collider.gameObject);
+                    }
+                }
+                if (hit5 && hit5.collider.tag == "Enemy")
+                {
+                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                    {
+                        enemiesInFOV.Add(hit1.collider.gameObject);
+                    }
+                }
+
+
+
                 break;
             case FacingState.DOWN:
                 hit1 = Physics2D.Raycast(transform.position, -transform.up, (sightDist + .2f));

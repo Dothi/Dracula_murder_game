@@ -93,8 +93,10 @@ public class KillScript : MonoBehaviour {
     }
 
     void KillEnemy(GameObject target)
-    {       
-        target.SetActive(false);
+    {
+        //target.SetActive(false);
+        target.GetComponent<EnemyAI>().currentEnemyState = EnemyAI.EnemyState.Dead;
+        target.GetComponentInChildren<SpriteRenderer>().color = Color.black;
         enemiesInRange.Remove(target);
         CheckWinForZeroEnemies(target);
     }
