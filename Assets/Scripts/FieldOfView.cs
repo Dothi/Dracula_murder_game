@@ -139,14 +139,6 @@ public class FieldOfView : MonoBehaviour
                         enemiesInFOV.Add(hit1.collider.gameObject);
                     }
                 }
-                /*
-                else
-                {
-                    if (enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
-                    {
-                        enemiesInFOV.Add(hit1.collider.gameObject);
-                    }
-                }*/
                 if (hit2 && hit2.collider.tag == "Enemy")
                 {
                     if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
@@ -176,7 +168,37 @@ public class FieldOfView : MonoBehaviour
                     }
                 }
 
+                //"unsee" enemies
+                for (int i = 0; i < enemiesInFOV.Count; i++)
+                {
+                    bool inFOV = false;
 
+                    if (hit1 && hit1.collider.gameObject == enemiesInFOV[i])
+                    {
+                        inFOV = true;
+                    }
+                    if (hit2 && hit2.collider.gameObject == enemiesInFOV[i])
+                    {
+                        inFOV = true;
+                    }
+                    if (hit3 && hit3.collider.gameObject == enemiesInFOV[i])
+                    {
+                        inFOV = true;
+                    }
+                    if (hit4 && hit4.collider.gameObject == enemiesInFOV[i])
+                    {
+                        inFOV = true;
+                    }
+                    if (hit5 && hit5.collider.gameObject == enemiesInFOV[i])
+                    {
+                        inFOV = true;
+                    }
+
+                    if (inFOV)
+                    {
+                        enemiesInFOV.Remove(enemiesInFOV[i]);
+                    }
+                }
 
                 break;
             case FacingState.DOWN:

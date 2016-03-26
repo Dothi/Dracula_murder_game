@@ -92,7 +92,6 @@ public class EnemyAI : MonoBehaviour
         else if (currentEnemyState == EnemyState.Dead)
         {
             speed = 0f;
-            Debug.Log("ei kävele");
         }
         else if (currentEnemyState == EnemyState.Suspicious)
         { 
