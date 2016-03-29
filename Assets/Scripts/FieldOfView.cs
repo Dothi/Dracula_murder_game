@@ -5,12 +5,11 @@ using System.Linq;
 
 public class FieldOfView : MonoBehaviour
 {
-
     public float sightDist;
     float timer;
     EnemyAI AI;
     PlayerStatusScript playerStatus;
-    List<GameObject> enemiesInFOV;
+    public List<GameObject> enemiesInFOV;
     
     public RaycastHit2D[] hits;
 
@@ -123,8 +122,7 @@ public class FieldOfView : MonoBehaviour
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
-                    AI.seePlayer = true;
-                    
+                    AI.seePlayer = true;                    
                 }
                 else
                 {
@@ -132,69 +130,46 @@ public class FieldOfView : MonoBehaviour
                 }
 
                 //See enemies
-                if (hit1 && hit1.collider.tag == "Enemy")
+                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
                 {
-                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
-                    {
                         enemiesInFOV.Add(hit1.collider.gameObject);
-                    }
                 }
-                if (hit2 && hit2.collider.tag == "Enemy")
+                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject))
                 {
-                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
-                    {
-                        enemiesInFOV.Add(hit1.collider.gameObject);
-                    }
+                    enemiesInFOV.Add(hit2.collider.gameObject);
                 }
-                if (hit3 && hit3.collider.tag == "Enemy")
+                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject))
                 {
-                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
-                    {
-                        enemiesInFOV.Add(hit1.collider.gameObject);
-                    }
+                    enemiesInFOV.Add(hit3.collider.gameObject);
                 }
-                if (hit4 && hit4.collider.tag == "Enemy")
+                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject))
                 {
-                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
-                    {
-                        enemiesInFOV.Add(hit1.collider.gameObject);
-                    }
+                    enemiesInFOV.Add(hit4.collider.gameObject);
                 }
-                if (hit5 && hit5.collider.tag == "Enemy")
+                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject))
                 {
-                    if (!enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
-                    {
-                        enemiesInFOV.Add(hit1.collider.gameObject);
-                    }
+                        enemiesInFOV.Add(hit5.collider.gameObject);
                 }
 
                 //"unsee" enemies
                 for (int i = 0; i < enemiesInFOV.Count; i++)
                 {
-                    bool inFOV = false;
-
                     if (hit1 && hit1.collider.gameObject == enemiesInFOV[i])
                     {
-                        inFOV = true;
                     }
-                    if (hit2 && hit2.collider.gameObject == enemiesInFOV[i])
+                    else if (hit2 && hit2.collider.gameObject == enemiesInFOV[i])
                     {
-                        inFOV = true;
                     }
-                    if (hit3 && hit3.collider.gameObject == enemiesInFOV[i])
+                    else if (hit3 && hit3.collider.gameObject == enemiesInFOV[i])
                     {
-                        inFOV = true;
                     }
-                    if (hit4 && hit4.collider.gameObject == enemiesInFOV[i])
+                    else if (hit4 && hit4.collider.gameObject == enemiesInFOV[i])
                     {
-                        inFOV = true;
                     }
-                    if (hit5 && hit5.collider.gameObject == enemiesInFOV[i])
+                    else if (hit5 && hit5.collider.gameObject == enemiesInFOV[i])
                     {
-                        inFOV = true;
                     }
-
-                    if (inFOV)
+                    else
                     {
                         enemiesInFOV.Remove(enemiesInFOV[i]);
                     }
@@ -327,8 +302,7 @@ public class FieldOfView : MonoBehaviour
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
-                    AI.seePlayer = true;
-                    
+                    AI.seePlayer = true;                    
                 }
                 else
                 {
@@ -336,15 +310,6 @@ public class FieldOfView : MonoBehaviour
                 }
                 break;
         }
-
-
-
-
-
-
-
-
-
     }
 }
 
