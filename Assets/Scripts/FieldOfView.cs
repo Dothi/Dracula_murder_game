@@ -10,7 +10,7 @@ public class FieldOfView : MonoBehaviour
     EnemyAI AI;
     PlayerStatusScript playerStatus;
     public List<GameObject> enemiesInFOV;
-    
+
     public RaycastHit2D[] hits;
 
     public enum FacingState
@@ -29,7 +29,7 @@ public class FieldOfView : MonoBehaviour
         currentFacingState = FacingState.UP;
         playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatusScript>();
         enemiesInFOV = new List<GameObject>();
-        
+
     }
 
     public void Update()
@@ -42,21 +42,18 @@ public class FieldOfView : MonoBehaviour
         else
         {
             AI.seePlayer = false;
-        }      
-
-        if (AI.seePlayer && playerStatus.currentPlayerStatus == PlayerStatusScript.PlayerStatus.Suspicious)
-        {
-            Debug.Log("ded");
         }
+
+
 
     }
 
     void Facing()
     {
-        if (AI.directionOfTravel.y < -.5f && AI.directionOfTravel.x > AI.directionOfTravel.y)
+        if (AI.directionOfTravel.y < 0 && AI.directionOfTravel.x > AI.directionOfTravel.y)
         {
             currentFacingState = FacingState.DOWN;
-            
+
         }
         else if (AI.directionOfTravel.x < 0 && AI.directionOfTravel.x < AI.directionOfTravel.y && AI.directionOfTravel.x < AI.directionOfTravel.y * -1)
         {
@@ -66,24 +63,24 @@ public class FieldOfView : MonoBehaviour
         else if (AI.directionOfTravel.y > .5f && AI.directionOfTravel.x < AI.directionOfTravel.y)
         {
             currentFacingState = FacingState.UP;
-            
+
         }
-       
+
         else if (AI.directionOfTravel.x > 0 && AI.directionOfTravel.x > AI.directionOfTravel.y)
         {
             currentFacingState = FacingState.RIGHT;
-            
+
         }
-        
-        
+
+
     }
 
     void Investigate()
     {
         timer += Time.deltaTime;
 
-        
-        
+
+
 
         switch (currentFacingState)
         {
@@ -103,36 +100,36 @@ public class FieldOfView : MonoBehaviour
                 //See player                                                                 
                 if (hit1 && hit1.collider.tag == "Player")
                 {
-                    AI.seePlayer = true;                    
-                }                
+                    AI.seePlayer = true;
+                }
                 else if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit3 && hit3.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit4 && hit4.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                   
+
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
-                    AI.seePlayer = true;                    
+                    AI.seePlayer = true;
                 }
                 else
                 {
-                    AI.seePlayer = false;                    
+                    AI.seePlayer = false;
                 }
 
                 //See enemies
                 if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
                 {
-                        enemiesInFOV.Add(hit1.collider.gameObject);
+                    enemiesInFOV.Add(hit1.collider.gameObject);
                 }
                 else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject))
                 {
@@ -148,7 +145,7 @@ public class FieldOfView : MonoBehaviour
                 }
                 else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject))
                 {
-                        enemiesInFOV.Add(hit5.collider.gameObject);
+                    enemiesInFOV.Add(hit5.collider.gameObject);
                 }
 
                 //"unsee" enemies
@@ -193,27 +190,27 @@ public class FieldOfView : MonoBehaviour
                 if (hit1 && hit1.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit3 && hit3.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit4 && hit4.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                   
+
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                 
+
                 }
                 else
                 {
@@ -284,27 +281,27 @@ public class FieldOfView : MonoBehaviour
                 if (hit1 && hit1.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit3 && hit3.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit4 && hit4.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else
                 {
@@ -372,29 +369,29 @@ public class FieldOfView : MonoBehaviour
                 Debug.DrawRay(transform.position, -transform.right * (sightDist + .2f), Color.green);
 
 
-             if (hit1 && hit1.collider.tag == "Player")
+                if (hit1 && hit1.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 if (hit2 && hit2.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                   
+
                 }
                 else if (hit3 && hit3.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit4 && hit4.collider.tag == "Player")
                 {
                     AI.seePlayer = true;
-                    
+
                 }
                 else if (hit5 && hit5.collider.tag == "Player")
                 {
-                    AI.seePlayer = true;                    
+                    AI.seePlayer = true;
                 }
                 else
                 {
