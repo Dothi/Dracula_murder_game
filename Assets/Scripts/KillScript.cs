@@ -46,27 +46,48 @@ public class KillScript : MonoBehaviour {
         {
             if (killTarget != null && killTarget.activeInHierarchy)
             {
-                if (killHoldTime < killHoldDuration)
+                if (killTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
                 {
-                    isSuckingBlood = true;
-                    killHoldTime += 10 * Time.deltaTime;
+                    if (killTarget.transform.parent != gameObject.transform)
+                    {
+                        killTarget.transform.parent = gameObject.transform;
+                    }
                 }
-                else if (killHoldTime >= killHoldDuration)
+                else
                 {
-                    bloodBar.GetBloodFromKill(bloodBar.bloodFromKill);
-                    KillEnemy(killTarget);                   
+                    if (killHoldTime < killHoldDuration)
+                    {
+                        isSuckingBlood = true;
+                        killHoldTime += 10 * Time.deltaTime;
+                    }
+                    else if (killHoldTime >= killHoldDuration)
+                    {
+                        bloodBar.GetBloodFromKill(bloodBar.bloodFromKill);
+                        KillEnemy(killTarget);
+                    }
                 }
-            }   
+            }
         }
         else if (Input.GetKeyUp(KeyCode.E))
         {
-            if (killHoldTime < killHoldDuration && killTarget != null && killTarget.activeInHierarchy)
+            if (killTarget != null && killTarget.activeInHierarchy &&
+                killTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
             {
-                killTarget.GetComponent<CollapseScript>().isCollapsed = true;
+                if (killTarget.transform.parent == gameObject.transform)
+                {
+                    killTarget.transform.parent = null;
+                }
+            }
+            else
+            {
+                if (killHoldTime < killHoldDuration && killTarget != null && killTarget.activeInHierarchy)
+                {
+                    killTarget.GetComponent<CollapseScript>().isCollapsed = true;
+                }
             }
             isSuckingBlood = false;
             killTarget = null;
-            killHoldTime = 0;           
+            killHoldTime = 0;
         }
     }
 
