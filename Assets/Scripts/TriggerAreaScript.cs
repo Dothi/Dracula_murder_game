@@ -13,6 +13,7 @@ public class TriggerAreaScript : MonoBehaviour
     GameObject gamecontroller;
     GameController gc;
     float timer;
+    float bustTimer;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class TriggerAreaScript : MonoBehaviour
         fov = GetComponent<FieldOfView>();
         cs = GetComponent<CollapseScript>();
         timer = 0f;
+        bustTimer = 30f;
     }
 
     void Update()
@@ -108,7 +110,7 @@ public class TriggerAreaScript : MonoBehaviour
                     break;
                 case EnemyAI.EnemyState.Suspicious:
                     timer += 10 * Time.deltaTime;
-                    if (timer >= 2f)
+                    if (timer >= bustTimer)
                     {
                         gc.gameOver = true;
                     }
