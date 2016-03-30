@@ -4,6 +4,7 @@ using System.Collections;
 public class CameraArea : MonoBehaviour {
 
     Transform playerTransform;
+    GameController gc;
 
     Camera camera;
     CameraFollow cameraFollow;
@@ -19,7 +20,7 @@ public class CameraArea : MonoBehaviour {
     public LayerMask playerMask;
 
     SpriteRenderer fade;
-    bool currentRoom;
+    public bool currentRoom;
     float lerpTime = 0.6f;
     float currentLerpTime;
     bool resetLerp;
@@ -30,9 +31,10 @@ public class CameraArea : MonoBehaviour {
     void Start()
     {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
         camera = FindObjectOfType<Camera>();
-        cameraFollow =camera.GetComponent<CameraFollow>();
+        cameraFollow = camera.GetComponent<CameraFollow>();
         cameraTransform = camera.transform;
 
         roomBoundsMin = new Vector2(GetComponent<BoxCollider2D>().bounds.min.x, GetComponent<BoxCollider2D>().bounds.min.y);
@@ -48,18 +50,25 @@ public class CameraArea : MonoBehaviour {
     }
     void SetCurrentRoomAndCamera()
     {
-        if (Physics2D.OverlapArea(roomBoundsMin, roomBoundsMax, playerMask) != null &&
-            Physics2D.OverlapArea(roomBoundsMin, roomBoundsMax, playerMask).gameObject.CompareTag("Player"))
-        {            
-            cameraFollow.cameraEndPos = new Vector3(GetComponentInParent<Transform>().position.x,
-                                                    GetComponentInParent<Transform>().position.y,
-                                                    cameraTransform.position.z);
-            cameraFollow.zoomEndValue = cameraZoom / camera.aspect;
-            currentRoom = true;           
+        if (!gc.playerIsPeeking)
+        {
+            if (Physics2D.OverlapArea(roomBoundsMin, roomBoundsMax, playerMask) != null &&
+                Physics2D.OverlapArea(roomBoundsMin, roomBoundsMax, playerMask).gameObject.CompareTag("PlayerFeet"))
+            {
+                cameraFollow.cameraEndPos = new Vector3(transform.parent.position.x,
+                                                        transform.parent.position.y,
+                                                        cameraTransform.position.z);
+                cameraFollow.zoomEndValue = cameraZoom / camera.aspect;
+                currentRoom = true;
+            }
+            else
+            {
+                currentRoom = false;
+            }
         }
         else
         {
-            currentRoom = false;
+            //currentRoom = false;
         }
     }
     void FadeRooms()

@@ -4,6 +4,7 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
     public float moveSpeed = 6;
+    public bool canMove = true;
     private Rigidbody2D rb;
 
     bool moveUp;
@@ -18,7 +19,7 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update ()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && canMove)
         {
             moveUp = true;
         }
@@ -26,7 +27,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             moveUp = false;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && canMove)
         {
             moveLeft = true;
         }
@@ -34,7 +35,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             moveLeft = false;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && canMove)
         {
             moveDown = true;
         }
@@ -42,7 +43,7 @@ public class PlayerMovement : MonoBehaviour {
         {
             moveDown = false;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && canMove)
         {
             moveRight = true;
         }

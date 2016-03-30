@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour {
     GameObject playAgainButton;
     public List<GameObject> enemies;
 
+    public bool playerIsPeeking = false;
+
 	void Start ()
     {
         playAgainButton = GameObject.Find("Button_PlayAgain");
