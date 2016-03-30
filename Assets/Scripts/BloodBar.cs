@@ -17,7 +17,7 @@ public class BloodBar : MonoBehaviour {
     {
         currentBlood = maxBlood;
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        killScript = GetComponent<KillScript>();
+        killScript = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
         bloodBar = GameObject.Find("BloodSlider").GetComponent<Slider>();
 	}
 	

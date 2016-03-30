@@ -15,8 +15,8 @@ public class KillScript : MonoBehaviour {
 
     void Start()
     {
-        bloodBar = GetComponent<BloodBar>();
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        bloodBar = gameController.GetComponent<BloodBar>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -35,7 +35,7 @@ public class KillScript : MonoBehaviour {
         }
     }
 
-    void LateUpdate()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -46,45 +46,30 @@ public class KillScript : MonoBehaviour {
         {
             if (killTarget != null && killTarget.activeInHierarchy)
             {
-                if (killTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
+                if (killHoldTime < killHoldDuration)
                 {
-                    if (killTarget.transform.parent != gameObject.transform)
-                    {
-                        killTarget.transform.parent = gameObject.transform;
-                    }
+                    isSuckingBlood = true;
+                    killHoldTime += 10 * Time.deltaTime;
                 }
-                else
+                else if (killHoldTime >= killHoldDuration)
                 {
-                    if (killHoldTime < killHoldDuration)
-                    {
-                        isSuckingBlood = true;
-                        killHoldTime += 10 * Time.deltaTime;
-                    }
-                    else if (killHoldTime >= killHoldDuration)
+                    if (isSuckingBlood)
                     {
                         bloodBar.GetBloodFromKill(bloodBar.bloodFromKill);
-                        KillEnemy(killTarget);
+                        isSuckingBlood = false;
                     }
+                    KillEnemy(killTarget);
                 }
+
             }
         }
         else if (Input.GetKeyUp(KeyCode.E))
         {
-            if (killTarget != null && killTarget.activeInHierarchy &&
-                killTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
+            if (killHoldTime < killHoldDuration && killTarget != null && killTarget.activeInHierarchy)
             {
-                if (killTarget.transform.parent == gameObject.transform)
-                {
-                    killTarget.transform.parent = null;
-                }
+                killTarget.GetComponent<CollapseScript>().isCollapsed = true;
             }
-            else
-            {
-                if (killHoldTime < killHoldDuration && killTarget != null && killTarget.activeInHierarchy)
-                {
-                    killTarget.GetComponent<CollapseScript>().isCollapsed = true;
-                }
-            }
+
             isSuckingBlood = false;
             killTarget = null;
             killHoldTime = 0;
@@ -98,7 +83,8 @@ public class KillScript : MonoBehaviour {
         Vector3 currentPosition = transform.position;
         foreach (GameObject potentialTarget in enemies)
         {
-            if (!potentialTarget.GetComponent<CollapseScript>().isCollapsed)
+            if (potentialTarget.GetComponent<EnemyAI>().currentEnemyState != EnemyAI.EnemyState.Collapsed &&
+                potentialTarget.GetComponent<EnemyAI>().currentEnemyState != EnemyAI.EnemyState.Dead)
             {
                 Vector3 directionToTarget = potentialTarget.transform.position - currentPosition;
                 float dSqrToTarget = directionToTarget.sqrMagnitude;
@@ -115,7 +101,6 @@ public class KillScript : MonoBehaviour {
 
     void KillEnemy(GameObject target)
     {
-        //target.SetActive(false);
         target.GetComponent<EnemyAI>().currentEnemyState = EnemyAI.EnemyState.Dead;
         target.GetComponentInChildren<SpriteRenderer>().color = Color.black;
         enemiesInRange.Remove(target);
