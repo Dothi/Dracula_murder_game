@@ -4,34 +4,86 @@ using System.Collections;
 public class PlayerMovement : MonoBehaviour {
 
     public float moveSpeed = 6;
+    private Rigidbody2D rb;
 
-    CameraFollow cameraFollow;
-    Transform cameraTransform;
+    bool moveUp;
+    bool moveLeft;
+    bool moveDown;
+    bool moveRight;
 
     void Start()
     {
-        cameraFollow = FindObjectOfType<Camera>().GetComponent<CameraFollow>();
-        cameraTransform = cameraFollow.GetComponentInParent<Transform>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
 	void Update ()
     {
-	    //Movement
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
+            moveUp = true;
+        }
+        else
+        {
+            moveUp = false;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position = new Vector2(transform.position.x - moveSpeed * Time.deltaTime, transform.position.y);
+            moveLeft = true;
+        }
+        else
+        {
+            moveLeft = false;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position = new Vector2(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
+            moveDown = true;
+        }
+        else
+        {
+            moveDown = false;
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position = new Vector2(transform.position.x + moveSpeed * Time.deltaTime, transform.position.y);
+            moveRight = true;
+        }
+        else
+        {
+            moveRight = false;
         }
 	}
+    void FixedUpdate()
+    {
+        if (moveUp)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
+        }
+        else if (!moveDown)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
+        if (moveLeft)
+        {
+            rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+        }
+        else if (!moveRight)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+        if (moveDown)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
+        }
+        else if (!moveUp)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, 0);
+        }
+        if (moveRight)
+        {
+            rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+        }
+        else if (!moveLeft)
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+    }
 }

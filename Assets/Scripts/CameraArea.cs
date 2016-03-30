@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DoorwayScript : MonoBehaviour {
+public class CameraArea : MonoBehaviour {
 
     Transform playerTransform;
 
