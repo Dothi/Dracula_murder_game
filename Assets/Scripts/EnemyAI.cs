@@ -56,7 +56,7 @@ public class EnemyAI : MonoBehaviour
     void Update()
     {
         IsBeingKilled();
-        PlayerBusting();
+        
 
         if (currentWaypoint != null && !isWaiting)
         {
@@ -71,20 +71,7 @@ public class EnemyAI : MonoBehaviour
             isWaiting = !isWaiting;
         }
     }
-    void PlayerBusting()
-    {
-        switch (currentEnemyState)
-        {
-            case EnemyState.Patrolling:
-                break;
-            case EnemyState.Suspicious:
-                if (seePlayer)
-                {
-                    
-                }
-                break;
-        }
-    }
+    
     void IsBeingKilled()
     {
         

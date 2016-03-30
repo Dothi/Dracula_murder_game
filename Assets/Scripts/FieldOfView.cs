@@ -33,6 +33,8 @@ public class FieldOfView : MonoBehaviour
     public void Update()
     {
         Facing();
+        
+
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed)
         {
             Investigate();
