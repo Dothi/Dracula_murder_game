@@ -13,8 +13,8 @@ public class EnemyAI : MonoBehaviour
     private Waypoint currentWaypoint;
     public int currentIndex;
     private float speedStorage;
-    
-    bool isWaiting;
+    GameController gc;
+    public bool isWaiting;
     public bool seePlayer;
     GameObject player;
 
@@ -41,6 +41,7 @@ public class EnemyAI : MonoBehaviour
         isWaiting = false;
         seePlayer = false;
         isCircular = true;
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
 
         
@@ -54,7 +55,8 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        isBeingKilled();
+        IsBeingKilled();
+        PlayerBusting();
 
         if (currentWaypoint != null && !isWaiting)
         {
@@ -69,7 +71,21 @@ public class EnemyAI : MonoBehaviour
             isWaiting = !isWaiting;
         }
     }
-    void isBeingKilled()
+    void PlayerBusting()
+    {
+        switch (currentEnemyState)
+        {
+            case EnemyState.Patrolling:
+                break;
+            case EnemyState.Suspicious:
+                if (seePlayer)
+                {
+                    
+                }
+                break;
+        }
+    }
+    void IsBeingKilled()
     {
         
         if (ks.isSuckingBlood && this.gameObject == ks.killTarget)

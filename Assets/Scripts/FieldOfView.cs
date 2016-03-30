@@ -6,11 +6,9 @@ using System.Linq;
 public class FieldOfView : MonoBehaviour
 {
     public float sightDist;
-    float timer;
     EnemyAI AI;
-    PlayerStatusScript playerStatus;
     public List<GameObject> enemiesInFOV;
-
+    CollapseScript collapseScript;
     public RaycastHit2D[] hits;
 
     public enum FacingState
@@ -24,10 +22,10 @@ public class FieldOfView : MonoBehaviour
     public FacingState currentFacingState;
     public void Awake()
     {
+        collapseScript = GetComponent<CollapseScript>();
         AI = GetComponent<EnemyAI>();
         sightDist = 6f;
         currentFacingState = FacingState.UP;
-        playerStatus = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStatusScript>();
         enemiesInFOV = new List<GameObject>();
 
     }
@@ -43,9 +41,6 @@ public class FieldOfView : MonoBehaviour
         {
             AI.seePlayer = false;
         }
-
-
-
     }
 
     void Facing()
@@ -77,11 +72,6 @@ public class FieldOfView : MonoBehaviour
 
     void Investigate()
     {
-        timer += Time.deltaTime;
-
-
-
-
         switch (currentFacingState)
         {
             case FacingState.UP:
@@ -151,20 +141,46 @@ public class FieldOfView : MonoBehaviour
                 //"unsee" enemies
                 for (int i = 0; i < enemiesInFOV.Count; i++)
                 {
+                    EnemyAI _ai = enemiesInFOV[i].GetComponent<EnemyAI>();
                     if (hit1 && hit1.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit2 && hit2.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit3 && hit3.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit4 && hit4.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit5 && hit5.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else
                     {
@@ -240,22 +256,49 @@ public class FieldOfView : MonoBehaviour
                 }
 
                 //"unsee" enemies
-                for (int i = 0; i < enemiesInFOV.Count; i++)
+               
+                    for (int i = 0; i < enemiesInFOV.Count; i++)
                 {
+                    EnemyAI _ai = enemiesInFOV[i].GetComponent<EnemyAI>();
                     if (hit1 && hit1.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit2 && hit2.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit3 && hit3.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit4 && hit4.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit5 && hit5.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else
                     {
@@ -333,20 +376,46 @@ public class FieldOfView : MonoBehaviour
                 //"unsee" enemies
                 for (int i = 0; i < enemiesInFOV.Count; i++)
                 {
+                    EnemyAI _ai = enemiesInFOV[i].GetComponent<EnemyAI>();
                     if (hit1 && hit1.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit2 && hit2.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit3 && hit3.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit4 && hit4.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit5 && hit5.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else
                     {
@@ -423,20 +492,46 @@ public class FieldOfView : MonoBehaviour
                 //"unsee" enemies
                 for (int i = 0; i < enemiesInFOV.Count; i++)
                 {
+                    EnemyAI _ai = enemiesInFOV[i].GetComponent<EnemyAI>();
                     if (hit1 && hit1.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit2 && hit2.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit3 && hit3.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit4 && hit4.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else if (hit5 && hit5.collider.gameObject == enemiesInFOV[i])
                     {
+                        if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+                        {
+                            collapseScript.isSuspicious = true;
+                            AI.isWaiting = false;
+                        }
                     }
                     else
                     {
@@ -447,6 +542,7 @@ public class FieldOfView : MonoBehaviour
                 break;
         }
     }
+    
 }
 
 

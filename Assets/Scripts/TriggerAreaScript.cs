@@ -9,7 +9,6 @@ public class TriggerAreaScript : MonoBehaviour
 
     GameObject player;
     GameObject gamecontroller;
-    PlayerStatusScript playerstatus;
     GameController gc;
 
     void Start()
@@ -17,7 +16,6 @@ public class TriggerAreaScript : MonoBehaviour
         AI = GetComponent<EnemyAI>();
         triggerArea = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
-        playerstatus = player.GetComponent<PlayerStatusScript>();
         gamecontroller = GameObject.FindGameObjectWithTag("GameController");
         gc = gamecontroller.GetComponent<GameController>();
 
@@ -25,50 +23,43 @@ public class TriggerAreaScript : MonoBehaviour
 
     void Update()
     {
-        if (AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
+        EnableTrigger();
+    }
+    void EnableTrigger()
+    {
+        switch (AI.currentEnemyState)
         {
-            triggerArea.enabled = true;
+            case EnemyAI.EnemyState.Collapsed:
+                triggerArea.enabled = true;
+                break;
+            case EnemyAI.EnemyState.Dead:
+                triggerArea.enabled = true;
+                break;
+            case EnemyAI.EnemyState.Suspicious:
+                triggerArea.enabled = true;
+                break;
+            case EnemyAI.EnemyState.Patrolling:
+                triggerArea.enabled = false;
+                break;
+
         }
-
-
     }
     void OnTriggerStay2D(Collider2D other)
     {
-        if (playerstatus.currentPlayerStatus == PlayerStatusScript.PlayerStatus.Harmless)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                if (AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
-                {                    
-                    playerstatus.currentPlayerStatus = PlayerStatusScript.PlayerStatus.Suspicious;
-                }
-                else if (AI.currentEnemyState == EnemyAI.EnemyState.Dead)
-                {
-                    playerstatus.currentPlayerStatus = PlayerStatusScript.PlayerStatus.Caught;
-                }
-            }
-
-        }
-        else if (playerstatus.currentPlayerStatus == PlayerStatusScript.PlayerStatus.Suspicious)
-        {
-            if (other.gameObject.tag == "Player")
-            {
-                if (AI.currentEnemyState == EnemyAI.EnemyState.Suspicious)
-                {
-                    gc.gameOver = true;
-                }
-            }
-        }
+       switch (AI.currentEnemyState)
+       {
+           case EnemyAI.EnemyState.Collapsed:
+               break;
+           case EnemyAI.EnemyState.Dead:
+               break;
+           case EnemyAI.EnemyState.Suspicious:
+               gc.gameOver = true;
+               break;
+       }
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if(other.gameObject.tag == "Player")
-        {
-            if (AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
-            {
-                playerstatus.currentPlayerStatus = PlayerStatusScript.PlayerStatus.Harmless;
-            }
-        }
+        
     }
 }
 
