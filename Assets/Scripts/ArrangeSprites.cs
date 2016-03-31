@@ -17,7 +17,7 @@ public class ArrangeSprites : MonoBehaviour {
             }
             else if (sr.CompareTag("Floor"))
             {
-                sr.sortingOrder = -1000;
+                sr.sortingOrder = -10000;
             }
         }
 	}

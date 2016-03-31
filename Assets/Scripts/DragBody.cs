@@ -24,7 +24,7 @@ public class DragBody : MonoBehaviour {
         }
     }
 
-    void LateUpdate()
+    void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -40,6 +40,8 @@ public class DragBody : MonoBehaviour {
                     {
                         dragTarget.transform.parent = gameObject.transform;
                     }
+                    //dragTarget.GetComponent<Rigidbody2D>().velocity = gameObject.GetComponent<Rigidbody2D>().velocity;
+                    //^ tarvii colliderin ja rigidbodyn
                 }
             }
         }
