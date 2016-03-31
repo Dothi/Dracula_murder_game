@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class DragBody : MonoBehaviour {
 
-
+    public LayerMask unwalkableMask;
     List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject dragTarget = null;
 
@@ -34,14 +34,25 @@ public class DragBody : MonoBehaviour {
         {
             if (dragTarget != null && dragTarget.activeInHierarchy)
             {
-                if (dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
-                {
-                    if (dragTarget.transform.parent != gameObject.transform)
+                GameObject enemyCol = dragTarget.transform.Find("Collider").gameObject;
+
+                if (dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead &&
+                    !Physics2D.Linecast(transform.position, dragTarget.transform.position, unwalkableMask) &&
+                    Vector3.Distance(dragTarget.transform.position, transform.position) < 3)
+                {                 
+                    if (!enemyCol.activeInHierarchy)
                     {
-                        dragTarget.transform.parent = gameObject.transform;
+                        enemyCol.SetActive(true);
                     }
-                    //dragTarget.GetComponent<Rigidbody2D>().velocity = gameObject.GetComponent<Rigidbody2D>().velocity;
-                    //^ tarvii colliderin ja rigidbodyn
+                    dragTarget.GetComponent<Rigidbody2D>().velocity = gameObject.GetComponent<Rigidbody2D>().velocity;
+                }
+                else
+                {
+                    if (enemyCol.activeInHierarchy)
+                    {
+                        enemyCol.SetActive(false);
+                    }
+                    dragTarget.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 }
             }
         }
@@ -50,10 +61,12 @@ public class DragBody : MonoBehaviour {
             if (dragTarget != null && dragTarget.activeInHierarchy &&
                 dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
             {
-                if (dragTarget.transform.parent == gameObject.transform)
+                GameObject enemyCol = dragTarget.transform.Find("Collider").gameObject;
+                if (enemyCol.activeInHierarchy)
                 {
-                    dragTarget.transform.parent = null;
+                    enemyCol.SetActive(false);
                 }
+                dragTarget.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             }
             dragTarget = null;
         }
