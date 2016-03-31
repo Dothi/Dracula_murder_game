@@ -2473,6 +2473,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 256
+  currentRoom: 0
 --- !u!61 &1254840898
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2938,7 +2939,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!1 &1522563340
 GameObject:
   m_ObjectHideFlags: 0
@@ -3193,6 +3194,7 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 256
+  currentRoom: 0
 --- !u!61 &1815796238
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3483,7 +3485,7 @@ GameObject:
   - 61: {fileID: 1874653182}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: Untagged
+  m_TagString: PlayerFeet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3960,3 +3962,4 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 256
+  currentRoom: 0
