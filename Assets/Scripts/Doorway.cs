@@ -10,6 +10,8 @@ public class Doorway : MonoBehaviour {
     CameraArea camArea;
     CameraFollow camFollow;
 
+    public bool playerInTrigger = false;
+
     void Start()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -20,29 +22,40 @@ public class Doorway : MonoBehaviour {
         cameraTransform = camera.transform;
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (Input.GetKey(KeyCode.Q) && other.CompareTag("PlayerFeet"))
+        if (other.CompareTag("PlayerFeet") && !playerInTrigger)
         {
-            camFollow.cameraEndPos = new Vector3(   transform.parent.position.x,
-                                                    transform.parent.position.y,
-                                                    cameraTransform.position.z);
-            camFollow.zoomEndValue = camArea.cameraZoom / camera.aspect;
+            playerInTrigger = true;
+        }
+    }
+    
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.Q))
+        {
+            if (playerInTrigger)
+            {
+                camFollow.cameraEndPos = new Vector3(transform.parent.position.x,
+                                        transform.parent.position.y,
+                                        cameraTransform.position.z);
+                camFollow.zoomEndValue = camArea.cameraZoom / camera.aspect;
 
-            gc.playerIsPeeking = true;
-            camArea.currentRoom = true;
+                gc.playerIsPeeking = true;
+                camArea.currentRoom = true;
+            }
         }
         else
         {
            gc.playerIsPeeking = false;
-           camArea.currentRoom = false;
         }
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("PlayerFeet"))
+        if (other.CompareTag("PlayerFeet") && playerInTrigger)
         {
             gc.playerIsPeeking = false;
+            playerInTrigger = false;
         }
     }
 }

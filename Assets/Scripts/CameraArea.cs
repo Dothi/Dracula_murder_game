@@ -66,10 +66,6 @@ public class CameraArea : MonoBehaviour {
                 currentRoom = false;
             }
         }
-        else
-        {
-            //currentRoom = false;
-        }
     }
     void FadeRooms()
     {
