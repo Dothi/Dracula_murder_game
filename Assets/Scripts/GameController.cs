@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour {
     public List<GameObject> enemies;
 
     public bool playerIsPeeking = false;
+    public bool playerInCloset = false;
 
 	void Start ()
     {

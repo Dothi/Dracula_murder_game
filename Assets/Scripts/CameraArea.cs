@@ -93,7 +93,7 @@ public class CameraArea : MonoBehaviour {
 
             fade.color = newFadeValue;
         }
-        else
+        else if(!gc.playerInCloset)
         {
             if (!resetLerp)
             {

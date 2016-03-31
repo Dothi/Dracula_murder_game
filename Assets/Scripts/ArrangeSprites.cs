@@ -11,13 +11,17 @@ public class ArrangeSprites : MonoBehaviour {
         allSprites = new List<SpriteRenderer>();
         foreach (SpriteRenderer sr in GameObject.FindObjectsOfType<SpriteRenderer>())
         {
-            if (!sr.CompareTag("Floor"))
+            if (!sr.CompareTag("Floor") && !sr.CompareTag("FadeOverlay"))
             {
                 allSprites.Add(sr);
             }
             else if (sr.CompareTag("Floor"))
             {
                 sr.sortingOrder = -10000;
+            }
+            else if (sr.CompareTag("FadeOverlay"))
+            {
+                sr.sortingOrder = 10000;               
             }
         }
 	}

@@ -9,6 +9,7 @@ TagManager:
   - PlayerFeet
   - Doorway
   - Floor
+  - FadeOverlay
   layers:
   - Default
   - TransparentFX
