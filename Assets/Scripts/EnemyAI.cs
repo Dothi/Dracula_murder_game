@@ -3,6 +3,9 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour
 {
+    Vector3[] path;
+
+    int targetIndex;
     float speed;
     public Waypoint[] waypoints;
     public bool isCircular;
@@ -33,10 +36,12 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+        
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
         inReverse = false;
         currentIndex = randomizer;
+        PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].transform.position, OnPathFound);
         speedStorage = 0f;
         isWaiting = false;
         seePlayer = false;
@@ -47,21 +52,89 @@ public class EnemyAI : MonoBehaviour
         
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
-        if (waypoints.Length > 0)
-        {
-            currentWaypoint = waypoints[0];
-        }
+        
     }
+    public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
+    {
+        if (pathSuccessful)
+        {
+            
+                path = newPath;
+                StopCoroutine("FollowPath");
+                StartCoroutine("FollowPath");
+            
+            
+        }
+        
+    }
+    IEnumerator FollowPath()
+    {
+
+        targetIndex = 0;
+        
+            Vector3 currentWaypoint = path[0];
+            Debug.Log(currentWaypoint);
+
+
+            while (true)
+            {
+                if (transform.position == currentWaypoint)
+                {
+                    targetIndex++;
+                    if (targetIndex >= path.Length)
+                    {
+                        Debug.Log("Stopped");
+                        
+                        
+                        isWaiting = true;
+                        
+                        yield break;
+                    }
+                    currentWaypoint = path[targetIndex];
+                }
+
+                if (currentWaypoint != null && !isWaiting)
+                {
+                    if (currentEnemyState == EnemyState.Patrolling)
+                    {
+                        transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                    }
+                }
+                yield return null;
+            }
+        
+    }
+    
 
     void Update()
     {
         IsBeingKilled();
         
-
-        if (currentWaypoint != null && !isWaiting)
+        if (isWaiting)
         {
-            MoveTowardsWaypoint();
+            isWaiting = false;
+            
+            Debug.Log(currentIndex);
+            int oldIndex = currentIndex;
+            currentIndex = randomizer;
+            if (currentIndex == oldIndex)
+            {
+                 if (oldIndex == 0)
+                 {
+                     currentIndex++;
+                 }
+                 else if (oldIndex == waypoints.Length)
+                 {
+                     currentIndex--;
+                 }
+            }
+            
+                PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].transform.position, OnPathFound);
+            
+            
         }
+        
+       
     }
 
     void Pause()
@@ -102,7 +175,7 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {   
-            speed = 1f;
+            speed = 10f;
         }
     }
 
