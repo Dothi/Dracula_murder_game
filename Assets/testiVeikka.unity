@@ -305,61 +305,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2, y: .600000024}
---- !u!1 &277018708
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 277018711}
-  - 61: {fileID: 277018710}
-  - 114: {fileID: 277018709}
-  m_Layer: 0
-  m_Name: Trigger
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &277018709
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 277018708}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f76cf326c1d1924bbcbe67ad1ff27b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ClosetSize: 2
-  playerCanHide: 1
---- !u!61 &277018710
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 277018708}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 4.42000008, y: 3.23000002}
---- !u!4 &277018711
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 277018708}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.209999993, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1631700103}
-  m_RootOrder: 1
 --- !u!1 &291875443
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,22 +599,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 13
       objectReference: {fileID: 0}
-    - target: {fileID: 470428, guid: 29ea83a2806a4f3489714c1acdd76f36, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 2.49000001
-      objectReference: {fileID: 0}
-    - target: {fileID: 6138030, guid: 29ea83a2806a4f3489714c1acdd76f36, type: 2}
-      propertyPath: m_Offset.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 175698, guid: 29ea83a2806a4f3489714c1acdd76f36, type: 2}
-      propertyPath: m_Icon
-      value: 
-      objectReference: {fileID: 2974397684917235467, guid: 0000000000000000d000000000000000,
-        type: 0}
-    m_RemovedComponents:
-    - {fileID: 6138030, guid: 29ea83a2806a4f3489714c1acdd76f36, type: 2}
-    - {fileID: 11416398, guid: 29ea83a2806a4f3489714c1acdd76f36, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 29ea83a2806a4f3489714c1acdd76f36, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &471384088
@@ -3762,27 +3692,6 @@ MonoBehaviour:
   isWaiting: 0
   seePlayer: 0
   currentEnemyState: 0
---- !u!1 &1631700100 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 175698, guid: 29ea83a2806a4f3489714c1acdd76f36, type: 2}
-  m_PrefabInternal: {fileID: 452570748}
---- !u!61 &1631700101
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1631700100}
-  m_Enabled: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: .550000012}
-  serializedVersion: 2
-  m_Size: {x: 3, y: 1.29999995}
---- !u!4 &1631700103 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 417202, guid: 29ea83a2806a4f3489714c1acdd76f36, type: 2}
-  m_PrefabInternal: {fileID: 452570748}
 --- !u!1 &1636225906
 GameObject:
   m_ObjectHideFlags: 0

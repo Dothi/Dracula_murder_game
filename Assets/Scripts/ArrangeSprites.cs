@@ -26,7 +26,7 @@ public class ArrangeSprites : MonoBehaviour {
     {
         foreach (SpriteRenderer sr in allSprites)
         {
-            sr.sortingOrder = (int)-sr.transform.parent.position.y;
+            sr.sortingOrder = Mathf.RoundToInt(-sr.transform.parent.position.y * 100);
         }
 	}
 }
