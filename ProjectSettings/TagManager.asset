@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Enemy
   - CameraArea
+  - PlayerFeet
+  - Doorway
+  - Floor
   layers:
   - Default
   - TransparentFX
