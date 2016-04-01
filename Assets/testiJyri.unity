@@ -998,6 +998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  suspiciousSpeed: 0
+  patrolSpeed: 0
   velocity: 0
   currWaitTime: 0
   waypoints:
@@ -1792,7 +1794,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 953272321}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 05f49da2847a2d842a01a554e871ecf6, type: 3}
   m_Name: 
@@ -2316,7 +2318,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
@@ -2428,6 +2430,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  suspiciousSpeed: 6
+  patrolSpeed: 3
   velocity: 0
   currWaitTime: 0
   waypoints:
@@ -2741,11 +2745,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22427324, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22427324, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11425892, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2984,6 +2988,52 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2, y: 0.6}
+--- !u!1001 &1488355606
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 441048, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 14.609184
+      objectReference: {fileID: 0}
+    - target: {fileID: 441048, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.5661789
+      objectReference: {fileID: 0}
+    - target: {fileID: 441048, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441048, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441048, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441048, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 441048, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 441048, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 164680, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+      propertyPath: m_Name
+      value: PeekOverlay
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b4be83ca051e60348ade7aa1491fcc89, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1522563340
 GameObject:
   m_ObjectHideFlags: 0
@@ -3194,6 +3244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  suspiciousSpeed: 0
+  patrolSpeed: 0
   velocity: 0
   currWaitTime: 0
   waypoints:
@@ -3527,6 +3579,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  suspiciousSpeed: 6
+  patrolSpeed: 3
   velocity: 0
   currWaitTime: 0
   waypoints:
