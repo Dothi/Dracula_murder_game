@@ -919,6 +919,7 @@ GameObject:
   - 114: {fileID: 636742089}
   - 58: {fileID: 636742091}
   - 114: {fileID: 636742092}
+  - 50: {fileID: 636742093}
   m_Layer: 0
   m_Name: Enemy (2)
   m_TagString: Enemy
@@ -980,6 +981,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightDist: 0
   enemiesInFOV: []
+  sprites:
+  - {fileID: 21300000, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300002, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300004, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300006, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
   currentFacingState: 0
 --- !u!114 &636742090
 MonoBehaviour:
@@ -992,6 +998,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: 0
+  currWaitTime: 0
   waypoints:
   - {fileID: 312299287}
   - {fileID: 1522563342}
@@ -1002,6 +1010,8 @@ MonoBehaviour:
   isCircular: 0
   inReverse: 0
   directionOfTravel: {x: 0, y: 0, z: 0}
+  previous: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0
@@ -1032,23 +1042,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a191d8b2d44a110419c52f24d1b51004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &652696193 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 172824, guid: 0200bb0c338736a40bc7b0e4e3ea12fe, type: 2}
-  m_PrefabInternal: {fileID: 893678492}
---- !u!114 &652696201
-MonoBehaviour:
+--- !u!50 &636742093
+Rigidbody2D:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 652696193}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05f49da2847a2d842a01a554e871ecf6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bloodDecreaseSpeed: 10
-  bloodFromKill: 65
+  m_GameObject: {fileID: 636742085}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &668379399
 GameObject:
   m_ObjectHideFlags: 0
@@ -1773,6 +1783,23 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.3, y: 4.7}
+--- !u!1 &953272321 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 183814, guid: 256fc1e6f5177ba4b8853401424efa40, type: 2}
+  m_PrefabInternal: {fileID: 500532704}
+--- !u!114 &953272323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 953272321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05f49da2847a2d842a01a554e871ecf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bloodDecreaseSpeed: 10
+  bloodFromKill: 65
 --- !u!1 &956343812
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,6 +2336,7 @@ GameObject:
   - 114: {fileID: 1251615426}
   - 58: {fileID: 1251615430}
   - 114: {fileID: 1251615431}
+  - 50: {fileID: 1251615432}
   m_Layer: 0
   m_Name: Enemy (9)
   m_TagString: Enemy
@@ -2342,6 +2370,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightDist: 0
   enemiesInFOV: []
+  sprites:
+  - {fileID: 21300000, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300002, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300004, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300006, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
   currentFacingState: 0
 --- !u!114 &1251615427
 MonoBehaviour:
@@ -2354,6 +2387,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: 0
+  currWaitTime: 0
   waypoints:
   - {fileID: 729660530}
   - {fileID: 1063184765}
@@ -2365,6 +2400,8 @@ MonoBehaviour:
   isCircular: 0
   inReverse: 0
   directionOfTravel: {x: 0, y: 0, z: 0}
+  previous: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0
@@ -2423,6 +2460,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a191d8b2d44a110419c52f24d1b51004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1251615432
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1251615424}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1254840895
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,7 +2868,7 @@ Transform:
   m_GameObject: {fileID: 1438552132}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 10, y: 17, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1851276118}
   m_RootOrder: 0
@@ -3156,6 +3210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightDist: 0
   enemiesInFOV: []
+  sprites: []
   currentFacingState: 0
 --- !u!114 &1630483273
 MonoBehaviour:
@@ -3168,6 +3223,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: 0
+  currWaitTime: 0
   waypoints:
   - {fileID: 1909695472}
   - {fileID: 1918563657}
@@ -3175,6 +3232,8 @@ MonoBehaviour:
   isCircular: 0
   inReverse: 0
   directionOfTravel: {x: 0, y: 0, z: 0}
+  previous: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0
@@ -3360,7 +3419,7 @@ Transform:
   m_GameObject: {fileID: 1845092543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 10, y: 17, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 636742086}
   m_RootOrder: 0
@@ -3419,6 +3478,7 @@ GameObject:
   - 114: {fileID: 1851276120}
   - 58: {fileID: 1851276122}
   - 114: {fileID: 1851276123}
+  - 50: {fileID: 1851276124}
   m_Layer: 0
   m_Name: Enemy (6)
   m_TagString: Enemy
@@ -3480,6 +3540,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sightDist: 0
   enemiesInFOV: []
+  sprites:
+  - {fileID: 21300000, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300002, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300004, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  - {fileID: 21300006, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
   currentFacingState: 0
 --- !u!114 &1851276121
 MonoBehaviour:
@@ -3492,6 +3557,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  velocity: 0
+  currWaitTime: 0
   waypoints:
   - {fileID: 1087112266}
   - {fileID: 2107626162}
@@ -3500,6 +3567,8 @@ MonoBehaviour:
   isCircular: 0
   inReverse: 0
   directionOfTravel: {x: 0, y: 0, z: 0}
+  previous: {x: 0, y: 0, z: 0}
+  sprite: {fileID: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0
@@ -3530,6 +3599,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a191d8b2d44a110419c52f24d1b51004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &1851276124
+Rigidbody2D:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1851276116}
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1909695470
 GameObject:
   m_ObjectHideFlags: 0
@@ -3748,7 +3834,7 @@ Transform:
   m_GameObject: {fileID: 1935334401}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 0}
-  m_LocalScale: {x: 10, y: 17, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 1251615425}
   m_RootOrder: 0

@@ -7,11 +7,14 @@ public class EnemyAI : MonoBehaviour
 
     int targetIndex;
     float speed;
+    public float velocity;
     public float currWaitTime;
     public Waypoint[] waypoints;
     public bool isCircular;
     public bool inReverse;
     public Vector3 directionOfTravel;
+    public Vector3 previous;
+    
     
     public int randomizer { get { return Random.Range(0, waypoints.Length); } }
 
@@ -105,7 +108,10 @@ public class EnemyAI : MonoBehaviour
                     {
                         transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
                         
-                        directionOfTravel = transform.position;
+
+                        directionOfTravel = (currentWaypoint - transform.position).normalized;
+                        
+                        
                     }
                 }
 
@@ -119,6 +125,10 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        
+
+        
+
         if (currentEnemyState != EnemyState.Dead)
         {
             IsBeingKilled();
@@ -198,8 +208,12 @@ public class EnemyAI : MonoBehaviour
         }
         else
         {
-            speed = 10f;
+            speed = 1f;
         }
+    }
+    private void MoveTowardsWaypoint()
+    {
+        
     }
 
 }

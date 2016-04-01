@@ -10,7 +10,8 @@ public class FieldOfView : MonoBehaviour
     public List<GameObject> enemiesInFOV;
     CollapseScript collapseScript;
     public RaycastHit2D[] hits;
-
+    public Sprite[] sprites;
+    SpriteRenderer spriteRend;
     public enum FacingState
     {
         UP,
@@ -27,13 +28,13 @@ public class FieldOfView : MonoBehaviour
         sightDist = 6f;
         currentFacingState = FacingState.UP;
         enemiesInFOV = new List<GameObject>();
-
+        spriteRend = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void Update()
     {
         Facing();
-        
+        SpriteRend();
 
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed)
         {
@@ -47,23 +48,23 @@ public class FieldOfView : MonoBehaviour
 
     void Facing()
     {
-        if (AI.directionOfTravel.y < 0 && AI.directionOfTravel.x > AI.directionOfTravel.y)
+        if (AI.directionOfTravel.y < 0)
         {
             currentFacingState = FacingState.DOWN;
 
         }
-        else if (AI.directionOfTravel.x < 0 && AI.directionOfTravel.x < AI.directionOfTravel.y && AI.directionOfTravel.x < AI.directionOfTravel.y * -1)
+        else if (AI.directionOfTravel.x < 0 && AI.directionOfTravel.y == 0)
         {
             currentFacingState = FacingState.LEFT;
 
         }
-        else if (AI.directionOfTravel.y > .5f && AI.directionOfTravel.x < AI.directionOfTravel.y)
+        else if (AI.directionOfTravel.y > 0)
         {
             currentFacingState = FacingState.UP;
 
         }
 
-        else if (AI.directionOfTravel.x > 0 && AI.directionOfTravel.x > AI.directionOfTravel.y)
+        else if (AI.directionOfTravel.x > 0 && AI.directionOfTravel.y == 0)
         {
             currentFacingState = FacingState.RIGHT;
 
@@ -541,6 +542,24 @@ public class FieldOfView : MonoBehaviour
                     }
                 }
 
+                break;
+        }
+    }
+    void SpriteRend()
+    {
+        switch (currentFacingState)
+        {
+            case FacingState.LEFT:
+                spriteRend.sprite = sprites[0];
+                break;
+            case FacingState.UP:
+                spriteRend.sprite = sprites[1];
+                break;
+            case FacingState.DOWN:
+                spriteRend.sprite = sprites[2];
+                break;
+            case FacingState.RIGHT:
+                spriteRend.sprite = sprites[3];
                 break;
         }
     }
