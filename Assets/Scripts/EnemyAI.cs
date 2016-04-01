@@ -7,17 +7,20 @@ public class EnemyAI : MonoBehaviour
 
     int targetIndex;
     float speed;
+    public float currWaitTime;
     public Waypoint[] waypoints;
     public bool isCircular;
     public bool inReverse;
     public Vector3 directionOfTravel;
+    
     public int randomizer { get { return Random.Range(0, waypoints.Length); } }
 
-    private Waypoint currentWaypoint;
+    private Waypoint currentWP;
     public int currentIndex;
     private float speedStorage;
     GameController gc;
     public bool isWaiting;
+    public bool isAtWaypoint;
     public bool seePlayer;
     GameObject player;
 
@@ -36,7 +39,7 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
-        
+        currWaitTime = 0f;
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
         inReverse = false;
@@ -49,33 +52,34 @@ public class EnemyAI : MonoBehaviour
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
 
-        
+
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
-        
+
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         if (pathSuccessful)
         {
-            
-                path = newPath;
-                StopCoroutine("FollowPath");
-                StartCoroutine("FollowPath");
-            
-            
+
+            path = newPath;
+            StopCoroutine("FollowPath");
+            StartCoroutine("FollowPath");
+
+
         }
-        
+
     }
     IEnumerator FollowPath()
     {
 
-        
+
         if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
 
             Debug.Log(currentWaypoint);
+
 
 
             while (true)
@@ -88,158 +92,119 @@ public class EnemyAI : MonoBehaviour
                         Debug.Log("Stopped");
 
                         targetIndex = 0;
+                        isAtWaypoint = true;
                         isWaiting = true;
-
                         yield break;
                     }
                     currentWaypoint = path[targetIndex];
                 }
 
-                if (currentWaypoint != null && !isWaiting)
+                if (currentWaypoint != null)
                 {
-                    if (currentEnemyState == EnemyState.Patrolling)
+                    if (currentEnemyState == EnemyState.Patrolling || currentEnemyState == EnemyState.Suspicious)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                        
+                        directionOfTravel = transform.position;
                     }
                 }
+
                 yield return null;
             }
         }
-        
-        
+
+
     }
-    
+
 
     void Update()
     {
-        IsBeingKilled();
-        
-        if (isWaiting)
+        if (currentEnemyState != EnemyState.Dead)
         {
-            isWaiting = false;
-            
-            Debug.Log(currentIndex);
-            int oldIndex = currentIndex;
-            currentIndex = randomizer;
-            if (currentIndex == oldIndex)
+            IsBeingKilled();
+
+            if (currentEnemyState == EnemyState.Patrolling)
             {
-                isWaiting = true;
+                if (isWaiting)
+                {
+                    currWaitTime += 1 * Time.deltaTime;
+                    if (currWaitTime >= waypoints[currentIndex].waitSeconds)
+                    {
+                        isWaiting = false;
+                        currWaitTime = 0f;
+                        waypoints[currentIndex].waitSeconds = Waypoint.randomizer;
+                    }
+                }
             }
-            
-                PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].transform.position, OnPathFound);
-            
-            
+            else
+            {
+                isWaiting = false;
+            }
+            if (currentEnemyState != EnemyState.Collapsed)
+            {
+                if (isAtWaypoint && !isWaiting)
+                {
+
+                    isAtWaypoint = false;
+
+                    int oldIndex = currentIndex;
+                    currentIndex = randomizer;
+                    if (currentIndex == oldIndex)
+                    {
+                        isAtWaypoint = true;
+                    }
+
+
+                    else
+                    {
+                        Debug.Log("Requesting Path");
+                        PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].transform.position, OnPathFound);
+                    }
+                }
+            }
         }
-        
-       
+
+
     }
 
-    void Pause()
-    {
-        if (currentEnemyState == EnemyState.Patrolling)
-        {
-            isWaiting = !isWaiting;
-        }
-    }
-    
+
     void IsBeingKilled()
     {
-        
+
         if (ks.isSuckingBlood && this.gameObject == ks.killTarget)
         {
             if (currentEnemyState != EnemyState.Dead)
             {
                 currentEnemyState = EnemyState.IsBeingKilled;
-            }          
+            }
         }
-        
 
-        if (currentEnemyState == EnemyState.IsBeingKilled) 
+
+        if (currentEnemyState == EnemyState.IsBeingKilled)
         {
             speed = 0f;
         }
         else if (currentEnemyState == EnemyState.Collapsed)
         {
-            speed = 0f;  
+            speed = 0f;
         }
         else if (currentEnemyState == EnemyState.Dead)
         {
             speed = 0f;
         }
         else if (currentEnemyState == EnemyState.Suspicious)
-        { 
+        {
             speed = 4f;
         }
         else
-        {   
+        {
             speed = 10f;
         }
     }
 
-    private void MoveTowardsWaypoint()
-    {
-        Vector3 currentPosition = this.transform.position;
-        Vector3 targetPosition = currentWaypoint.transform.position;
-
-        if (Vector3.Distance(currentPosition, targetPosition) > 2f)
-        {
-            directionOfTravel = targetPosition - currentPosition;
-            directionOfTravel.Normalize();
-
-            this.transform.Translate(directionOfTravel.x * speed * Time.deltaTime,
-                                     directionOfTravel.y * speed * Time.deltaTime,
-                                     directionOfTravel.z * speed * Time.deltaTime,
-                                     Space.World);
-        }
-
-        else
-        {
-            if (currentWaypoint.waitSeconds > 0)
-            {
-                Pause();
-                Invoke("Pause", currentWaypoint.waitSeconds);
-            }
-
-            if (currentWaypoint.speedOut > 0)
-            {
-                speedStorage = speed;
-                speed = currentWaypoint.speedOut;
-            }
-            else if (speedStorage != 0)
-            {
-                speed = speedStorage;
-                speedStorage = 0f;
-            }
-
-            NextWaypoint();
-
-        }
-    }
-
-    private void NextWaypoint()
-    {
-        if (isCircular)
-        {
-            if (!inReverse)
-            { 
-                    foreach (var wp in waypoints)
-                    {
-                        wp.waitSeconds = wp.randomizer;
-                    }
-                    currentIndex = randomizer;
-            }
-           /* else
-            {
-                if ((!inReverse && currentIndex + 1 >= waypoints.Length) || (inReverse && currentIndex == 0))
-                {
-                    inReverse = !inReverse;
-                }
-                currentIndex = randomizer;
-            }*/
-            currentWaypoint = waypoints[currentIndex];
-        }
-    }
 }
+
+    
 
 
 

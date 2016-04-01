@@ -334,6 +334,21 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 110397430c0e90645a6806810eb893ae, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &419042461
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 380626339}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1630483271}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &471384088
 GameObject:
   m_ObjectHideFlags: 0
@@ -989,6 +1004,7 @@ MonoBehaviour:
   directionOfTravel: {x: 0, y: 0, z: 0}
   currentIndex: 0
   isWaiting: 0
+  isAtWaypoint: 0
   seePlayer: 0
   currentEnemyState: 0
 --- !u!58 &636742091
@@ -2351,6 +2367,7 @@ MonoBehaviour:
   directionOfTravel: {x: 0, y: 0, z: 0}
   currentIndex: 0
   isWaiting: 0
+  isAtWaypoint: 0
   seePlayer: 0
   currentEnemyState: 0
 --- !u!114 &1251615428
@@ -2672,7 +2689,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1630483271}
+  - {fileID: 2111144768}
   - {fileID: 636742086}
   - {fileID: 1851276118}
   - {fileID: 1251615425}
@@ -3083,14 +3100,49 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 17, y: 0.6}
---- !u!1 &1630483268 stripped
+--- !u!1 &1630483268
 GameObject:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 182676, guid: 110397430c0e90645a6806810eb893ae, type: 2}
   m_PrefabInternal: {fileID: 380626339}
---- !u!4 &1630483271 stripped
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1630483269}
+  - 58: {fileID: 1630483274}
+  - 114: {fileID: 1630483272}
+  - 114: {fileID: 1630483273}
+  - 114: {fileID: 1630483275}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1630483269
 Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 380626339}
+  m_GameObject: {fileID: 1630483268}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2111144768}
+  m_RootOrder: 0
+--- !u!4 &1630483271
+Transform:
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 452038, guid: 110397430c0e90645a6806810eb893ae, type: 2}
   m_PrefabInternal: {fileID: 380626339}
+  m_GameObject: {fileID: 419042461}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2111144768}
+  m_RootOrder: 1
 --- !u!114 &1630483272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3125,6 +3177,7 @@ MonoBehaviour:
   directionOfTravel: {x: 0, y: 0, z: 0}
   currentIndex: 0
   isWaiting: 0
+  isAtWaypoint: 0
   seePlayer: 0
   currentEnemyState: 0
 --- !u!58 &1630483274
@@ -3449,6 +3502,7 @@ MonoBehaviour:
   directionOfTravel: {x: 0, y: 0, z: 0}
   currentIndex: 0
   isWaiting: 0
+  isAtWaypoint: 0
   seePlayer: 0
   currentEnemyState: 0
 --- !u!58 &1851276122
@@ -3863,6 +3917,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waitSeconds: 0
   speedOut: 0
+--- !u!1 &2111144767
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 380626339}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 2111144768}
+  m_Layer: 0
+  m_Name: Missing Prefab
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2111144768
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 380626339}
+  m_GameObject: {fileID: 2111144767}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1630483269}
+  - {fileID: 1630483271}
+  m_Father: {fileID: 1360861145}
+  m_RootOrder: 0
 --- !u!1 &2146356115
 GameObject:
   m_ObjectHideFlags: 0

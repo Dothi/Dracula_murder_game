@@ -6,7 +6,7 @@ public class Waypoint : MonoBehaviour
 
     public float waitSeconds;
     public float speedOut;
-    public int randomizer { get { return Random.Range(8, 15); } }
+    public static int randomizer { get { return Random.Range(8, 15); } }
 
     void Awake()
     {
