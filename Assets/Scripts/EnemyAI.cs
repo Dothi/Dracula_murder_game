@@ -7,6 +7,8 @@ public class EnemyAI : MonoBehaviour
 
     int targetIndex;
     float speed;
+    public float suspiciousSpeed = 6f;
+    public float patrolSpeed = 3f;
     public float velocity;
     public float currWaitTime;
     public Waypoint[] waypoints;
@@ -105,6 +107,7 @@ public class EnemyAI : MonoBehaviour
         if (currentEnemyState != EnemyState.Dead)
         {
             IsBeingKilled();
+            SpeedController();
 
             if (currentEnemyState == EnemyState.Patrolling)
             {
@@ -161,6 +164,11 @@ public class EnemyAI : MonoBehaviour
         }
 
 
+        
+    }
+    void SpeedController()
+    {
+
         if (currentEnemyState == EnemyState.IsBeingKilled)
         {
             speed = 0f;
@@ -175,11 +183,11 @@ public class EnemyAI : MonoBehaviour
         }
         else if (currentEnemyState == EnemyState.Suspicious)
         {
-            speed = 4f;
+            speed = suspiciousSpeed;
         }
         else
         {
-            speed = 1f;
+            speed = patrolSpeed;
         }
     }
 }
