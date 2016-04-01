@@ -1011,7 +1011,6 @@ MonoBehaviour:
   inReverse: 0
   directionOfTravel: {x: 0, y: 0, z: 0}
   previous: {x: 0, y: 0, z: 0}
-  sprite: {fileID: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0
@@ -2280,6 +2279,48 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1986425599}
   m_RootOrder: 0
+--- !u!1001 &1221528837
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 470908, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: c90b991477e32a64f887f40005ceb7d7, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1242575271
 GameObject:
   m_ObjectHideFlags: 0
@@ -2401,7 +2442,6 @@ MonoBehaviour:
   inReverse: 0
   directionOfTravel: {x: 0, y: 0, z: 0}
   previous: {x: 0, y: 0, z: 0}
-  sprite: {fileID: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0
@@ -2944,75 +2984,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2, y: 0.6}
---- !u!1 &1490257283
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1490257285}
-  - 114: {fileID: 1490257284}
-  - 114: {fileID: 1490257286}
-  - 114: {fileID: 1490257287}
-  m_Layer: 0
-  m_Name: A*
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1490257284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1490257283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da1209da0686d484a85a209275470115, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  displayGridGizmos: 0
-  unwalkableMask:
-    serializedVersion: 2
-    m_Bits: 512
-  gridWorldSize: {x: 85.56, y: 47.16}
-  nodeRadius: 0.5
---- !u!4 &1490257285
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1490257283}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
---- !u!114 &1490257286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1490257283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fea1a9295cb3dde4d8ff27caeaf8e5d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1490257287
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1490257283}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36ec42a046618d242b9411257f96d81a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1522563340
 GameObject:
   m_ObjectHideFlags: 0
@@ -3233,7 +3204,6 @@ MonoBehaviour:
   inReverse: 0
   directionOfTravel: {x: 0, y: 0, z: 0}
   previous: {x: 0, y: 0, z: 0}
-  sprite: {fileID: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0
@@ -3568,7 +3538,6 @@ MonoBehaviour:
   inReverse: 0
   directionOfTravel: {x: 0, y: 0, z: 0}
   previous: {x: 0, y: 0, z: 0}
-  sprite: {fileID: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0

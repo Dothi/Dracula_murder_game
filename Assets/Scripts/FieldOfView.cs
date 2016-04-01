@@ -75,20 +75,21 @@ public class FieldOfView : MonoBehaviour
 
     void Investigate()
     {
+        Vector3 rayPos = transform.position + new Vector3(0, 1, 0);
         switch (currentFacingState)
         {
             case FacingState.UP:
-                RaycastHit2D hit1 = Physics2D.Raycast(transform.position, transform.up, (sightDist + .2f));
-                RaycastHit2D hit2 = Physics2D.Raycast(transform.position, (transform.up + transform.right + new Vector3(-.3f, 0, 0)), (sightDist + .6f));
-                RaycastHit2D hit3 = Physics2D.Raycast(transform.position, (transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f));
-                RaycastHit2D hit4 = Physics2D.Raycast(transform.position, (transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f));
-                RaycastHit2D hit5 = Physics2D.Raycast(transform.position, (transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f));
+                RaycastHit2D hit1 = Physics2D.Raycast(rayPos, transform.up, (sightDist + .2f));
+                RaycastHit2D hit2 = Physics2D.Raycast(rayPos, (transform.up + transform.right + new Vector3(-.3f, 0, 0)), (sightDist + .6f));
+                RaycastHit2D hit3 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f));
+                RaycastHit2D hit4 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f));
+                RaycastHit2D hit5 = Physics2D.Raycast(rayPos, (transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f));
 
-                Debug.DrawRay(transform.position, (transform.up + transform.right + new Vector3(-.3f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (transform.up - transform.right + new Vector3(.3f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (transform.up - transform.right + new Vector3(.65f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (transform.up + transform.right + new Vector3(-.65f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, transform.up * (sightDist + .2f), Color.green);
+                Debug.DrawRay(rayPos, (transform.up + transform.right + new Vector3(-.3f, 0, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (transform.up - transform.right + new Vector3(.3f, 0, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (transform.up - transform.right + new Vector3(.65f, 0, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (transform.up + transform.right + new Vector3(-.65f, 0, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, transform.up * (sightDist + .2f), Color.green);
 
                 //See player                                                                 
                 if (hit1 && hit1.collider.tag == "Player")
@@ -193,17 +194,17 @@ public class FieldOfView : MonoBehaviour
 
                 break;
             case FacingState.DOWN:
-                hit1 = Physics2D.Raycast(transform.position, -transform.up, (sightDist + .2f));
-                hit2 = Physics2D.Raycast(transform.position, (-transform.up + transform.right + new Vector3(-.3f, 0, 0)), (sightDist + .6f));
-                hit3 = Physics2D.Raycast(transform.position, (-transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f));
-                hit4 = Physics2D.Raycast(transform.position, (-transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f));
-                hit5 = Physics2D.Raycast(transform.position, (-transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f));
+                hit1 = Physics2D.Raycast(rayPos, -transform.up, (sightDist + .2f));
+                hit2 = Physics2D.Raycast(rayPos, (-transform.up + transform.right + new Vector3(-.3f, 0, 0)), (sightDist + .6f));
+                hit3 = Physics2D.Raycast(rayPos, (-transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f));
+                hit4 = Physics2D.Raycast(rayPos, (-transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f));
+                hit5 = Physics2D.Raycast(rayPos, (-transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f));
 
-                Debug.DrawRay(transform.position, (-transform.up + transform.right + new Vector3(-.3f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (-transform.up - transform.right + new Vector3(.3f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (-transform.up - transform.right + new Vector3(.65f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (-transform.up + transform.right + new Vector3(-.65f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, -transform.up * (sightDist + .2f), Color.green);
+                Debug.DrawRay(rayPos, (-transform.up + transform.right + new Vector3(-.3f, 0, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (-transform.up - transform.right + new Vector3(.3f, 0, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (-transform.up - transform.right + new Vector3(.65f, 0, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (-transform.up + transform.right + new Vector3(-.65f, 0, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, -transform.up * (sightDist + .2f), Color.green);
 
 
                 if (hit1 && hit1.collider.tag == "Player")
@@ -311,17 +312,17 @@ public class FieldOfView : MonoBehaviour
 
                 break;
             case FacingState.RIGHT:
-                hit1 = Physics2D.Raycast(transform.position, transform.right, (sightDist + .2f));
-                hit2 = Physics2D.Raycast(transform.position, (transform.right + transform.up + new Vector3(0, -.3f, 0)), (sightDist + .6f));
-                hit3 = Physics2D.Raycast(transform.position, (transform.right - transform.up + new Vector3(0, .3f, 0)), (sightDist + .6f));
-                hit4 = Physics2D.Raycast(transform.position, (transform.right - transform.up + new Vector3(0, .65f, 0)), (sightDist + .6f));
-                hit5 = Physics2D.Raycast(transform.position, (transform.right + transform.up + new Vector3(0, -.65f, 0)), (sightDist + .6f));
+                hit1 = Physics2D.Raycast(rayPos, transform.right, (sightDist + .2f));
+                hit2 = Physics2D.Raycast(rayPos, (transform.right + transform.up + new Vector3(0, -.3f, 0)), (sightDist + .6f));
+                hit3 = Physics2D.Raycast(rayPos, (transform.right - transform.up + new Vector3(0, .3f, 0)), (sightDist + .6f));
+                hit4 = Physics2D.Raycast(rayPos, (transform.right - transform.up + new Vector3(0, .65f, 0)), (sightDist + .6f));
+                hit5 = Physics2D.Raycast(rayPos, (transform.right + transform.up + new Vector3(0, -.65f, 0)), (sightDist + .6f));
 
-                Debug.DrawRay(transform.position, (transform.right + transform.up + new Vector3(0, -.3f, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (transform.right - transform.up + new Vector3(0, .3f, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (transform.right - transform.up + new Vector3(0, .65f, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (transform.right + transform.up + new Vector3(0, -.65f, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, transform.right * (sightDist + .2f), Color.green);
+                Debug.DrawRay(rayPos, (transform.right + transform.up + new Vector3(0, -.3f, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (transform.right - transform.up + new Vector3(0, .3f, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (transform.right - transform.up + new Vector3(0, .65f, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (transform.right + transform.up + new Vector3(0, -.65f, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, transform.right * (sightDist + .2f), Color.green);
 
 
                 if (hit1 && hit1.collider.tag == "Player")
@@ -428,17 +429,17 @@ public class FieldOfView : MonoBehaviour
 
                 break;
             case FacingState.LEFT:
-                hit1 = Physics2D.Raycast(transform.position, -transform.right, (sightDist + .2f));
-                hit2 = Physics2D.Raycast(transform.position, (-transform.right + transform.up + new Vector3(0, -.3f, 0)), (sightDist + .6f));
-                hit3 = Physics2D.Raycast(transform.position, (-transform.right - transform.up + new Vector3(0, .3f, 0)), (sightDist + .6f));
-                hit4 = Physics2D.Raycast(transform.position, (-transform.right - transform.up + new Vector3(0, .65f, 0)), (sightDist + .6f));
-                hit5 = Physics2D.Raycast(transform.position, (-transform.right + transform.up + new Vector3(0, -.65f, 0)), (sightDist + .6f));
+                hit1 = Physics2D.Raycast(rayPos, -transform.right, (sightDist + .2f));
+                hit2 = Physics2D.Raycast(rayPos, (-transform.right + transform.up + new Vector3(0, -.3f, 0)), (sightDist + .6f));
+                hit3 = Physics2D.Raycast(rayPos, (-transform.right - transform.up + new Vector3(0, .3f, 0)), (sightDist + .6f));
+                hit4 = Physics2D.Raycast(rayPos, (-transform.right - transform.up + new Vector3(0, .65f, 0)), (sightDist + .6f));
+                hit5 = Physics2D.Raycast(rayPos, (-transform.right + transform.up + new Vector3(0, -.65f, 0)), (sightDist + .6f));
 
-                Debug.DrawRay(transform.position, (-transform.right + transform.up + new Vector3(0, -.3f, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (-transform.right - transform.up + new Vector3(0, .3f, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (-transform.right - transform.up + new Vector3(0, .65f, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, (-transform.right + transform.up + new Vector3(0, -.65f, 0)) * sightDist, Color.green);
-                Debug.DrawRay(transform.position, -transform.right * (sightDist + .2f), Color.green);
+                Debug.DrawRay(rayPos, (-transform.right + transform.up + new Vector3(0, -.3f, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (-transform.right - transform.up + new Vector3(0, .3f, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (-transform.right - transform.up + new Vector3(0, .65f, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, (-transform.right + transform.up + new Vector3(0, -.65f, 0)) * sightDist, Color.green);
+                Debug.DrawRay(rayPos, -transform.right * (sightDist + .2f), Color.green);
 
 
                 if (hit1 && hit1.collider.tag == "Player")

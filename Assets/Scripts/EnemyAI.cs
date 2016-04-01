@@ -14,13 +14,9 @@ public class EnemyAI : MonoBehaviour
     public bool inReverse;
     public Vector3 directionOfTravel;
     public Vector3 previous;
-    
-    
     public int randomizer { get { return Random.Range(0, waypoints.Length); } }
-
     private Waypoint currentWP;
     public int currentIndex;
-    private float speedStorage;
     GameController gc;
     public bool isWaiting;
     public bool isAtWaypoint;
@@ -48,28 +44,20 @@ public class EnemyAI : MonoBehaviour
         inReverse = false;
         currentIndex = randomizer;
         PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].transform.position, OnPathFound);
-        speedStorage = 0f;
         isWaiting = false;
         seePlayer = false;
         isCircular = true;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-
-
-
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
-
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
         if (pathSuccessful)
         {
-
             path = newPath;
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
-
-
         }
 
     }
@@ -80,11 +68,7 @@ public class EnemyAI : MonoBehaviour
         if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
-
             Debug.Log(currentWaypoint);
-
-
-
             while (true)
             {
                 if (transform.position == currentWaypoint)
@@ -93,7 +77,6 @@ public class EnemyAI : MonoBehaviour
                     if (targetIndex >= path.Length)
                     {
                         Debug.Log("Stopped");
-
                         targetIndex = 0;
                         isAtWaypoint = true;
                         isWaiting = true;
@@ -101,7 +84,6 @@ public class EnemyAI : MonoBehaviour
                     }
                     currentWaypoint = path[targetIndex];
                 }
-
                 if (currentWaypoint != null)
                 {
                     if (currentEnemyState == EnemyState.Patrolling || currentEnemyState == EnemyState.Suspicious)
@@ -109,26 +91,17 @@ public class EnemyAI : MonoBehaviour
                         transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
                         
 
-                        directionOfTravel = (currentWaypoint - transform.position).normalized;
-                        
-                        
+                        directionOfTravel = (currentWaypoint - transform.position).normalized;   
                     }
                 }
-
                 yield return null;
             }
         }
-
-
     }
 
 
     void Update()
     {
-        
-
-        
-
         if (currentEnemyState != EnemyState.Dead)
         {
             IsBeingKilled();
@@ -163,8 +136,6 @@ public class EnemyAI : MonoBehaviour
                     {
                         isAtWaypoint = true;
                     }
-
-
                     else
                     {
                         Debug.Log("Requesting Path");
@@ -211,11 +182,6 @@ public class EnemyAI : MonoBehaviour
             speed = 1f;
         }
     }
-    private void MoveTowardsWaypoint()
-    {
-        
-    }
-
 }
 
     
