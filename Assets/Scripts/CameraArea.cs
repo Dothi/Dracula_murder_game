@@ -10,13 +10,15 @@ public class CameraArea : MonoBehaviour {
     CameraFollow cameraFollow;
     Transform cameraTransform;
 
-    float roomWidth;
-    float roomHeight;
+    //float roomWidth;
+    //float roomHeight;
+    float roomAspect;
     
     Vector2 roomBoundsMin;
     Vector2 roomBoundsMax;
 
     public float cameraZoom;
+    public float cameraZoomH;
     public LayerMask playerMask;
 
     SpriteRenderer fade;
@@ -40,6 +42,8 @@ public class CameraArea : MonoBehaviour {
         roomBoundsMin = new Vector2(GetComponent<BoxCollider2D>().bounds.min.x, GetComponent<BoxCollider2D>().bounds.min.y);
         roomBoundsMax = new Vector2(GetComponent<BoxCollider2D>().bounds.max.x, GetComponent<BoxCollider2D>().bounds.max.y);
 
+        roomAspect = GetComponent<BoxCollider2D>().bounds.max.x / GetComponent<BoxCollider2D>().bounds.max.y;
+
         fade = transform.parent.FindChild("Fade").GetComponent<SpriteRenderer>();
     }
 
@@ -58,7 +62,16 @@ public class CameraArea : MonoBehaviour {
                 cameraFollow.cameraEndPos = new Vector3(transform.parent.position.x,
                                                         transform.parent.position.y,
                                                         cameraTransform.position.z);
-                cameraFollow.zoomEndValue = cameraZoom / camera.aspect;
+
+                if (roomAspect > camera.aspect)
+                {
+                    cameraFollow.zoomEndValue = cameraZoom / camera.aspect;                
+                }
+                else if (roomAspect < camera.aspect)
+                {
+                    cameraFollow.zoomEndValue = cameraZoom / camera.aspect;
+                }
+
                 currentRoom = true;
             }
             else
