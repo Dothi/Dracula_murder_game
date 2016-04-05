@@ -49,6 +49,9 @@ public class TriggerAreaScript : MonoBehaviour
                             Debug.Log("BUSTED");
                             gc.gameOver = true;
                             break;
+                        case EnemyAI.EnemyState.IsBeingKilled:
+                            gc.gameOver = true;
+                            break;
                     }
                 }
             }
@@ -61,7 +64,7 @@ public class TriggerAreaScript : MonoBehaviour
             for (int i = 0; i < nearbyEnemiesScript.nearbyEnemies.Count; i++)
             {
                 EnemyAI currentEnemyAI = nearbyEnemiesScript.nearbyEnemies[i].GetComponent<EnemyAI>();
-                if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Dead)
+                if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Dead || currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.IsBeingKilled)
                 {
                     gc.gameOver = true;
                 }
@@ -81,6 +84,10 @@ public class TriggerAreaScript : MonoBehaviour
                 triggerArea.radius = 3.5f;
                 break;
             case EnemyAI.EnemyState.Dead:
+                triggerArea.enabled = true;
+                triggerArea.radius = 3.5f;
+                break;
+            case EnemyAI.EnemyState.IsBeingKilled:
                 triggerArea.enabled = true;
                 triggerArea.radius = 3.5f;
                 break;
@@ -106,6 +113,9 @@ public class TriggerAreaScript : MonoBehaviour
                     nearbyEnemiesScript.nearbyEnemies.Add(this.gameObject);
                     break;
                 case EnemyAI.EnemyState.Dead:
+                    nearbyEnemiesScript.nearbyEnemies.Add(this.gameObject);
+                    break;
+                case EnemyAI.EnemyState.IsBeingKilled:
                     nearbyEnemiesScript.nearbyEnemies.Add(this.gameObject);
                     break;
                 case EnemyAI.EnemyState.Suspicious:
