@@ -104,6 +104,13 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
+        Patrolling();
+
+
+    }
+
+    void Patrolling()
+    {
         if (currentEnemyState != EnemyState.Dead)
         {
             IsBeingKilled();
@@ -147,11 +154,7 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-
-
     }
-
-
     void IsBeingKilled()
     {
 

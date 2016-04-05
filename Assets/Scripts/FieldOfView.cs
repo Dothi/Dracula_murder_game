@@ -26,7 +26,7 @@ public class FieldOfView : MonoBehaviour
     {
         collapseScript = GetComponent<CollapseScript>();
         AI = GetComponent<EnemyAI>();
-        sightDist = 6f;
+        sightDist = 10f;
         currentFacingState = FacingState.UP;
         enemiesInFOV = new List<GameObject>();
         spriteRend = GetComponentInChildren<SpriteRenderer>();
@@ -38,9 +38,6 @@ public class FieldOfView : MonoBehaviour
     {
         Facing();
         SpriteRend();
-
-        
-
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
         {
             Investigate();

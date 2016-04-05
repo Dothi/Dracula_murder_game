@@ -67,6 +67,7 @@ public class TriggerAreaScript : MonoBehaviour
                 if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Dead || currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.IsBeingKilled)
                 {
                     gc.gameOver = true;
+                    Debug.Log("enemy saw u");
                 }
                 else if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
                 {
