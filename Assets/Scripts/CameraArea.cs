@@ -69,7 +69,7 @@ public class CameraArea : MonoBehaviour {
                 }
                 else if (roomAspect < camera.aspect)
                 {
-                    cameraFollow.zoomEndValue = cameraZoom / camera.aspect;
+                    cameraFollow.zoomEndValue = cameraZoom / camera.aspect; //en tajuu miten tän pitäs toimii lol
                 }
 
                 currentRoom = true;

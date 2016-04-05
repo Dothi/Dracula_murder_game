@@ -35,7 +35,7 @@ public class MirrorScript : MonoBehaviour {
                 if (enemy.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Patrolling ||
                     enemy.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Waiting)
                 {
-                    enemy.GetComponent<EnemyAI>().currentEnemyState = EnemyAI.EnemyState.Suspicious; //wörkki mutta toglettuu takas, vika jossai muualla
+                    enemy.GetComponent<CollapseScript>().isSuspicious = true;
                 }               
             }
         }
