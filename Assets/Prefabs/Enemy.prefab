@@ -25,7 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 479388}
   - 61: {fileID: 6124234}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Collider
   m_TagString: PlayerFeet
   m_Icon: {fileID: 0}
@@ -53,7 +53,7 @@ GameObject:
   m_Icon: {fileID: -3545028842045912814, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &183476
 GameObject:
   m_ObjectHideFlags: 0

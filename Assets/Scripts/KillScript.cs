@@ -7,7 +7,7 @@ public class KillScript : MonoBehaviour {
     BloodBar bloodBar;
     GameController gameController;
 
-    List<GameObject> enemiesInRange = new List<GameObject>();
+    public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject killTarget = null;
     float killHoldTime = 0;
     public float killHoldDuration = 15;
@@ -23,7 +23,10 @@ public class KillScript : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            enemiesInRange.Add(other.gameObject);          
+            if (!enemiesInRange.Contains(other.gameObject))
+            {
+                    enemiesInRange.Add(other.gameObject);
+            }         
         }
     }
 
