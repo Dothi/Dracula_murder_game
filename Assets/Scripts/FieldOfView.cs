@@ -12,6 +12,7 @@ public class FieldOfView : MonoBehaviour
     public RaycastHit2D[] hits;
     public Sprite[] sprites;
     SpriteRenderer spriteRend;
+    LayerMask layerMask;
     public enum FacingState
     {
         UP,
@@ -29,6 +30,8 @@ public class FieldOfView : MonoBehaviour
         currentFacingState = FacingState.UP;
         enemiesInFOV = new List<GameObject>();
         spriteRend = GetComponentInChildren<SpriteRenderer>();
+        layerMask = 1 << LayerMask.NameToLayer("TriggerArea");
+        layerMask = ~layerMask;
     }
 
     public void Update()
@@ -36,13 +39,16 @@ public class FieldOfView : MonoBehaviour
         Facing();
         SpriteRend();
 
-        if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed)
+        
+
+        if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
         {
             Investigate();
         }
         else
         {
             AI.seePlayer = false;
+            enemiesInFOV.Clear();
         }
     }
 
@@ -79,11 +85,11 @@ public class FieldOfView : MonoBehaviour
         switch (currentFacingState)
         {
             case FacingState.UP:
-                RaycastHit2D hit1 = Physics2D.Raycast(rayPos, transform.up, (sightDist + .2f));
-                RaycastHit2D hit2 = Physics2D.Raycast(rayPos, (transform.up + transform.right + new Vector3(-.3f, 0, 0)), (sightDist + .6f));
-                RaycastHit2D hit3 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f));
-                RaycastHit2D hit4 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f));
-                RaycastHit2D hit5 = Physics2D.Raycast(rayPos, (transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f));
+                RaycastHit2D hit1 = Physics2D.Raycast(rayPos, transform.up, (sightDist + .2f), layerMask);
+                RaycastHit2D hit2 = Physics2D.Raycast(rayPos, (transform.up + transform.right + new Vector3(-.3f, 0, 0)), (sightDist + .6f), layerMask);
+                RaycastHit2D hit3 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f), layerMask);
+                RaycastHit2D hit4 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f), layerMask);
+                RaycastHit2D hit5 = Physics2D.Raycast(rayPos, (transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f), layerMask);
 
                 Debug.DrawRay(rayPos, (transform.up + transform.right + new Vector3(-.3f, 0, 0)) * sightDist, Color.green);
                 Debug.DrawRay(rayPos, (transform.up - transform.right + new Vector3(.3f, 0, 0)) * sightDist, Color.green);
@@ -194,11 +200,11 @@ public class FieldOfView : MonoBehaviour
 
                 break;
             case FacingState.DOWN:
-                hit1 = Physics2D.Raycast(rayPos, -transform.up, (sightDist + .2f));
-                hit2 = Physics2D.Raycast(rayPos, (-transform.up + transform.right + new Vector3(-.3f, 0, 0)), (sightDist + .6f));
-                hit3 = Physics2D.Raycast(rayPos, (-transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f));
-                hit4 = Physics2D.Raycast(rayPos, (-transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f));
-                hit5 = Physics2D.Raycast(rayPos, (-transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f));
+                hit1 = Physics2D.Raycast(rayPos, -transform.up, (sightDist + .2f), layerMask);
+                hit2 = Physics2D.Raycast(rayPos, (-transform.up + transform.right + new Vector3(-.3f, 0, 0)), (sightDist + .6f), layerMask);
+                hit3 = Physics2D.Raycast(rayPos, (-transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f), layerMask);
+                hit4 = Physics2D.Raycast(rayPos, (-transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f), layerMask);
+                hit5 = Physics2D.Raycast(rayPos, (-transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f), layerMask);
 
                 Debug.DrawRay(rayPos, (-transform.up + transform.right + new Vector3(-.3f, 0, 0)) * sightDist, Color.green);
                 Debug.DrawRay(rayPos, (-transform.up - transform.right + new Vector3(.3f, 0, 0)) * sightDist, Color.green);
@@ -312,11 +318,11 @@ public class FieldOfView : MonoBehaviour
 
                 break;
             case FacingState.RIGHT:
-                hit1 = Physics2D.Raycast(rayPos, transform.right, (sightDist + .2f));
-                hit2 = Physics2D.Raycast(rayPos, (transform.right + transform.up + new Vector3(0, -.3f, 0)), (sightDist + .6f));
-                hit3 = Physics2D.Raycast(rayPos, (transform.right - transform.up + new Vector3(0, .3f, 0)), (sightDist + .6f));
-                hit4 = Physics2D.Raycast(rayPos, (transform.right - transform.up + new Vector3(0, .65f, 0)), (sightDist + .6f));
-                hit5 = Physics2D.Raycast(rayPos, (transform.right + transform.up + new Vector3(0, -.65f, 0)), (sightDist + .6f));
+                hit1 = Physics2D.Raycast(rayPos, transform.right, (sightDist + .2f), layerMask);
+                hit2 = Physics2D.Raycast(rayPos, (transform.right + transform.up + new Vector3(0, -.3f, 0)), (sightDist + .6f), layerMask);
+                hit3 = Physics2D.Raycast(rayPos, (transform.right - transform.up + new Vector3(0, .3f, 0)), (sightDist + .6f), layerMask);
+                hit4 = Physics2D.Raycast(rayPos, (transform.right - transform.up + new Vector3(0, .65f, 0)), (sightDist + .6f), layerMask);
+                hit5 = Physics2D.Raycast(rayPos, (transform.right + transform.up + new Vector3(0, -.65f, 0)), (sightDist + .6f), layerMask);
 
                 Debug.DrawRay(rayPos, (transform.right + transform.up + new Vector3(0, -.3f, 0)) * sightDist, Color.green);
                 Debug.DrawRay(rayPos, (transform.right - transform.up + new Vector3(0, .3f, 0)) * sightDist, Color.green);
@@ -429,11 +435,11 @@ public class FieldOfView : MonoBehaviour
 
                 break;
             case FacingState.LEFT:
-                hit1 = Physics2D.Raycast(rayPos, -transform.right, (sightDist + .2f));
-                hit2 = Physics2D.Raycast(rayPos, (-transform.right + transform.up + new Vector3(0, -.3f, 0)), (sightDist + .6f));
-                hit3 = Physics2D.Raycast(rayPos, (-transform.right - transform.up + new Vector3(0, .3f, 0)), (sightDist + .6f));
-                hit4 = Physics2D.Raycast(rayPos, (-transform.right - transform.up + new Vector3(0, .65f, 0)), (sightDist + .6f));
-                hit5 = Physics2D.Raycast(rayPos, (-transform.right + transform.up + new Vector3(0, -.65f, 0)), (sightDist + .6f));
+                hit1 = Physics2D.Raycast(rayPos, -transform.right, (sightDist + .2f), layerMask);
+                hit2 = Physics2D.Raycast(rayPos, (-transform.right + transform.up + new Vector3(0, -.3f, 0)), (sightDist + .6f), layerMask);
+                hit3 = Physics2D.Raycast(rayPos, (-transform.right - transform.up + new Vector3(0, .3f, 0)), (sightDist + .6f), layerMask);
+                hit4 = Physics2D.Raycast(rayPos, (-transform.right - transform.up + new Vector3(0, .65f, 0)), (sightDist + .6f), layerMask);
+                hit5 = Physics2D.Raycast(rayPos, (-transform.right + transform.up + new Vector3(0, -.65f, 0)), (sightDist + .6f), layerMask);
 
                 Debug.DrawRay(rayPos, (-transform.right + transform.up + new Vector3(0, -.3f, 0)) * sightDist, Color.green);
                 Debug.DrawRay(rayPos, (-transform.right - transform.up + new Vector3(0, .3f, 0)) * sightDist, Color.green);

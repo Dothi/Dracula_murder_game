@@ -2,7 +2,8 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class BloodBar : MonoBehaviour {
+public class BloodBar : MonoBehaviour
+{
 
     GameController gameController;
     KillScript killScript;
@@ -13,16 +14,16 @@ public class BloodBar : MonoBehaviour {
     public float bloodDecreaseSpeed = 10;
     public float bloodFromKill = 65;
 
-	void Start ()
+    void Start()
     {
         currentBlood = maxBlood;
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         killScript = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
         bloodBar = GameObject.Find("BloodSlider").GetComponent<Slider>();
-	}
-	
+    }
 
-	void Update ()
+
+    void Update()
     {
         bloodBar.value = currentBlood;
 
@@ -43,7 +44,7 @@ public class BloodBar : MonoBehaviour {
                 Debug.Log("Game Over");
             }
         }
-	}
+    }
 
     public void GetBloodFromKill(float amount)
     {

@@ -17,14 +17,14 @@ public class TriggerAreaScript : MonoBehaviour
 
     void Start()
     {
-        AI = GetComponent<EnemyAI>();
+        AI = GetComponentInParent<EnemyAI>();
         triggerArea = GetComponent<CircleCollider2D>();
         player = GameObject.FindGameObjectWithTag("Player");
         gamecontroller = GameObject.FindGameObjectWithTag("GameController");
         nearbyEnemiesScript = player.GetComponent<NearbyEnemiesScript>();
         gc = gamecontroller.GetComponent<GameController>();
-        fov = GetComponent<FieldOfView>();
-        cs = GetComponent<CollapseScript>();
+        fov = GetComponentInParent<FieldOfView>();
+        cs = GetComponentInParent<CollapseScript>();
         timer = 0f;
         bustTimer = 2.5f;
     }
@@ -104,19 +104,19 @@ public class TriggerAreaScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (triggerArea.enabled == true && other.tag == "Player" && !nearbyEnemiesScript.nearbyEnemies.Contains(this.gameObject))
+        if (triggerArea.enabled == true && other.tag == "Player" && !nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
         {
             
             switch (AI.currentEnemyState)
             {
                 case EnemyAI.EnemyState.Collapsed:
-                    nearbyEnemiesScript.nearbyEnemies.Add(this.gameObject);
+                    nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
                     break;
                 case EnemyAI.EnemyState.Dead:
-                    nearbyEnemiesScript.nearbyEnemies.Add(this.gameObject);
+                    nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
                     break;
                 case EnemyAI.EnemyState.IsBeingKilled:
-                    nearbyEnemiesScript.nearbyEnemies.Add(this.gameObject);
+                    nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
                     break;
                 case EnemyAI.EnemyState.Suspicious:
                     timer += 1f * Time.deltaTime;
@@ -133,9 +133,9 @@ public class TriggerAreaScript : MonoBehaviour
     void OnTriggerExit2D(Collider2D other)
     {
         timer = 0f;
-        if (nearbyEnemiesScript.nearbyEnemies.Contains(this.gameObject))
+        if (nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
         {
-            nearbyEnemiesScript.nearbyEnemies.Remove(this.gameObject);
+            nearbyEnemiesScript.nearbyEnemies.Remove(gameObject.transform.parent.gameObject);
         }
     }
 }

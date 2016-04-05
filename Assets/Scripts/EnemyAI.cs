@@ -104,10 +104,9 @@ public class EnemyAI : MonoBehaviour
 
     void Update()
     {
-        IsBeingKilled();
         if (currentEnemyState != EnemyState.Dead)
         {
-            
+            IsBeingKilled();
             SpeedController();
 
             if (currentEnemyState == EnemyState.Patrolling)

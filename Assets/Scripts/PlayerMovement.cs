@@ -6,7 +6,8 @@ public class PlayerMovement : MonoBehaviour {
     public float moveSpeed = 6;
     public bool canMove = true;
     private Rigidbody2D rb;
-
+    SpriteRenderer spriteRend;
+    public Sprite[] sprites;
     bool moveUp;
     bool moveLeft;
     bool moveDown;
@@ -14,6 +15,8 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start()
     {
+        spriteRend = GetComponentInChildren<SpriteRenderer>();
+        
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -57,6 +60,7 @@ public class PlayerMovement : MonoBehaviour {
         if (moveUp)
         {
             rb.velocity = new Vector2(rb.velocity.x, moveSpeed);
+            spriteRend.sprite = sprites[0];
         }
         else if (!moveDown)
         {
@@ -65,6 +69,7 @@ public class PlayerMovement : MonoBehaviour {
         if (moveLeft)
         {
             rb.velocity = new Vector2(-moveSpeed, rb.velocity.y);
+            spriteRend.sprite = sprites[1];
         }
         else if (!moveRight)
         {
@@ -73,6 +78,7 @@ public class PlayerMovement : MonoBehaviour {
         if (moveDown)
         {
             rb.velocity = new Vector2(rb.velocity.x, -moveSpeed);
+            spriteRend.sprite = sprites[2];
         }
         else if (!moveUp)
         {
@@ -81,6 +87,7 @@ public class PlayerMovement : MonoBehaviour {
         if (moveRight)
         {
             rb.velocity = new Vector2(moveSpeed, rb.velocity.y);
+            spriteRend.sprite = sprites[3];
         }
         else if (!moveLeft)
         {
