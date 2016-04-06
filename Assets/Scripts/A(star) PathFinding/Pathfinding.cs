@@ -75,11 +75,14 @@ public class Pathfinding : MonoBehaviour
                 }
             }
         }
+        
+        
         yield return null;
         if (pathSuccess)
         {
             waypoints = RetracePath(startNode, targetNode);
         }
+        
         requestManager.FinishedProcessingPath(waypoints, pathSuccess);
     }
 

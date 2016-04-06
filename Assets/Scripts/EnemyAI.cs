@@ -9,11 +9,9 @@ public class EnemyAI : MonoBehaviour
     float speed;
     public float suspiciousSpeed = 6f;
     public float patrolSpeed = 3f;
-    public float velocity;
     public float currWaitTime;
+    public float idleTimer;
     public Waypoint[] waypoints;
-    public bool isCircular;
-    public bool inReverse;
     public Vector3 directionOfTravel;
     public Vector3 previous;
     public int randomizer { get { return Random.Range(0, waypoints.Length); } }
@@ -24,7 +22,7 @@ public class EnemyAI : MonoBehaviour
     public bool isAtWaypoint;
     public bool seePlayer;
     GameObject player;
-
+    public GameObject bigroom;
     KillScript ks;
     public enum EnemyState
     {
@@ -41,17 +39,18 @@ public class EnemyAI : MonoBehaviour
     void Start()
     {
         currWaitTime = 0f;
+        idleTimer = 0f;
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
-        inReverse = false;
         currentIndex = randomizer;
+      //  PathRequestManager.RequestPath(transform.position, RandomPointInRoom(), OnPathFound);
         PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].transform.position, OnPathFound);
         isWaiting = false;
         seePlayer = false;
-        isCircular = true;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
+        
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
@@ -61,12 +60,11 @@ public class EnemyAI : MonoBehaviour
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
         }
+        
 
     }
     IEnumerator FollowPath()
     {
-
-
         if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
@@ -91,8 +89,6 @@ public class EnemyAI : MonoBehaviour
                     if (currentEnemyState == EnemyState.Patrolling || currentEnemyState == EnemyState.Suspicious)
                     {
                         transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-                        
-
                         directionOfTravel = (currentWaypoint - transform.position).normalized;   
                     }
                 }
@@ -106,6 +102,15 @@ public class EnemyAI : MonoBehaviour
     {
         Patrolling();
 
+      /*  if (directionOfTravel == Vector3.zero && !isWaiting)
+        {
+            idleTimer += 1 * Time.deltaTime;
+            if(idleTimer >= 20f)
+            {
+                isAtWaypoint = true;
+                Debug.Log("vittutututu");
+            }
+        }*/
 
     }
 
@@ -125,7 +130,7 @@ public class EnemyAI : MonoBehaviour
                     {
                         isWaiting = false;
                         currWaitTime = 0f;
-                        waypoints[currentIndex].waitSeconds = Waypoint.randomizer;
+                        
                     }
                 }
             }
@@ -149,9 +154,13 @@ public class EnemyAI : MonoBehaviour
                     else
                     {
                         Debug.Log("Requesting Path");
+                        
+                        //PathRequestManager.RequestPath(transform.position, RandomPointInRoom(), OnPathFound);
                         PathRequestManager.RequestPath(transform.position, waypoints[currentIndex].transform.position, OnPathFound);
+                       // idleTimer = 0f;
                     }
                 }
+                
             }
         }
     }
@@ -164,14 +173,10 @@ public class EnemyAI : MonoBehaviour
             {
                 currentEnemyState = EnemyState.IsBeingKilled;
             }
-        }
-
-
-        
+        }    
     }
     void SpeedController()
     {
-
         if (currentEnemyState == EnemyState.IsBeingKilled)
         {
             speed = 0f;
@@ -192,6 +197,18 @@ public class EnemyAI : MonoBehaviour
         {
             speed = patrolSpeed;
         }
+    }
+
+    Vector3 RandomPointInRoom()
+    {
+        
+
+        float x = Random.Range(bigroom.GetComponentInParent<Transform>().position.x - Mathf.Round(bigroom.transform.localScale.x), bigroom.GetComponentInParent<Transform>().position.x + Mathf.Round(bigroom.transform.localScale.x));
+        float y = Random.Range(bigroom.GetComponentInParent<Transform>().position.y - Mathf.Round(bigroom.transform.localScale.y), bigroom.GetComponentInParent<Transform>().position.y + Mathf.Round(bigroom.transform.localScale.y));
+
+        return new Vector3(x, y);
+
+
     }
 }
 
