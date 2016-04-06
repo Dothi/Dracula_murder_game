@@ -11,7 +11,7 @@ GameObject:
   - 61: {fileID: 6171936}
   - 114: {fileID: 11421408}
   m_Layer: 0
-  m_Name: CameraArea
+  m_Name: CameraArea_BigRoom
   m_TagString: CameraArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58abeef86c9429243938c03208dd4aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraZoom: 11.7
+  cameraZoom: 23.3
   cameraZoomH: 0
   playerMask:
     serializedVersion: 2

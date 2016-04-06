@@ -11,7 +11,7 @@ GameObject:
   - 61: {fileID: 6101204}
   - 114: {fileID: 11435572}
   m_Layer: 0
-  m_Name: CameraArea
+  m_Name: CameraArea_SmallRoom
   m_TagString: CameraArea
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
