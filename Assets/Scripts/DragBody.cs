@@ -34,23 +34,23 @@ public class DragBody : MonoBehaviour {
         {
             if (dragTarget != null && dragTarget.activeInHierarchy)
             {
-                GameObject enemyCol = dragTarget.transform.Find("Collider").gameObject;
+                BoxCollider2D enemyCol = dragTarget.transform.Find("Collider").GetComponent<BoxCollider2D>();
 
                 if (dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead &&
                     !Physics2D.Linecast(transform.position, dragTarget.transform.position, unwalkableMask) &&
                     Vector3.Distance(dragTarget.transform.position, transform.position) < 3)
                 {                 
-                    if (!enemyCol.activeInHierarchy)
+                    if (enemyCol.isTrigger)
                     {
-                        enemyCol.SetActive(true);
+                        enemyCol.isTrigger = false;
                     }
                     dragTarget.GetComponent<Rigidbody2D>().velocity = gameObject.GetComponent<Rigidbody2D>().velocity;
                 }
                 else
                 {
-                    if (enemyCol.activeInHierarchy)
+                    if (!enemyCol.isTrigger)
                     {
-                        enemyCol.SetActive(false);
+                        enemyCol.isTrigger = true;
                     }
                     dragTarget.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                 }
@@ -61,10 +61,10 @@ public class DragBody : MonoBehaviour {
             if (dragTarget != null && dragTarget.activeInHierarchy &&
                 dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
             {
-                GameObject enemyCol = dragTarget.transform.Find("Collider").gameObject;
-                if (enemyCol.activeInHierarchy)
+                BoxCollider2D enemyCol = dragTarget.transform.Find("Collider").GetComponent<BoxCollider2D>();
+                if (!enemyCol.isTrigger)
                 {
-                    enemyCol.SetActive(false);
+                    enemyCol.isTrigger = true;
                 }
                 dragTarget.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             }

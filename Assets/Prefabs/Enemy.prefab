@@ -27,11 +27,11 @@ GameObject:
   - 61: {fileID: 6124234}
   m_Layer: 0
   m_Name: Collider
-  m_TagString: PlayerFeet
+  m_TagString: EnemyFeet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &105458
 GameObject:
   m_ObjectHideFlags: 0
@@ -204,7 +204,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2

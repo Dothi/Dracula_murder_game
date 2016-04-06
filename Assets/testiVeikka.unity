@@ -159,7 +159,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &51804851
 Transform:
   m_ObjectHideFlags: 0
@@ -183,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &51804853
 BoxCollider2D:
@@ -997,7 +998,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &496050465
 Transform:
   m_ObjectHideFlags: 0
@@ -1021,6 +1022,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &496050467
 BoxCollider2D:
@@ -1232,7 +1234,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &521287534
 Transform:
   m_ObjectHideFlags: 0
@@ -1256,6 +1258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &521287536
 BoxCollider2D:
@@ -1859,6 +1862,18 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 100790, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124234, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100790, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_TagString
+      value: EnemyFeet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
   m_IsPrefabParent: 0
@@ -2195,7 +2210,7 @@ Transform:
   m_Children:
   - {fileID: 1061007293}
   m_Father: {fileID: 292160278}
-  m_RootOrder: 3
+  m_RootOrder: 6
 --- !u!1001 &783992292
 Prefab:
   m_ObjectHideFlags: 0
@@ -2501,7 +2516,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &924564771
 Transform:
   m_ObjectHideFlags: 0
@@ -2525,6 +2540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &924564773
 BoxCollider2D:
@@ -3423,6 +3439,18 @@ Prefab:
       propertyPath: m_Name
       value: Enemy (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 100790, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6124234, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100790, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_TagString
+      value: EnemyFeet
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
   m_IsPrefabParent: 0
@@ -4085,7 +4113,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1276520186
 Transform:
   m_ObjectHideFlags: 0
@@ -4109,6 +4137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &1276520188
 BoxCollider2D:
@@ -4397,7 +4426,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 292160278}
-  m_RootOrder: 1
+  m_RootOrder: 2
 --- !u!114 &1345107379
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4409,6 +4438,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 1894451950}
   playerInTrigger: 0
 --- !u!61 &1345107380
 BoxCollider2D:
@@ -4738,7 +4768,7 @@ GameObject:
   m_Icon: {fileID: -3114416830163030229, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1391474905
 Transform:
   m_ObjectHideFlags: 0
@@ -4837,7 +4867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1423717602
 Transform:
   m_ObjectHideFlags: 0
@@ -4861,6 +4891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &1423717604
 BoxCollider2D:
@@ -5045,7 +5076,7 @@ Transform:
   - {fileID: 1281976460}
   - {fileID: 1382425786}
   m_Father: {fileID: 292160278}
-  m_RootOrder: 2
+  m_RootOrder: 5
 --- !u!1001 &1501723461
 Prefab:
   m_ObjectHideFlags: 0
@@ -5407,7 +5438,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1626312428
 Transform:
   m_ObjectHideFlags: 0
@@ -5419,7 +5450,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 292160278}
-  m_RootOrder: 6
+  m_RootOrder: 4
 --- !u!114 &1626312429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5431,6 +5462,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &1626312430
 BoxCollider2D:
@@ -5466,7 +5498,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1636225907
 Transform:
   m_ObjectHideFlags: 0
@@ -5478,7 +5510,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 292160278}
-  m_RootOrder: 5
+  m_RootOrder: 3
 --- !u!114 &1636225908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5490,6 +5522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &1636225909
 BoxCollider2D:
@@ -5905,6 +5938,8 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1894451951}
+  - 61: {fileID: 1894451953}
+  - 114: {fileID: 1894451952}
   m_Layer: 0
   m_Name: Door_front
   m_TagString: Untagged
@@ -5925,6 +5960,31 @@ Transform:
   - {fileID: 979042261}
   m_Father: {fileID: 0}
   m_RootOrder: 18
+--- !u!114 &1894451952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1894451950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 492c431e484acd241919dede3088158c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!61 &1894451953
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1894451950}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0.27}
+  serializedVersion: 2
+  m_Size: {x: 3.6, y: 0.65}
 --- !u!1 &1909695470
 GameObject:
   m_ObjectHideFlags: 0
@@ -6043,7 +6103,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 481044, guid: edc931db45fe1ee4097d220ae9b78d2a, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 448422, guid: edc931db45fe1ee4097d220ae9b78d2a, type: 2}
       propertyPath: m_RootOrder
@@ -6125,7 +6185,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1925376088
 Transform:
   m_ObjectHideFlags: 0
@@ -6149,6 +6209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &1925376090
 BoxCollider2D:
@@ -6402,7 +6463,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1963619908
 Transform:
   m_ObjectHideFlags: 0
@@ -6426,6 +6487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
   playerInTrigger: 0
 --- !u!61 &1963619910
 BoxCollider2D:
@@ -6631,6 +6693,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc1be4a0b3149c44ac858068799f202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 1894451950}
   playerInTrigger: 0
 --- !u!61 &2095382592
 BoxCollider2D:
