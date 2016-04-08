@@ -38,7 +38,7 @@ public class EnemyAI : MonoBehaviour
 
     public EnemyState currentEnemyState;
 
-    void Awake()
+    void Start()
     {
         currWaitTime = 0f;
         idleTimer = 0f;
