@@ -6,7 +6,7 @@ public class EnemyAI : MonoBehaviour
     Vector3[] path;
 
     int targetIndex;
-    public int roomVisits;
+    public int roomStops;
     float speed;
     public float suspiciousSpeed = 6f;
     public float patrolSpeed = 3f;
@@ -42,7 +42,7 @@ public class EnemyAI : MonoBehaviour
     {
         currWaitTime = 0f;
         idleTimer = 0f;
-        roomVisits = 0;
+        roomStops = 0;
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
         currentIndex = randomizer;
@@ -83,7 +83,7 @@ public class EnemyAI : MonoBehaviour
                         Debug.Log("Stopped");
                         targetIndex = 0;
                         isAtWaypoint = true;
-                        roomVisits++;
+                        roomStops++;
                         isWaiting = true;
                         yield break;
                     }
@@ -151,10 +151,10 @@ public class EnemyAI : MonoBehaviour
 
                     int oldIndex = currentIndex;
                     currentIndex = randomizer;
-                    if (roomVisits >= roomVisitRandomizer)
+                    if (roomStops >= roomVisitRandomizer)
                     {
                         targetRoom = waypoints[currentIndex].gameObject;
-                        roomVisits = 0;
+                        roomStops = 0;
                     }
                     if (currentIndex == oldIndex)
                     {

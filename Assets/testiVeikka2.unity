@@ -1029,6 +1029,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e78a50f02ca1e134aba3dbe4fa7079d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &445178935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 445178931}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ec0f582c8fa0494e9975ec379cbde40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  suspiciousEnemies: []
 --- !u!1 &496050464
 GameObject:
   m_ObjectHideFlags: 0
@@ -3759,11 +3771,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22427324, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22427324, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11425892, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
