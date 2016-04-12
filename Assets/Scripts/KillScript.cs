@@ -25,7 +25,11 @@ public class KillScript : MonoBehaviour {
         {
             if (!enemiesInRange.Contains(other.gameObject))
             {
-                    enemiesInRange.Add(other.gameObject);
+                if (other.gameObject.GetComponent<EnemyAI>().currentEnemyState != EnemyAI.EnemyState.Collapsed &&
+                    other.gameObject.GetComponent<EnemyAI>().currentEnemyState != EnemyAI.EnemyState.Dead)
+                {
+                    enemiesInRange.Add(other.gameObject);   
+                }
             }         
         }
     }
@@ -108,6 +112,7 @@ public class KillScript : MonoBehaviour {
         target.GetComponentInChildren<SpriteRenderer>().color = Color.black;
         enemiesInRange.Remove(target);
         CheckWinForZeroEnemies(target);
+        killTarget = null;
     }
     void CheckWinForZeroEnemies(GameObject target)
     {

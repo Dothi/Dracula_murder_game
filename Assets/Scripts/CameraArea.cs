@@ -35,8 +35,8 @@ public class CameraArea : MonoBehaviour {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
-        camera = FindObjectOfType<Camera>();
-        cameraFollow = camera.GetComponent<CameraFollow>();
+        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cameraFollow = camera.transform.GetComponent<CameraFollow>();
         cameraTransform = camera.transform;
 
         roomBoundsMin = new Vector2(GetComponent<BoxCollider2D>().bounds.min.x, GetComponent<BoxCollider2D>().bounds.min.y);

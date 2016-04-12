@@ -20,7 +20,7 @@ public class Doorway : MonoBehaviour {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         doorSprite = door.transform.Find("Sprite").GetComponent<SpriteRenderer>();
 
-        camera = FindObjectOfType<Camera>();
+        camera = camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         camArea = transform.parent.GetComponentInChildren<CameraArea>();
         camFollow = camera.GetComponent<CameraFollow>();
         cameraTransform = camera.transform;

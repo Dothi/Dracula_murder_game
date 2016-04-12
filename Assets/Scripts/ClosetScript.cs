@@ -8,6 +8,8 @@ public class ClosetScript : MonoBehaviour {
 
     List<GameObject> ObjectsInside;
     public int ClosetSize = 1;
+    TextMesh statusText;
+    MeshRenderer textMesh;
 
     GameObject player;
     Collider2D playerFeet;
@@ -29,6 +31,11 @@ public class ClosetScript : MonoBehaviour {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
         ObjectsInside = new List<GameObject>();
+        statusText = transform.parent.GetComponentInChildren<TextMesh>();
+        textMesh = transform.parent.GetComponentInChildren<MeshRenderer>();
+        textMesh.enabled = false;
+        statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
+
         player = GameObject.FindGameObjectWithTag("Player");
         playerFeet = player.transform.Find("Collider").GetComponent<BoxCollider2D>();
 
@@ -43,6 +50,7 @@ public class ClosetScript : MonoBehaviour {
             if (!ObjectsInside.Contains(player))
             {
                 HidePlayer(player);
+                UnhideBody();
             }
             else if (ObjectsInside.Contains(player))
             {
@@ -66,6 +74,7 @@ public class ClosetScript : MonoBehaviour {
         if (other == playerFeet)
         {
             playerInRange = true;
+            textMesh.enabled = true;
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -73,6 +82,7 @@ public class ClosetScript : MonoBehaviour {
         if (other == playerFeet)
         {
             playerInRange = false;
+            textMesh.enabled = false;
         }
     }
 
@@ -82,9 +92,30 @@ public class ClosetScript : MonoBehaviour {
         {
             if (!ObjectsInside.Contains(enemy))
             {
+                player.GetComponent<DragBody>().enemiesInRange.Remove(enemy);
+                player.GetComponent<NearbyEnemiesScript>().nearbyEnemies.Remove(enemy);
                 ObjectsInside.Add(enemy);
                 enemy.SetActive(false);
+                statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
             }
+        }
+    }
+    public void UnhideBody()
+    {
+        if (playerInRange && ObjectsInside.Count == ClosetSize)
+        {
+            for (int i = 0; i < ObjectsInside.Count; i++)
+            {
+                if (ObjectsInside[i].CompareTag("Enemy"))
+                {
+                    player.GetComponent<DragBody>().enemiesInRange.Remove(ObjectsInside[i]);
+                    player.GetComponent<NearbyEnemiesScript>().nearbyEnemies.Remove(ObjectsInside[i]);
+                    ObjectsInside.Remove(ObjectsInside[i]);
+                    ObjectsInside[i].SetActive(true);
+                    statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
+                    break;
+                }
+            }   
         }
     }
     public void HidePlayer(GameObject player)
@@ -95,6 +126,7 @@ public class ClosetScript : MonoBehaviour {
             gc.playerInCloset = true;
             ObjectsInside.Add(player);
             player.SetActive(false);
+            statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
         }
     }
     public void UnhidePlayer(GameObject player)
@@ -102,6 +134,7 @@ public class ClosetScript : MonoBehaviour {
         gc.playerInCloset = false;
         ObjectsInside.Remove(player);           
         player.SetActive(true);
+        statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
     }
     private void FadePeekOverlay()
     {

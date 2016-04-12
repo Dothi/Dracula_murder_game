@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class DragBody : MonoBehaviour {
 
     public LayerMask unwalkableMask;
-    List<GameObject> enemiesInRange = new List<GameObject>();
+    public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject dragTarget = null;
 
     void OnTriggerEnter2D(Collider2D other)
