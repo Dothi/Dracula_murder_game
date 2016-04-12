@@ -7,20 +7,23 @@ public class VampireHunterScript : MonoBehaviour
     int targetIndex;
     public float speed;
     GameObject player;
-    
+    public bool isAtWaypoint = true;
 
     void Start()
     {
-        speed = 4f;
+        speed = 6f;
         player = GameObject.FindGameObjectWithTag("Player");
         
     }
 
     void Update()
     {
-        
+        if (isAtWaypoint)
+        {
+            
             PathRequestManager.RequestPath(transform.position, player.transform.position, OnPathFound);
-        
+            isAtWaypoint = false;
+        }
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
@@ -45,7 +48,7 @@ public class VampireHunterScript : MonoBehaviour
                     if (targetIndex >= path.Length)
                     {
                         Debug.Log("Stopped");
-                        
+                        isAtWaypoint = true;
                         targetIndex = 0;
                         yield break;
                     }
