@@ -11,6 +11,11 @@ public class MirrorScript : MonoBehaviour {
 
     bool playerInRange;
 
+    enum Facing { down, right, left };
+    Facing facing = Facing.down;
+
+    public bool mirrorFacingDown = true;
+
 	void Start ()
     {
         EnemiesInRange = new List<GameObject>();
@@ -35,7 +40,18 @@ public class MirrorScript : MonoBehaviour {
                 if (enemy.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Patrolling ||
                     enemy.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Waiting)
                 {
-                    enemy.GetComponent<CollapseScript>().isSuspicious = true;
+                    if (facing == Facing.down && enemy.GetComponent<FieldOfView>().currentFacingState != FieldOfView.FacingState.DOWN)
+                    {
+                        enemy.GetComponent<CollapseScript>().isSuspicious = true;
+                    }
+                    else if (facing == Facing.left && enemy.GetComponent<FieldOfView>().currentFacingState != FieldOfView.FacingState.LEFT)
+                    {
+                        enemy.GetComponent<CollapseScript>().isSuspicious = true;                        
+                    }
+                    else if (facing == Facing.right && enemy.GetComponent<FieldOfView>().currentFacingState != FieldOfView.FacingState.RIGHT)
+                    {
+                        enemy.GetComponent<CollapseScript>().isSuspicious = true;
+                    }
                 }               
             }
         }
