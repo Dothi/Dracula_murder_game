@@ -8,11 +8,14 @@ public class FieldOfView : MonoBehaviour
     public float sightDist;
     EnemyAI AI;
     public List<GameObject> enemiesInFOV;
+    public bool inSight;
     CollapseScript collapseScript;
     public RaycastHit2D[] hits;
     public Sprite[] sprites;
     SpriteRenderer spriteRend;
     LayerMask layerMask;
+    LayerMask playerMask;
+    GameObject player;
     public enum FacingState
     {
         UP,
@@ -24,14 +27,19 @@ public class FieldOfView : MonoBehaviour
     public FacingState currentFacingState;
     public void Awake()
     {
+        inSight = false;
         collapseScript = GetComponent<CollapseScript>();
         AI = GetComponent<EnemyAI>();
         sightDist = 10f;
         currentFacingState = FacingState.UP;
         enemiesInFOV = new List<GameObject>();
         spriteRend = GetComponentInChildren<SpriteRenderer>();
+        player = GameObject.FindGameObjectWithTag("Player");
         layerMask = 1 << LayerMask.NameToLayer("TriggerArea");
+        playerMask = 1 << LayerMask.NameToLayer("LinecastIgnore") | 1 << LayerMask.NameToLayer("TriggerArea");
         layerMask = ~layerMask;
+        playerMask = ~playerMask;
+
     }
 
     public void Update()
@@ -40,6 +48,7 @@ public class FieldOfView : MonoBehaviour
         SpriteRend();
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
         {
+            InSight();
             Investigate();
         }
         else
@@ -95,26 +104,26 @@ public class FieldOfView : MonoBehaviour
                 Debug.DrawRay(rayPos, transform.up * (sightDist + .2f), Color.green);
 
                 //See player                                                                 
-                if (hit1 && hit1.collider.tag == "Player")
+                if (hit1 && hit1.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
                 }
-                else if (hit2 && hit2.collider.tag == "Player")
-                {
-                    AI.seePlayer = true;
-
-                }
-                else if (hit3 && hit3.collider.tag == "Player")
+                else if (hit2 && hit2.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit4 && hit4.collider.tag == "Player")
+                else if (hit3 && hit3.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit5 && hit5.collider.tag == "Player")
+                else if (hit4 && hit4.collider.tag == "Player" && inSight)
+                {
+                    AI.seePlayer = true;
+
+                }
+                else if (hit5 && hit5.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
                 }
@@ -210,27 +219,27 @@ public class FieldOfView : MonoBehaviour
                 Debug.DrawRay(rayPos, -transform.up * (sightDist + .2f), Color.green);
 
 
-                if (hit1 && hit1.collider.tag == "Player")
+                if (hit1 && hit1.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit2 && hit2.collider.tag == "Player")
+                else if (hit2 && hit2.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit3 && hit3.collider.tag == "Player")
+                else if (hit3 && hit3.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit4 && hit4.collider.tag == "Player")
+                else if (hit4 && hit4.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit5 && hit5.collider.tag == "Player")
+                else if (hit5 && hit5.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
@@ -328,27 +337,27 @@ public class FieldOfView : MonoBehaviour
                 Debug.DrawRay(rayPos, transform.right * (sightDist + .2f), Color.green);
 
 
-                if (hit1 && hit1.collider.tag == "Player")
+                if (hit1 && hit1.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit2 && hit2.collider.tag == "Player")
+                else if (hit2 && hit2.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit3 && hit3.collider.tag == "Player")
+                else if (hit3 && hit3.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit4 && hit4.collider.tag == "Player")
+                else if (hit4 && hit4.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit5 && hit5.collider.tag == "Player")
+                else if (hit5 && hit5.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
@@ -445,27 +454,27 @@ public class FieldOfView : MonoBehaviour
                 Debug.DrawRay(rayPos, -transform.right * (sightDist + .2f), Color.green);
 
 
-                if (hit1 && hit1.collider.tag == "Player")
+                if (hit1 && hit1.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                if (hit2 && hit2.collider.tag == "Player")
+                if (hit2 && hit2.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit3 && hit3.collider.tag == "Player")
+                else if (hit3 && hit3.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit4 && hit4.collider.tag == "Player")
+                else if (hit4 && hit4.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
 
                 }
-                else if (hit5 && hit5.collider.tag == "Player")
+                else if (hit5 && hit5.collider.tag == "Player" && inSight)
                 {
                     AI.seePlayer = true;
                 }
@@ -567,7 +576,19 @@ public class FieldOfView : MonoBehaviour
                 break;
         }
     }
-    
+    void InSight()
+    {
+        RaycastHit2D lineHit = Physics2D.Linecast(transform.position, player.transform.position, playerMask);
+
+        if (lineHit && lineHit.collider.tag != "PlayerFeet")
+        {
+            inSight = false;
+        }
+        else
+        {
+            inSight = true;
+        }
+    }
 }
 
 
