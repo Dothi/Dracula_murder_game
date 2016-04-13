@@ -5,6 +5,9 @@ public class Door : MonoBehaviour {
 
     SpriteRenderer doorSprite;
 
+    public Sprite normalSprite;
+    public Sprite highlightSprite;
+
     void Start()
     {
         doorSprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();

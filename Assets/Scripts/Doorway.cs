@@ -31,6 +31,7 @@ public class Doorway : MonoBehaviour {
         if (other.CompareTag("PlayerFeet") && !playerInTrigger)
         {
             playerInTrigger = true;
+            doorSprite.sprite = door.GetComponent<Door>().highlightSprite;
         }
     }
     
@@ -76,6 +77,7 @@ public class Doorway : MonoBehaviour {
         {
             gc.playerIsPeeking = false;
             playerInTrigger = false;
+            doorSprite.sprite = door.GetComponent<Door>().normalSprite;
             if (doorSprite.color != new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 1f))
             {
                 if (doorSprite.color != new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 0.0f)) // = some has opened the door

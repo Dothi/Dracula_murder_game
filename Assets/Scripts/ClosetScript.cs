@@ -26,6 +26,9 @@ public class ClosetScript : MonoBehaviour {
     Color fadeEndValue;
     Color lastFadeEndValue;
 
+    public Sprite normalSprite;
+    public Sprite highlightSprite;
+
 	void Start ()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -81,6 +84,7 @@ public class ClosetScript : MonoBehaviour {
         {
             playerInRange = true;
             textMesh.enabled = true;
+            transform.parent.GetComponentInChildren<SpriteRenderer>().sprite = highlightSprite;
         }
     }
     void OnTriggerExit2D(Collider2D other)
@@ -89,6 +93,7 @@ public class ClosetScript : MonoBehaviour {
         {
             playerInRange = false;
             textMesh.enabled = false;
+            transform.parent.GetComponentInChildren<SpriteRenderer>().sprite = normalSprite;
         }
     }
 
