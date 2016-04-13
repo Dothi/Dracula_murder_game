@@ -88,19 +88,19 @@ public class TriggerAreaScript : MonoBehaviour
         {
             case EnemyAI.EnemyState.Collapsed:
                 triggerArea.enabled = true;
-                triggerArea.radius = 3.5f;
+                triggerArea.radius = 1.6f;
                 break;
             case EnemyAI.EnemyState.Dead:
                 triggerArea.enabled = true;
-                triggerArea.radius = 3.5f;
+                triggerArea.radius = 1.6f;
                 break;
             case EnemyAI.EnemyState.IsBeingKilled:
                 triggerArea.enabled = true;
-                triggerArea.radius = 3.5f;
+                triggerArea.radius = 1.6f;
                 break;
             case EnemyAI.EnemyState.Suspicious:
                 triggerArea.enabled = true;
-                triggerArea.radius = 2f;
+                triggerArea.radius = 1.2f;
                 break;
             case EnemyAI.EnemyState.Patrolling:
                 triggerArea.enabled = false;
