@@ -49,8 +49,14 @@ public class ClosetScript : MonoBehaviour {
         {
             if (!ObjectsInside.Contains(player))
             {
-                HidePlayer(player);
-                UnhideBody();
+                if (ObjectsInside.Count == ClosetSize)
+                {
+                    UnhideBody();
+                }
+                else
+                {
+                    HidePlayer(player);
+                }               
             }
             else if (ObjectsInside.Contains(player))
             {
@@ -102,16 +108,16 @@ public class ClosetScript : MonoBehaviour {
     }
     public void UnhideBody()
     {
-        if (playerInRange && ObjectsInside.Count == ClosetSize)
+        if (playerInRange)
         {
             for (int i = 0; i < ObjectsInside.Count; i++)
             {
                 if (ObjectsInside[i].CompareTag("Enemy"))
                 {
-                    player.GetComponent<DragBody>().enemiesInRange.Remove(ObjectsInside[i]);
-                    player.GetComponent<NearbyEnemiesScript>().nearbyEnemies.Remove(ObjectsInside[i]);
-                    ObjectsInside.Remove(ObjectsInside[i]);
                     ObjectsInside[i].SetActive(true);
+                    ObjectsInside.Remove(ObjectsInside[i]);
+                    //ObjectsInside[i].transform.Find("Collider").GetComponent<BoxCollider2D>().isTrigger = true;
+                    //ObjectsInside[i].GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
                     break;
                 }
