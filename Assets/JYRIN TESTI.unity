@@ -2817,9 +2817,21 @@ Prefab:
       objectReference: {fileID: 1395680934}
     - target: {fileID: 22427324, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22427324, guid: ce932e64536664345bea364fdb074b3e, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22463210, guid: ce932e64536664345bea364fdb074b3e, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 22408342, guid: ce932e64536664345bea364fdb074b3e, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 22408342, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
@@ -5386,6 +5398,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 492c431e484acd241919dede3088158c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  normalSprite: {fileID: 0}
+  highlightSprite: {fileID: 0}
 --- !u!61 &1894451953
 BoxCollider2D:
   m_ObjectHideFlags: 0
