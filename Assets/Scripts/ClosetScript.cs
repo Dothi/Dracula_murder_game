@@ -6,7 +6,7 @@ public class ClosetScript : MonoBehaviour {
 
     GameController gc;
 
-    List<GameObject> ObjectsInside;
+    public List<GameObject> ObjectsInside;
     public int ClosetSize = 1;
     TextMesh statusText;
     MeshRenderer textMesh;
@@ -16,6 +16,7 @@ public class ClosetScript : MonoBehaviour {
     bool playerInRange = false;
 
     public bool playerCanHide = true;
+    public static bool playerIsHiding = false;
 
     GameObject peekOverlay;
     List<SpriteRenderer> overlayPieces;
@@ -32,7 +33,7 @@ public class ClosetScript : MonoBehaviour {
 	void Start ()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-
+        
         ObjectsInside = new List<GameObject>();
         statusText = transform.parent.GetComponentInChildren<TextMesh>();
         textMesh = transform.parent.GetComponentInChildren<MeshRenderer>();
@@ -41,6 +42,7 @@ public class ClosetScript : MonoBehaviour {
 
         player = GameObject.FindGameObjectWithTag("Player");
         playerFeet = player.transform.Find("Collider").GetComponent<BoxCollider2D>();
+        
 
         overlayPieces = new List<SpriteRenderer>();
         peekOverlay = GameObject.Find("PeekOverlay");
@@ -121,8 +123,8 @@ public class ClosetScript : MonoBehaviour {
                 {
                     ObjectsInside[i].SetActive(true);
                     ObjectsInside.Remove(ObjectsInside[i]);
-                    //ObjectsInside[i].transform.Find("Collider").GetComponent<BoxCollider2D>().isTrigger = true;
-                    //ObjectsInside[i].GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                    ObjectsInside[i].transform.Find("Collider").GetComponent<BoxCollider2D>().isTrigger = true;
+                    ObjectsInside[i].GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
                     break;
                 }
@@ -137,6 +139,7 @@ public class ClosetScript : MonoBehaviour {
             gc.playerInCloset = true;
             ObjectsInside.Add(player);
             player.SetActive(false);
+            playerIsHiding = true;
             statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
         }
     }
@@ -145,6 +148,7 @@ public class ClosetScript : MonoBehaviour {
         gc.playerInCloset = false;
         ObjectsInside.Remove(player);           
         player.SetActive(true);
+        playerIsHiding = false;
         statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
     }
     private void FadePeekOverlay()

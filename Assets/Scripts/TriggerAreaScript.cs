@@ -33,6 +33,12 @@ public class TriggerAreaScript : MonoBehaviour
     {
         EnableTrigger();
 
+        if (ClosetScript.playerIsHiding)
+        {
+            timer = 0f;
+            nearbyEnemiesScript.nearbyEnemies.Clear();
+        }
+
         if (fov.enemiesInFOV.Count > 0)
         {
             for (int i = 0; i < fov.enemiesInFOV.Count; i++)
@@ -105,7 +111,7 @@ public class TriggerAreaScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (triggerArea.enabled == true && other.tag == "Player" && !nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
+        if (triggerArea.enabled == true && other.tag == "Player" && !nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject) && !ClosetScript.playerIsHiding)
         {
             
             switch (AI.currentEnemyState)

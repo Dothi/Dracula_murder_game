@@ -46,7 +46,7 @@ public class EnemyAI : MonoBehaviour
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
         currentIndex = randomizer;
-        targetRoom = waypoints[randomizer].gameObject;
+        targetRoom = waypoints[currentIndex].gameObject;
         PathRequestManager.RequestPath(transform.position, RandomPointInRoom(), OnPathFound);
         isWaiting = false;
         seePlayer = false;
