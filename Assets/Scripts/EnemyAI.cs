@@ -64,15 +64,12 @@ public class EnemyAI : MonoBehaviour
             StopCoroutine("FollowPath");
             StartCoroutine("FollowPath");
         }
-        
-
     }
     IEnumerator FollowPath()
     {
         if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
-            Debug.Log(currentWaypoint);
             while (true)
             {
                 if (transform.position == currentWaypoint)
@@ -80,7 +77,6 @@ public class EnemyAI : MonoBehaviour
                     targetIndex++;
                     if (targetIndex >= path.Length)
                     {
-                        Debug.Log("Stopped");
                         targetIndex = 0;
                         isAtWaypoint = true;
                         roomStops++;
@@ -112,7 +108,6 @@ public class EnemyAI : MonoBehaviour
                 if (idleTimer >= 5f)
                 {
                     isAtWaypoint = true;
-                    Debug.Log("vittutututu");
                 }
             }
         }
@@ -162,14 +157,10 @@ public class EnemyAI : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Requesting Path");
-                        
                         PathRequestManager.RequestPath(transform.position, RandomPointInRoom(), OnPathFound);
-                        
                         idleTimer = 0f;
                     }
                 }
-                
             }
         }
     }

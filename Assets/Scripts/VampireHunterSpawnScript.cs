@@ -39,7 +39,6 @@ public class VampireHunterSpawnScript : MonoBehaviour
         if (suspiciousEnemies.Count >= 3)
         {
             //Spawn vampire hunter
-            Debug.Log("Spawn vampirehunter");
             VampireHunter.SetActive(true);
 
         }
