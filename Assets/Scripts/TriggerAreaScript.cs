@@ -12,7 +12,7 @@ public class TriggerAreaScript : MonoBehaviour
     GameObject player;
     GameObject gamecontroller;
     GameController gc;
-    float timer;
+    public float timer;
     float bustTimer;
 
     void Start()
@@ -26,7 +26,7 @@ public class TriggerAreaScript : MonoBehaviour
         fov = GetComponentInParent<FieldOfView>();
         cs = GetComponentInParent<CollapseScript>();
         timer = 0f;
-        bustTimer = 2.5f;
+        bustTimer = 3f;
     }
 
     void Update()
@@ -109,28 +109,35 @@ public class TriggerAreaScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (triggerArea.enabled == true && other.tag == "Player" && !nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject) && !ClosetScript.playerIsHiding)
+        if (triggerArea.enabled == true && other.tag == "Player" && !ClosetScript.playerIsHiding)
         {
-            
+
             switch (AI.currentEnemyState)
             {
                 case EnemyAI.EnemyState.Collapsed:
-                    nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
+                    if (!nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
+                    {
+                        nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
+                    }
                     break;
                 case EnemyAI.EnemyState.Dead:
-                    nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
+                    if (!nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
+                    {
+                        nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
+                    }
                     break;
                 case EnemyAI.EnemyState.IsBeingKilled:
-                    nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
+                    if (!nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
+                    {
+                        nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
+                    }
                     break;
                 case EnemyAI.EnemyState.Suspicious:
-                    timer += 1f * Time.deltaTime;
-                    
-                    if (timer >= bustTimer)
+                    if (!nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
                     {
-                        gc.gameOver = true;
+                        nearbyEnemiesScript.nearbyEnemies.Add(gameObject.transform.parent.gameObject);
                     }
-                                    
+
                     break;
             }
         }

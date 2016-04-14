@@ -17,7 +17,6 @@ public class VampireHunterScript : MonoBehaviour
         speed = 6f;
         player = GameObject.FindGameObjectWithTag("Player");
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
-        
     }
 
     void Update()
@@ -36,8 +35,7 @@ public class VampireHunterScript : MonoBehaviour
         {
             speed = 0f;
             Debug.Log("Bang");
-           //gc.gameOver = true;
-            
+           //gc.gameOver = true;   
         }
         if (isAtWaypoint)
         {

@@ -10,7 +10,7 @@ public class DragBody : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("Enemy") && !enemiesInRange.Contains(other.gameObject))
         {
             enemiesInRange.Add(other.gameObject);
         }
