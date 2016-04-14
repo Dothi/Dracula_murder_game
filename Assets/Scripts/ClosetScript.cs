@@ -48,7 +48,7 @@ public class ClosetScript : MonoBehaviour {
         peekOverlay = GameObject.Find("PeekOverlay");
         overlayPieces.AddRange(peekOverlay.transform.GetComponentsInChildren<SpriteRenderer>());
 	}
-    void Update()
+    void FixedUpdate()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
