@@ -14,7 +14,7 @@ public class FieldOfView : MonoBehaviour
     public Sprite[] sprites;
     SpriteRenderer spriteRend;
     LayerMask layerMask;
-    LayerMask playerMask;
+    LayerMask lineCastIgnoreMask;
     GameObject player;
     public enum FacingState
     {
@@ -36,9 +36,9 @@ public class FieldOfView : MonoBehaviour
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         layerMask = 1 << LayerMask.NameToLayer("TriggerArea");
-        playerMask = 1 << LayerMask.NameToLayer("LinecastIgnore") | 1 << LayerMask.NameToLayer("TriggerArea");
+        lineCastIgnoreMask = 1 << LayerMask.NameToLayer("LinecastIgnore") | 1 << LayerMask.NameToLayer("TriggerArea");
         layerMask = ~layerMask;
-        playerMask = ~playerMask;
+        lineCastIgnoreMask = ~lineCastIgnoreMask;
 
     }
 
@@ -578,7 +578,7 @@ public class FieldOfView : MonoBehaviour
     }
     void InSight()
     {
-        RaycastHit2D lineHit = Physics2D.Linecast(transform.position, player.transform.position, playerMask);
+        RaycastHit2D lineHit = Physics2D.Linecast(transform.position, player.transform.position, lineCastIgnoreMask);
 
         if (lineHit && lineHit.collider.tag != "PlayerFeet")
         {
