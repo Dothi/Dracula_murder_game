@@ -11,10 +11,8 @@ public class MirrorScript : MonoBehaviour {
 
     bool playerInRange;
 
-    enum Facing { down, right, left };
-    Facing facing = Facing.down;
-
-    public bool mirrorFacingDown = true;
+    public enum Facing { down, right, left };
+    public Facing facing = Facing.down;
 
 	void Start ()
     {
