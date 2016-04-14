@@ -46,7 +46,7 @@ GameObject:
   - 50: {fileID: 5096406}
   - 114: {fileID: 11400242}
   - 114: {fileID: 11418694}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
@@ -148,6 +148,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nearbyEnemies: []
+  suspiciousEnemies: []
+  timer: 0
 --- !u!114 &11418694
 MonoBehaviour:
   m_ObjectHideFlags: 1
