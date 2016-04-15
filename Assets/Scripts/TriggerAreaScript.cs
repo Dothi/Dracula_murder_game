@@ -12,8 +12,7 @@ public class TriggerAreaScript : MonoBehaviour
     GameObject player;
     GameObject gamecontroller;
     GameController gc;
-    public float timer;
-    float bustTimer;
+    
 
     void Start()
     {
@@ -25,8 +24,7 @@ public class TriggerAreaScript : MonoBehaviour
         gc = gamecontroller.GetComponent<GameController>();
         fov = GetComponentInParent<FieldOfView>();
         cs = GetComponentInParent<CollapseScript>();
-        timer = 0f;
-        bustTimer = 3f;
+        
     }
 
     void Update()
@@ -35,7 +33,7 @@ public class TriggerAreaScript : MonoBehaviour
 
         if (ClosetScript.playerIsHiding)
         {
-            timer = 0f;
+            
             nearbyEnemiesScript.nearbyEnemies.Clear();
         }
 
@@ -144,7 +142,7 @@ public class TriggerAreaScript : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        timer = 0f;
+        
         if (nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
         {
             nearbyEnemiesScript.nearbyEnemies.Remove(gameObject.transform.parent.gameObject);
