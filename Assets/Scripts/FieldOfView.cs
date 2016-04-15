@@ -60,23 +60,23 @@ public class FieldOfView : MonoBehaviour
 
     void Facing()
     {
-        if (AI.directionOfTravel.y < 0)
+        if (AI.directionOfTravel.y < 0 && AI.directionOfTravel.y < AI.directionOfTravel.x && AI.directionOfTravel.y < -AI.directionOfTravel.x)
         {
             currentFacingState = FacingState.DOWN;
 
         }
-        else if (AI.directionOfTravel.x < 0 && AI.directionOfTravel.y == 0)
+        else if (AI.directionOfTravel.x < 0 && AI.directionOfTravel.x < AI.directionOfTravel.y && AI.directionOfTravel.x < -AI.directionOfTravel.y)
         {
             currentFacingState = FacingState.LEFT;
 
         }
-        else if (AI.directionOfTravel.y > 0)
+        else if (AI.directionOfTravel.y > 0 && AI.directionOfTravel.y > AI.directionOfTravel.x && AI.directionOfTravel.y > -AI.directionOfTravel.x)
         {
             currentFacingState = FacingState.UP;
 
         }
 
-        else if (AI.directionOfTravel.x > 0 && AI.directionOfTravel.y == 0)
+        else if (AI.directionOfTravel.x > 0 && AI.directionOfTravel.x > AI.directionOfTravel.y && AI.directionOfTravel.x > -AI.directionOfTravel.y)
         {
             currentFacingState = FacingState.RIGHT;
 

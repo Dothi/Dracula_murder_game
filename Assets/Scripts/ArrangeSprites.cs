@@ -18,7 +18,7 @@ public class ArrangeSprites : MonoBehaviour {
             else if (sr.CompareTag("Floor"))
             {
                 sr.sortingOrder = -10000;
-                if (sr.transform.parent.name == "Carpet")
+                if (sr.transform.parent != null && sr.transform.parent.name == "Carpet")
                 {
                     sr.sortingOrder += 1;
                 }
