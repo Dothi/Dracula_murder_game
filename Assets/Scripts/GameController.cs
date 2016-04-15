@@ -14,6 +14,10 @@ public class GameController : MonoBehaviour {
     public bool playerIsPeeking = false;
     public bool playerInCloset = false;
 
+    void Awake()
+    {
+        GameObject.Find("Canvas").SetActive(true);
+    }
 	void Start ()
     {
         playAgainButton = GameObject.Find("Button_PlayAgain");
