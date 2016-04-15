@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class CameraArea : MonoBehaviour {
 
@@ -21,6 +22,7 @@ public class CameraArea : MonoBehaviour {
     public float cameraZoomH;
     public LayerMask playerMask;
 
+    public List<SpriteRenderer> spritesInRoom = new List<SpriteRenderer>();
     SpriteRenderer fade;
     public bool currentRoom;
     float lerpTime = 0.6f;
@@ -45,6 +47,11 @@ public class CameraArea : MonoBehaviour {
         roomAspect = GetComponent<BoxCollider2D>().bounds.max.x / GetComponent<BoxCollider2D>().bounds.max.y;
 
         fade = transform.parent.FindChild("Fade").GetComponent<SpriteRenderer>();
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        spritesInRoom.AddRange(other.gameObject.GetComponentsInChildren<SpriteRenderer>());
     }
 
     void Update()

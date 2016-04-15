@@ -10,7 +10,7 @@ public class Door : MonoBehaviour {
 
     void Start()
     {
-        doorSprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        doorSprite = transform.Find("Sprite (door)").GetComponent<SpriteRenderer>();
     }
 
     void OnTriggerStay2D(Collider2D other)
