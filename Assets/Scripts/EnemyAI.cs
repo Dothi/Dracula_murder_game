@@ -200,8 +200,8 @@ public class EnemyAI : MonoBehaviour
     }
     Vector3 RandomPointInRoom()
     {
-        float x = Random.Range(targetRoom.GetComponent<Transform>().position.x - targetRoom.transform.localScale.x, targetRoom.GetComponent<Transform>().position.x + targetRoom.transform.localScale.x);
-        float y = Random.Range(targetRoom.GetComponent<Transform>().position.y - targetRoom.transform.localScale.y, targetRoom.GetComponent<Transform>().position.y + targetRoom.transform.localScale.y);
+        float x = Random.Range(targetRoom.GetComponent<Transform>().position.x - targetRoom.transform.localScale.x / 2, targetRoom.GetComponent<Transform>().position.x + targetRoom.transform.localScale.x / 2);
+        float y = Random.Range(targetRoom.GetComponent<Transform>().position.y - targetRoom.transform.localScale.y / 2, targetRoom.GetComponent<Transform>().position.y + targetRoom.transform.localScale.y / 2);
 
         return new Vector3(x, y);
     }
