@@ -29,7 +29,7 @@ public class BloodBar : MonoBehaviour
 
         if (!killScript.isSuckingBlood && currentBlood > 0)
         {
-            currentBlood -= bloodDecreaseSpeed * Time.deltaTime;
+            currentBlood -= (bloodDecreaseSpeed * Time.deltaTime);
         }
         if (currentBlood > maxBlood)
         {
