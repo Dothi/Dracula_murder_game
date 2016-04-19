@@ -15,13 +15,13 @@ public class EnemyAI : MonoBehaviour
     public Waypoint[] waypoints;
     public Vector3 directionOfTravel;
     Vector3 previous;
-    int randomizer { get { return Random.Range(0, waypoints.Length); } }
-    int roomVisitRandomizer { get { return Random.Range(8, 13); } }
+    public int randomizer { get { return Random.Range(0, waypoints.Length); } }
+    public int roomVisitRandomizer { get { return Random.Range(8, 13); } }
     private Waypoint currentWP;
     public int currentIndex;
     GameController gc;
     public bool isWaiting;
-    bool isAtWaypoint;
+    public bool isAtWaypoint;
     public bool seePlayer;
     GameObject player;
     public GameObject targetRoom;
