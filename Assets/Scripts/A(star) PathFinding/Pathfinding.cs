@@ -125,8 +125,8 @@ public class Pathfinding : MonoBehaviour
 
         if (distX > distY)
 
-            return 94 * distY + 10 * (distX - distY);
-        return 94 * distX + 10 * (distY - distX);
+            return 14 * distY + 10 * (distX - distY);
+        return 14 * distX + 10 * (distY - distX);
 
     }
 }
