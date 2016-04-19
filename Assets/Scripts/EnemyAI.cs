@@ -107,7 +107,7 @@ public class EnemyAI : MonoBehaviour
             if (directionOfTravel == Vector3.zero && !isWaiting)
             {
                 idleTimer += 1 * Time.deltaTime;
-                if (idleTimer >= 5f)
+                if (idleTimer >= 3f)
                 {
                     isAtWaypoint = true;
                 }

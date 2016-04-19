@@ -35,7 +35,7 @@ public class CollapseScript : MonoBehaviour {
             }
             else
             {
-                transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.red;
+                transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.white;
             }
             if (isSuspicious && !isCollapsed)
             {
