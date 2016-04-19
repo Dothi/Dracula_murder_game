@@ -73,7 +73,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 403190}
   - 61: {fileID: 6122716}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Edge_pieces_vertical (row)
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
