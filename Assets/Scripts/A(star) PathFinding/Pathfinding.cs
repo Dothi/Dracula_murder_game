@@ -5,8 +5,6 @@ using System.Diagnostics;
 using System;
 public class Pathfinding : MonoBehaviour
 {
-
-
     PathRequestManager requestManager;
     Grid grid;
 
@@ -75,14 +73,12 @@ public class Pathfinding : MonoBehaviour
                 }
             }
         }
-        
-        
         yield return null;
         if (pathSuccess)
         {
             waypoints = RetracePath(startNode, targetNode);
         }
-        
+
         requestManager.FinishedProcessingPath(waypoints, pathSuccess);
     }
 

@@ -20,6 +20,11 @@ public class NearbyEnemiesScript : MonoBehaviour
 
     void Update()
     {
+        GetNearbyEnemyState();
+    }
+
+    void GetNearbyEnemyState()
+    {
         for (int i = 0; i < nearbyEnemies.Count; i++)
         {
             EnemyAI ai = nearbyEnemies[i].GetComponent<EnemyAI>();
@@ -37,17 +42,17 @@ public class NearbyEnemiesScript : MonoBehaviour
                 suspiciousEnemies.Remove(suspiciousEnemies[i]);
             }
         }
-            if (suspiciousEnemies.Count > 0)
+        if (suspiciousEnemies.Count > 0)
+        {
+            timer += Time.deltaTime;
+            if (timer >= bustTimer)
             {
-                timer += Time.deltaTime;
-                if (timer >= bustTimer)
-                {
-                    gc.gameOver = true;
-                }
+                gc.gameOver = true;
             }
-            else
-            {
-                timer = 0f;
-            }
+        }
+        else
+        {
+            timer = 0f;
+        }
     }
 }

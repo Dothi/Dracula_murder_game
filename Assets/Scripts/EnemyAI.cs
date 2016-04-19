@@ -10,18 +10,18 @@ public class EnemyAI : MonoBehaviour
     float speed;
     public float suspiciousSpeed = 6f;
     public float patrolSpeed = 3f;
-    public float currWaitTime;
-    public float idleTimer;
+    float currWaitTime;
+    float idleTimer;
     public Waypoint[] waypoints;
     public Vector3 directionOfTravel;
-    public Vector3 previous;
-    public int randomizer { get { return Random.Range(0, waypoints.Length); } }
-    public int roomVisitRandomizer { get { return Random.Range(8, 13); } }
+    Vector3 previous;
+    int randomizer { get { return Random.Range(0, waypoints.Length); } }
+    int roomVisitRandomizer { get { return Random.Range(8, 13); } }
     private Waypoint currentWP;
     public int currentIndex;
     GameController gc;
     public bool isWaiting;
-    public bool isAtWaypoint;
+    bool isAtWaypoint;
     public bool seePlayer;
     GameObject player;
     public GameObject targetRoom;
@@ -53,8 +53,11 @@ public class EnemyAI : MonoBehaviour
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
-        
-        
+    }
+    void Update()
+    {
+        Patrolling();
+        IdleController();
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
@@ -97,9 +100,8 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-    void Update()
+    void IdleController()
     {
-        Patrolling();
         if (currentEnemyState != EnemyState.Dead && currentEnemyState != EnemyState.Collapsed)
         {
             if (directionOfTravel == Vector3.zero && !isWaiting)
@@ -112,7 +114,6 @@ public class EnemyAI : MonoBehaviour
             }
         }
     }
-
     void Patrolling()
     {
         if (currentEnemyState != EnemyState.Dead)
@@ -197,7 +198,6 @@ public class EnemyAI : MonoBehaviour
             speed = patrolSpeed;
         }
     }
-
     Vector3 RandomPointInRoom()
     {
         float x = Random.Range(targetRoom.GetComponentInParent<Transform>().position.x - targetRoom.transform.localScale.x, targetRoom.GetComponentInParent<Transform>().position.x + targetRoom.transform.localScale.x);
