@@ -26,12 +26,28 @@ public class Doorway : MonoBehaviour {
         cameraTransform = camera.transform;
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("PlayerFeet") && !playerInTrigger)
+        if (!gc.playerNearCloset)
         {
-            playerInTrigger = true;
-            doorSprite.sprite = door.GetComponent<Door>().highlightSprite;
+            if (other.CompareTag("PlayerFeet") && !playerInTrigger)
+            {
+                playerInTrigger = true;
+                doorSprite.sprite = door.GetComponent<Door>().highlightSprite;   
+            }            
+        }
+        else
+        {
+            gc.playerIsPeeking = false;
+            playerInTrigger = false;
+            doorSprite.sprite = door.GetComponent<Door>().normalSprite;
+            if (doorSprite.color != new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 1f))
+            {
+                if (doorSprite.color != new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 0.0f)) // = some has opened the door
+                {
+                    doorSprite.color = new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 1f);
+                }
+            }
         }
     }
     

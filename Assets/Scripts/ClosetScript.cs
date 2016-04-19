@@ -85,6 +85,7 @@ public class ClosetScript : MonoBehaviour {
         if (other == playerFeet)
         {
             playerInRange = true;
+            gc.playerNearCloset = true;
             textMesh.enabled = true;
             transform.parent.GetComponentInChildren<SpriteRenderer>().sprite = highlightSprite;
         }
@@ -94,6 +95,7 @@ public class ClosetScript : MonoBehaviour {
         if (other == playerFeet)
         {
             playerInRange = false;
+            gc.playerNearCloset = false;
             textMesh.enabled = false;
             transform.parent.GetComponentInChildren<SpriteRenderer>().sprite = normalSprite;
         }

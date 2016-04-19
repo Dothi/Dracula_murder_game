@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour {
 
     public bool playerIsPeeking = false;
     public bool playerInCloset = false;
+    public bool playerNearCloset = false;
+
 
     void Awake()
     {
