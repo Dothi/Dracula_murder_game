@@ -11,6 +11,8 @@ public class CameraArea : MonoBehaviour {
     CameraFollow cameraFollow;
     Transform cameraTransform;
 
+    Transform roomCenter;
+
     //float roomWidth;
     //float roomHeight;
     float roomAspect;
@@ -41,6 +43,8 @@ public class CameraArea : MonoBehaviour {
         cameraFollow = camera.transform.GetComponent<CameraFollow>();
         cameraTransform = camera.transform;
 
+        roomCenter = GameObject.Find("CameraPosition").transform;
+
         roomBoundsMin = new Vector2(GetComponent<BoxCollider2D>().bounds.min.x, GetComponent<BoxCollider2D>().bounds.min.y);
         roomBoundsMax = new Vector2(GetComponent<BoxCollider2D>().bounds.max.x, GetComponent<BoxCollider2D>().bounds.max.y);
 
@@ -66,8 +70,8 @@ public class CameraArea : MonoBehaviour {
             if (Physics2D.OverlapArea(roomBoundsMin, roomBoundsMax, playerMask) != null &&
                 Physics2D.OverlapArea(roomBoundsMin, roomBoundsMax, playerMask).gameObject.CompareTag("PlayerFeet"))
             {
-                cameraFollow.cameraEndPos = new Vector3(transform.parent.position.x,
-                                                        transform.parent.position.y,
+                cameraFollow.cameraEndPos = new Vector3(roomCenter.position.x,
+                                                        roomCenter.position.y,
                                                         cameraTransform.position.z);
 
                 if (roomAspect > camera.aspect)
