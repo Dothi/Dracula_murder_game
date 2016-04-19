@@ -58,10 +58,12 @@ public class Grid : MonoBehaviour
                     int checkX = node.gridX + x;
                     int checkY = node.gridY + y;
 
-                    if (checkX != checkY && checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
+                    if (checkX >= 0 && checkX < gridSizeX && checkY >= 0 && checkY < gridSizeY)
                     {
-                        if (checkX != checkY && checkX != -checkY && checkY != -checkX)
-                        neighbours.Add(grid[checkX, checkY]);
+                        if (x != y && x != -y)
+                        {
+                            neighbours.Add(grid[checkX, checkY]);
+                        }
                     }
                 }
             }
