@@ -24,20 +24,22 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update ()
     {
-        if (rb.velocity != Vector2.zero)
+        Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+        if (movementVector != Vector2.zero)
         {
             anim.SetBool("isWalking", true);
+            anim.SetFloat("inputX", movementVector.x);
+            anim.SetFloat("inputY", movementVector.y);
         }
+
         else
         {
             anim.SetBool("isWalking", false);
         }
 
-
         if (Input.GetKey(KeyCode.W) && canMove)
         {
-            moveUp = true;
-            anim.SetFloat("inputY", 1f);
+            moveUp = true;          
         }
         else
         {
@@ -46,7 +48,6 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKey(KeyCode.A) && canMove)
         {
             moveLeft = true;
-            anim.SetFloat("inputX", -1f);
         }
         else
         {
@@ -55,7 +56,6 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKey(KeyCode.S) && canMove)
         {
             moveDown = true;
-            anim.SetFloat("inputY", -1f);
         }
         else
         {
@@ -64,19 +64,10 @@ public class PlayerMovement : MonoBehaviour {
         if (Input.GetKey(KeyCode.D) && canMove)
         {
             moveRight = true;
-            anim.SetFloat("inputX", 1f);
         }
         else
         {
             moveRight = false;
-        }
-        if (!Input.GetKey(KeyCode.W) && !Input.GetKey(KeyCode.S))
-        {
-            anim.SetFloat("inputY", 0f);
-        }
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
-        {
-            anim.SetFloat("inputX", 0f);
         }
 	}
     void FixedUpdate()
