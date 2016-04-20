@@ -24,7 +24,11 @@ public class CameraArea : MonoBehaviour {
     public float cameraZoomH;
     public LayerMask playerMask;
 
-    public List<SpriteRenderer> spritesInRoom = new List<SpriteRenderer>();
+    public List<GameObject> bottomWallPieces = new List<GameObject>();
+    List<SpriteRenderer> bottomWallSprites = new List<SpriteRenderer>();
+    Color wallFadeStartValue;
+    Color wallFadeEndValue;
+    
     SpriteRenderer fade;
     public bool currentRoom;
     float lerpTime = 0.6f;
@@ -50,12 +54,12 @@ public class CameraArea : MonoBehaviour {
 
         roomAspect = GetComponent<BoxCollider2D>().bounds.max.x / GetComponent<BoxCollider2D>().bounds.max.y;
 
-        fade = transform.parent.FindChild("Fade").GetComponent<SpriteRenderer>();
-    }
+        for (int i = 0; i < bottomWallPieces.Count; i++)
+        {
+            bottomWallSprites.AddRange(bottomWallPieces[i].GetComponentsInChildren<SpriteRenderer>());
+        }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        spritesInRoom.AddRange(other.gameObject.GetComponentsInChildren<SpriteRenderer>());
+        fade = transform.parent.FindChild("Fade").GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -100,9 +104,18 @@ public class CameraArea : MonoBehaviour {
                 currentLerpTime = 0;
                 resetLerp = false;
                 fadeStartValue = fade.color;
+
+                if (bottomWallSprites.Count > 0)
+                {
+                    wallFadeStartValue = bottomWallSprites[0].color;
+                }
             }
 
             fadeEndValue = new Color(fade.color.r, fade.color.g, fade.color.b, 0.0f);
+            if (bottomWallSprites.Count > 0)
+            {
+                wallFadeEndValue = new Color(1f, 1f, 1f, 0.6f);
+            }
 
             currentLerpTime += Time.deltaTime;
 
@@ -116,6 +129,13 @@ public class CameraArea : MonoBehaviour {
             Color newFadeValue = Color.Lerp(fadeStartValue, fadeEndValue, perc);
 
             fade.color = newFadeValue;
+
+            for (int i = 0; i < bottomWallSprites.Count; i++)
+            {
+                bottomWallSprites[i].color = Color.Lerp(wallFadeStartValue,
+                                                        wallFadeEndValue,
+                                                        perc);
+            }
         }
         else if(!gc.playerInCloset)
         {
@@ -124,9 +144,18 @@ public class CameraArea : MonoBehaviour {
                 currentLerpTime = 0;
                 resetLerp = true;
                 fadeStartValue = fade.color;
+
+                if (bottomWallSprites.Count > 0)
+                {
+                    wallFadeStartValue = bottomWallSprites[0].color;
+                }
             }
 
             fadeEndValue = new Color(fade.color.r, fade.color.g, fade.color.b, 1.0f);
+            if (bottomWallSprites.Count > 0)
+            {
+                wallFadeEndValue = new Color(1f, 1f, 1f, 1.0f);
+            }
 
             currentLerpTime += Time.deltaTime;
 
@@ -140,6 +169,13 @@ public class CameraArea : MonoBehaviour {
             Color newFadeValue = Color.Lerp(fadeStartValue, fadeEndValue, perc);
 
             fade.color = newFadeValue;
+
+            for (int i = 0; i < bottomWallSprites.Count; i++)
+            {
+                bottomWallSprites[i].color = Color.Lerp(wallFadeStartValue,
+                                                        wallFadeEndValue,
+                                                        perc);
+            }
         }
     }
 }
