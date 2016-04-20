@@ -248,8 +248,6 @@ MonoBehaviour:
   roomStops: 0
   suspiciousSpeed: 6
   patrolSpeed: 3
-  currWaitTime: 0
-  idleTimer: 0
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -258,7 +256,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   directionOfTravel: {x: 0, y: 0, z: 0}
-  previous: {x: 0, y: 0, z: 0}
   currentIndex: 0
   isWaiting: 0
   isAtWaypoint: 0
@@ -306,7 +303,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 20bdc06fcccef9c4a80cae884677c11f, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
