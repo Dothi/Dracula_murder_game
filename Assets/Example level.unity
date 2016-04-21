@@ -1303,14 +1303,6 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 22428720, guid: ce932e64536664345bea364fdb074b3e, type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 410
-      objectReference: {fileID: 0}
-    - target: {fileID: 22428720, guid: ce932e64536664345bea364fdb074b3e, type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 94
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce932e64536664345bea364fdb074b3e, type: 2}
   m_IsPrefabParent: 0
@@ -1529,16 +1521,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 11409500, guid: 65b8e52f53ec8094b844b6098c780b46, type: 2}
-      propertyPath: normalBlood
-      value: 
-      objectReference: {fileID: 21300000, guid: a71a63fec549f7940a188834896cd0dd,
-        type: 3}
-    - target: {fileID: 11409500, guid: 65b8e52f53ec8094b844b6098c780b46, type: 2}
-      propertyPath: garlicBlood
-      value: 
-      objectReference: {fileID: 21300000, guid: f7577afba24c3b845bab6350da57ceec,
-        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 65b8e52f53ec8094b844b6098c780b46, type: 2}
   m_IsPrefabParent: 0
@@ -4275,6 +4257,10 @@ Prefab:
     - target: {fileID: 416634, guid: c86ce74a9f7ff874cb89b8e4037f7ee7, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 127666, guid: c86ce74a9f7ff874cb89b8e4037f7ee7, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c86ce74a9f7ff874cb89b8e4037f7ee7, type: 2}

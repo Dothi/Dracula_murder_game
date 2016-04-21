@@ -25,7 +25,6 @@ public class Garlic : MonoBehaviour {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         bb = GameObject.FindGameObjectWithTag("GameController").GetComponent<BloodBar>();
         bloodSprite = GameObject.Find("BloodSlider").transform.Find("Fill Area").transform.Find("Fill").GetComponent<UnityEngine.UI.Image>();
-        Debug.Log(bloodSprite);
 	}
 
     void OnTriggerEnter2D(Collider2D other)
