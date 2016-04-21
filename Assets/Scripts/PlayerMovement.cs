@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour {
     public float moveSpeed = 6;
     public bool canMove = true;
     private Rigidbody2D rb;
-    //SpriteRenderer spriteRend;
     Animator anim;
     public Sprite[] sprites;
     bool moveUp;
@@ -16,9 +15,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start()
     {
-        //spriteRend = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
-        
         rb = GetComponent<Rigidbody2D>();
     }
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class Grid : MonoBehaviour
 {
+    #region Variables
     public bool displayGridGizmos;
     public LayerMask unwalkableMask;
     public Vector2 gridWorldSize;
@@ -14,6 +15,7 @@ public class Grid : MonoBehaviour
     float nodeDiameter;
     int gridSizeX;
     int gridSizeY;
+    #endregion
 
 
     void Awake()

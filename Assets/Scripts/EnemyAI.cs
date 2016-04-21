@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour
 {
+    #region Variables
     Vector3[] path;
 
     int targetIndex;
@@ -29,6 +30,7 @@ public class EnemyAI : MonoBehaviour
     KillScript ks;
     AudioSource audioSource;
     public AudioClip gasp;
+    #endregion
     public enum EnemyState
     {
         Patrolling,

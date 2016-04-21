@@ -5,6 +5,7 @@ using System.Linq;
 
 public class FieldOfView : MonoBehaviour
 {
+    #region Variables
     public float sightDist;
     EnemyAI AI;
     public List<GameObject> enemiesInFOV;
@@ -16,6 +17,7 @@ public class FieldOfView : MonoBehaviour
     LayerMask layerMask;
     LayerMask lineCastIgnoreMask;
     GameObject player;
+    #endregion
     public enum FacingState
     {
         UP,
