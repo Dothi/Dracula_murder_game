@@ -23,7 +23,7 @@ public class MirrorScript : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))  //pitää muuttaa kun viholliset saa "jalkacolliderit"
+        if (other.CompareTag("EnemyFeet")) 
         {
             EnemiesInRange.Add(other.gameObject);
         }
@@ -56,7 +56,7 @@ public class MirrorScript : MonoBehaviour {
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Enemy"))  //pitää muuttaa kun viholliset saa "jalkacolliderit"
+        if (other.CompareTag("EnemyFeet")) 
         {
             EnemiesInRange.Remove(other.gameObject);
         }
