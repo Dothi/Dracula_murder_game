@@ -9,8 +9,8 @@ public class BloodBar : MonoBehaviour
     KillScript killScript;
     Slider bloodBar;
 
-    float currentBlood;
-    float maxBlood = 100;
+    private float currentBlood;
+    private float maxBlood = 100;
     public float bloodDecreaseSpeed = 10;
     public float bloodFromKill = 65;
 
@@ -27,10 +27,7 @@ public class BloodBar : MonoBehaviour
     {
         bloodBar.value = currentBlood;
 
-        if (!killScript.isSuckingBlood && currentBlood > 0)
-        {
-            currentBlood -= (bloodDecreaseSpeed * Time.deltaTime);
-        }
+        BloodDecrease(bloodDecreaseSpeed);
         if (currentBlood > maxBlood)
         {
             currentBlood = maxBlood;
@@ -45,7 +42,13 @@ public class BloodBar : MonoBehaviour
             }
         }
     }
-
+    public void BloodDecrease(float amount)
+    {
+        if (!killScript.isSuckingBlood && currentBlood > 0)
+        {
+            currentBlood -= (amount * Time.deltaTime);
+        }
+    }
     public void GetBloodFromKill(float amount)
     {
         currentBlood += amount;
