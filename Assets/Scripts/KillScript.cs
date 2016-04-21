@@ -12,6 +12,7 @@ public class KillScript : MonoBehaviour {
     float killHoldTime = 0;
     public float killHoldDuration = 15;
     public bool isSuckingBlood;
+    public AudioClip bodyFall;
 
     void Start()
     {
@@ -108,7 +109,9 @@ public class KillScript : MonoBehaviour {
 
     void KillEnemy(GameObject target)
     {
+        target.GetComponent<AudioSource>().clip = bodyFall;
         target.GetComponent<EnemyAI>().currentEnemyState = EnemyAI.EnemyState.Dead;
+        target.GetComponent<AudioSource>().Play();
         target.GetComponentInChildren<SpriteRenderer>().color = Color.black;
         enemiesInRange.Remove(target);
         CheckWinForZeroEnemies(target);

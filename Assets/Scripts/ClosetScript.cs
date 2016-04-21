@@ -30,6 +30,10 @@ public class ClosetScript : MonoBehaviour {
     public Sprite normalSprite;
     public Sprite highlightSprite;
 
+    AudioSource audioSource;
+    public AudioClip closetClose;
+    public AudioClip closetOpen;
+
 	void Start ()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -47,6 +51,7 @@ public class ClosetScript : MonoBehaviour {
         overlayPieces = new List<SpriteRenderer>();
         peekOverlay = GameObject.Find("PeekOverlay");
         overlayPieces.AddRange(peekOverlay.transform.GetComponentsInChildren<SpriteRenderer>());
+        audioSource = GetComponent<AudioSource>();
 	}
     void FixedUpdate()
     {
@@ -112,6 +117,8 @@ public class ClosetScript : MonoBehaviour {
                 ObjectsInside.Add(enemy);
                 enemy.SetActive(false);
                 statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
+                audioSource.clip = closetOpen;
+                audioSource.Play();
             }
         }
     }
@@ -128,6 +135,8 @@ public class ClosetScript : MonoBehaviour {
                     ObjectsInside[i].transform.Find("Collider").GetComponent<BoxCollider2D>().isTrigger = true;
                     ObjectsInside[i].GetComponent<Rigidbody2D>().velocity = Vector3.zero;
                     statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
+                    audioSource.clip = closetClose;
+                    audioSource.Play();
                     break;
                 }
             }   
@@ -143,6 +152,8 @@ public class ClosetScript : MonoBehaviour {
             player.SetActive(false);
             playerIsHiding = true;
             statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
+            audioSource.clip = closetOpen;
+            audioSource.Play();
         }
     }
     public void UnhidePlayer(GameObject player)
@@ -152,6 +163,8 @@ public class ClosetScript : MonoBehaviour {
         player.SetActive(true);
         playerIsHiding = false;
         statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
+        audioSource.clip = closetClose;
+        audioSource.Play();
     }
     private void FadePeekOverlay()
     {

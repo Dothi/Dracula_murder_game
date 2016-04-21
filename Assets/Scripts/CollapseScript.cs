@@ -10,11 +10,14 @@ public class CollapseScript : MonoBehaviour {
     float suspiciousTime = 0f;
     float suspiciousDuration = 600f;
     
+    
+    
     EnemyAI AI;
 
     void Start()
     {
         AI = GetComponent<EnemyAI>();
+        
     }
 
     void Update()
@@ -31,6 +34,7 @@ public class CollapseScript : MonoBehaviour {
                     isCollapsed = false;
                     collapseTime = 0;
                     isSuspicious = true;
+
                 }
             }
             else
@@ -41,6 +45,7 @@ public class CollapseScript : MonoBehaviour {
             {
                 AI.isWaiting = false;
                 suspiciousTime += 10 * Time.deltaTime;
+                
                 AI.currentEnemyState = EnemyAI.EnemyState.Suspicious;
                 if (suspiciousTime >= suspiciousDuration)
                 {

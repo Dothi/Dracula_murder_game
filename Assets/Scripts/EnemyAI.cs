@@ -23,9 +23,12 @@ public class EnemyAI : MonoBehaviour
     public bool isWaiting;
     public bool isAtWaypoint;
     public bool seePlayer;
+    bool hasGasped;
     GameObject player;
     public GameObject targetRoom;
     KillScript ks;
+    AudioSource audioSource;
+    public AudioClip gasp;
     public enum EnemyState
     {
         Patrolling,
@@ -43,6 +46,7 @@ public class EnemyAI : MonoBehaviour
         currWaitTime = 0f;
         idleTimer = 0f;
         roomStops = 0;
+        hasGasped = false;
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
         currentIndex = randomizer;
@@ -53,11 +57,22 @@ public class EnemyAI : MonoBehaviour
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
+        audioSource = GetComponent<AudioSource>();
     }
     void Update()
     {
         Patrolling();
         IdleController();
+
+        if (currentEnemyState == EnemyState.Suspicious && !hasGasped)
+        {
+            PlayGasp();
+            hasGasped = true;
+        }
+        if (currentEnemyState != EnemyState.Suspicious)
+        {
+            hasGasped = false;
+        }
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
@@ -130,7 +145,6 @@ public class EnemyAI : MonoBehaviour
                     {
                         isWaiting = false;
                         currWaitTime = 0f;
-                        
                     }
                 }
             }
@@ -204,6 +218,11 @@ public class EnemyAI : MonoBehaviour
         float y = Random.Range(targetRoom.GetComponent<Transform>().position.y - targetRoom.transform.localScale.y / 2, targetRoom.GetComponent<Transform>().position.y + targetRoom.transform.localScale.y / 2);
 
         return new Vector3(x, y);
+    }
+    void PlayGasp()
+    {
+        audioSource.clip = gasp;
+        audioSource.Play();
     }
 }
 
