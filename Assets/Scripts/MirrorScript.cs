@@ -25,7 +25,7 @@ public class MirrorScript : MonoBehaviour {
     {
         if (other.CompareTag("EnemyFeet")) 
         {
-            EnemiesInRange.Add(other.gameObject);
+            EnemiesInRange.Add(other.transform.parent.gameObject);
         }
         else if (other == playerFeet)
         {
@@ -58,7 +58,7 @@ public class MirrorScript : MonoBehaviour {
     {
         if (other.CompareTag("EnemyFeet")) 
         {
-            EnemiesInRange.Remove(other.gameObject);
+            EnemiesInRange.Remove(other.transform.parent.gameObject);
         }
         else if (other == playerFeet)
         {
