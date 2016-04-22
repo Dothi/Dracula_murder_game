@@ -1093,11 +1093,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 482386, guid: 0b58cdd47e095b341bc91ea029cdcb6b, type: 2}
       propertyPath: m_LocalScale.x
-      value: 17.3
+      value: 15.5
       objectReference: {fileID: 0}
     - target: {fileID: 482386, guid: 0b58cdd47e095b341bc91ea029cdcb6b, type: 2}
       propertyPath: m_LocalScale.y
-      value: 16.3
+      value: 14.5
       objectReference: {fileID: 0}
     - target: {fileID: 6139186, guid: 0b58cdd47e095b341bc91ea029cdcb6b, type: 2}
       propertyPath: m_Size.x
@@ -2822,7 +2822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f49da2847a2d842a01a554e871ecf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodDecreaseSpeed: 3
+  bloodDecreaseSpeed: 0
   bloodFromKill: 65
 --- !u!1001 &1213061620
 Prefab:

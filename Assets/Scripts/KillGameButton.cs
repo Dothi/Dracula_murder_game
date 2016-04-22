@@ -23,6 +23,7 @@ public class KillGameButton : MonoBehaviour {
     Image image;
     KeyCode keyCode = KeyCode.A;
     string letter = "A";
+    public int r {get {return Random.Range(0, 6);}}
 
 	void Start ()
     {
@@ -36,7 +37,7 @@ public class KillGameButton : MonoBehaviour {
 
     public void RandomizeLetter()          //Maybe implement it so that it doesn't random same letter many times in a row
     {
-        int r = Random.Range(0, 6);
+        
         switch (r)
         {
             case 0:

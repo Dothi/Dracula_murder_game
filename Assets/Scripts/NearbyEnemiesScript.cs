@@ -37,7 +37,11 @@ public class NearbyEnemiesScript : MonoBehaviour
         for (int i = 0; i < suspiciousEnemies.Count; i++)
         {
             EnemyAI ai = suspiciousEnemies[i].GetComponent<EnemyAI>();
-            if (!nearbyEnemies.Contains(suspiciousEnemies[i]) || ai.currentEnemyState != EnemyAI.EnemyState.Suspicious)
+            if (!nearbyEnemies.Contains(suspiciousEnemies[i]))
+            {
+                suspiciousEnemies.Remove(suspiciousEnemies[i]);
+            }
+            else if (ai.currentEnemyState != EnemyAI.EnemyState.Suspicious)
             {
                 suspiciousEnemies.Remove(suspiciousEnemies[i]);
             }
@@ -48,6 +52,7 @@ public class NearbyEnemiesScript : MonoBehaviour
             if (timer >= bustTimer)
             {
                 gc.gameOver = true;
+                Debug.Log("busteed");
             }
         }
         else

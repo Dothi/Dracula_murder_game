@@ -107,10 +107,10 @@ public class TriggerAreaScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D other)
     {
-        if (triggerArea.enabled == true && other.tag == "Player" && !ClosetScript.playerIsHiding)
+        if (this.triggerArea.enabled == true && other.tag == "Player" && !ClosetScript.playerIsHiding)
         {
 
-            switch (AI.currentEnemyState)
+            switch (this.AI.currentEnemyState)
             {
                 case EnemyAI.EnemyState.Collapsed:
                     if (!nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
