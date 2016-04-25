@@ -31,6 +31,7 @@ public class KillMinigame : MonoBehaviour {
         //TO DO:
         //Set the minigame above player position here
         //Disable player movement and other input stuff
+        //Disable target enemy
         SetButtonPositions();
         currentButton = 0;
 
@@ -48,6 +49,9 @@ public class KillMinigame : MonoBehaviour {
             if (Input.GetKeyDown(CancelKey))
             {
                 //TO DO: Cancel minigame
+                //collapse enemy
+                //enable player input
+                gameObject.SetActive(false);
             }
             else
             {
@@ -61,10 +65,14 @@ public class KillMinigame : MonoBehaviour {
                         if (currentButton == MinigameLength)
                         {
                             //TO DO: winning
+                            //disable minigame
+                            //enable player input
+                            //kill enemy
+                            //heal player
                             Debug.Log("Minigame won!");
                             break;
                         }
-                        //Move buttons - Maybe add smooth movement (lerp)?
+                        //Move buttons -TO DO: Maybe add smooth movement (lerp)?
                         for (int j = 0; j < buttonList.Count; j++)
                         {
                             KillGameButton button = buttonList[j];
@@ -79,6 +87,9 @@ public class KillMinigame : MonoBehaviour {
                     if (Input.GetKeyDown(keyCodes[i]))
                     {
                         //TO DO: Fail
+                        //Cancel minigame
+                        //collapse enemy
+                        //enable player input
                         Debug.Log("Minigame failed!");
                         break;
                     }
