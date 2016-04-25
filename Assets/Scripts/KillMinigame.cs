@@ -36,8 +36,6 @@ public class KillMinigame : MonoBehaviour {
     {
         //TO DO:
         //Set the minigame above player position here
-        //Disable player movement and other input stuff
-        //Disable target enemy
         SetButtonPositions();
         currentButton = 0;
 
