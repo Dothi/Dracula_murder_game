@@ -17,13 +17,19 @@ public class KillMinigame : MonoBehaviour {
 
     GameObject buttonParent;
 
+    KillScript ks;
+
     void Start()
     {
         SetKeyCodesList();
         buttonParent = transform.Find("Buttons").gameObject;
 
+        ks = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
+
         SpawnButtons();
-        SetButtonPositions();       
+        SetButtonPositions();
+
+        gameObject.SetActive(false);
     }
 
 	void OnEnable ()
@@ -40,17 +46,17 @@ public class KillMinigame : MonoBehaviour {
             buttonList[i].GetComponent<Image>().enabled = true;
             buttonList[i].RandomizeLetter();
         }
-	}
+    }
 
     void Update()
     {
         if (Input.anyKeyDown)
         {
-            if (Input.GetKeyDown(CancelKey))
+            if (Input.GetKeyDown(CancelKey) || Input.GetKeyDown(KeyCode.Escape))
             {
-                //TO DO: Cancel minigame
-                //collapse enemy
-                //enable player input
+                //Cancel
+                ks.CancelKill();
+                Debug.Log("Minigame cancelled");
                 gameObject.SetActive(false);
             }
             else
@@ -64,33 +70,25 @@ public class KillMinigame : MonoBehaviour {
                         currentButton++;
                         if (currentButton == MinigameLength)
                         {
-                            //TO DO: winning
-                            //disable minigame
-                            //enable player input
-                            //kill enemy
-                            //heal player
+                            //Win
+                            ks.SuccesfulKill();
                             Debug.Log("Minigame won!");
+                            gameObject.SetActive(false);
+
                             break;
                         }
-                        //Move buttons -TO DO: Maybe add smooth movement (lerp)?
-                        for (int j = 0; j < buttonList.Count; j++)
-                        {
-                            KillGameButton button = buttonList[j];
-                            if (button.GetComponent<Image>().enabled == true)
-                            {
-                                button.transform.position = new Vector2(button.transform.position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap),
-                                        buttonParent.transform.position.y);
-                            }
-                        }
+
+                        //TO DO: Maybe add smooth movement (lerp)?
+                        MoveButtons();
                         break;
                     }
                     if (Input.GetKeyDown(keyCodes[i]))
                     {
-                        //TO DO: Fail
-                        //Cancel minigame
-                        //collapse enemy
-                        //enable player input
+                        //Fail
+                        ks.CancelKill();
                         Debug.Log("Minigame failed!");
+                        gameObject.SetActive(false);
+
                         break;
                     }
                 }
@@ -104,6 +102,7 @@ public class KillMinigame : MonoBehaviour {
             GameObject button = (GameObject)Instantiate(killGameButtonPrefab, buttonParent.transform.position, Quaternion.identity);
             button.transform.SetParent(buttonParent.transform);
             buttonList.Add(button.GetComponent<KillGameButton>());
+            button.GetComponent<KillGameButton>().SetImageComponent();
         }
     }
     void SetButtonPositions()
@@ -120,6 +119,18 @@ public class KillMinigame : MonoBehaviour {
             {                                          //Position of last button               + width of button                                 + assigned gap
                 button.transform.position = new Vector2(buttonList[i - 1].transform.position.x + button.GetComponent<RectTransform>().rect.width + buttonGap,
                                                         buttonParent.transform.position.y);
+            }
+        }
+    }
+    void MoveButtons()
+    {
+        for (int j = 0; j < buttonList.Count; j++)
+        {
+            KillGameButton button = buttonList[j];
+            if (button.GetComponent<Image>().enabled == true)
+            {
+                button.transform.position = new Vector2(button.transform.position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap),
+                        buttonParent.transform.position.y);
             }
         }
     }

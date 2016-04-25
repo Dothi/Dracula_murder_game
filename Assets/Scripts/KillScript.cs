@@ -4,20 +4,26 @@ using System.Collections.Generic;
 
 public class KillScript : MonoBehaviour {
 
-    BloodBar bloodBar;
+    public BloodBar bloodBar;
     GameController gameController;
 
     public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject killTarget = null;
-    float killHoldTime = 0;
-    public float killHoldDuration = 15;
+
     public bool isSuckingBlood;
     public AudioClip bodyFall;
+
+    GameObject minigame;
+    PlayerMovement pMove;
 
     void Start()
     {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         bloodBar = gameController.GetComponent<BloodBar>();
+        minigame = FindObjectOfType<KillMinigame>().gameObject;
+        pMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+
+        //minigame.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -45,42 +51,16 @@ public class KillScript : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && !isSuckingBlood)
         {
-            killHoldTime = 0;
             killTarget = GetClosestEnemy(enemiesInRange);
-        }
-        else if (Input.GetKey(KeyCode.E))
-        {
+
             if (killTarget != null && killTarget.activeInHierarchy)
             {
-                if (killHoldTime < killHoldDuration)
-                {
-                    isSuckingBlood = true;
-                    killHoldTime += 10 * Time.deltaTime;
-                }
-                else if (killHoldTime >= killHoldDuration)
-                {
-                    if (isSuckingBlood)
-                    {
-                        bloodBar.GetBloodFromKill(bloodBar.bloodFromKill);
-                        isSuckingBlood = false;
-                    }
-                    KillEnemy(killTarget);
-                }
-
+                isSuckingBlood = true;
+                pMove.canMove = false;
+                minigame.SetActive(true);
             }
-        }
-        else if (Input.GetKeyUp(KeyCode.E))
-        {
-            if (killHoldTime < killHoldDuration && killTarget != null && killTarget.activeInHierarchy)
-            {
-                killTarget.GetComponent<CollapseScript>().isCollapsed = true;
-            }
-
-            isSuckingBlood = false;
-            killTarget = null;
-            killHoldTime = 0;
         }
     }
 
@@ -106,8 +86,27 @@ public class KillScript : MonoBehaviour {
 
         return bestTarget;
     }
-
-    void KillEnemy(GameObject target)
+    public void CancelKill()
+    {
+        if (killTarget != null && killTarget.activeInHierarchy)
+        {
+            killTarget.GetComponent<CollapseScript>().isCollapsed = true;
+        }
+        isSuckingBlood = false;
+        killTarget = null;
+        pMove.canMove = true;
+    }
+    public void SuccesfulKill()
+    {
+        if (killTarget != null && killTarget.activeInHierarchy)
+        {
+            bloodBar.GetBloodFromKill(bloodBar.bloodFromKill);
+            KillEnemy(killTarget);
+        }
+        isSuckingBlood = false;
+        pMove.canMove = true;
+    }
+    public void KillEnemy(GameObject target)
     {
         target.GetComponent<AudioSource>().clip = bodyFall;
         target.GetComponent<EnemyAI>().currentEnemyState = EnemyAI.EnemyState.Dead;

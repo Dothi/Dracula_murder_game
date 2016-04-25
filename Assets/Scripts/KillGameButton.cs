@@ -23,12 +23,7 @@ public class KillGameButton : MonoBehaviour {
     Image image;
     KeyCode keyCode = KeyCode.A;
     string letter = "A";
-    public int r {get {return Random.Range(0, 6);}}
-
-	void Start ()
-    {
-        image = GetComponent<Image>();
-	}	
+    //public int r {get {return Random.Range(0, 6);}}
 
 	void Update ()
     {
@@ -37,7 +32,13 @@ public class KillGameButton : MonoBehaviour {
 
     public void RandomizeLetter()          //Maybe implement it so that it doesn't random same letter many times in a row
     {
-        
+        if (image != null)
+        {
+            image = GetComponent<Image>();
+        }
+
+        int r = Random.Range(0, 6);
+          
         switch (r)
         {
             case 0:
@@ -90,5 +91,9 @@ public class KillGameButton : MonoBehaviour {
         {
             image.color = new Color(image.color.r, image.color.g, image.color.b, 1 - (transform.localPosition.x / fadeRange));
         }
+    }
+    public void SetImageComponent()
+    {
+        image = GetComponent<Image>();
     }
 }
