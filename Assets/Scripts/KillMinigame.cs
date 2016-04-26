@@ -25,6 +25,7 @@ public class KillMinigame : MonoBehaviour {
         buttonParent = transform.Find("Buttons").gameObject;
 
         ks = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
+        ks.minigame = gameObject;
 
         SpawnButtons();
         SetButtonPositions();

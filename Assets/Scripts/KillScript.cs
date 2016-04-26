@@ -13,17 +13,14 @@ public class KillScript : MonoBehaviour {
     public bool isSuckingBlood;
     public AudioClip bodyFall;
 
-    GameObject minigame;
+    public GameObject minigame;
     PlayerMovement pMove;
 
     void Start()
     {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         bloodBar = gameController.GetComponent<BloodBar>();
-        minigame = FindObjectOfType<KillMinigame>().gameObject;
         pMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
-
-        //minigame.SetActive(false);
     }
 
     void OnTriggerEnter2D(Collider2D other)
