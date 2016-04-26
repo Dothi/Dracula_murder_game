@@ -5,7 +5,6 @@ public class Doorway : MonoBehaviour {
 
     GameController gc;
 
-    Camera camera;
     Transform cameraTransform;
     CameraArea camArea;
     CameraFollow camFollow;
@@ -20,10 +19,9 @@ public class Doorway : MonoBehaviour {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         doorSprite = door.transform.Find("Sprite (door)").GetComponent<SpriteRenderer>();
 
-        camera = camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
         camArea = transform.parent.GetComponentInChildren<CameraArea>();
-        camFollow = camera.GetComponent<CameraFollow>();
-        cameraTransform = camera.transform;
+        camFollow = Camera.main.GetComponent<CameraFollow>();
+        cameraTransform = Camera.main.transform;
     }
 
     void OnTriggerStay2D(Collider2D other)
@@ -60,7 +58,7 @@ public class Doorway : MonoBehaviour {
                 camFollow.cameraEndPos = new Vector3(transform.parent.position.x,
                                         transform.parent.position.y,
                                         cameraTransform.position.z);
-                camFollow.zoomEndValue = camArea.cameraZoom / camera.aspect;
+                camFollow.zoomEndValue = camArea.cameraZoom / Camera.main.aspect;
 
                 gc.playerIsPeeking = true;
                 camArea.currentRoom = true;

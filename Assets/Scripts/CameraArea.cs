@@ -7,7 +7,6 @@ public class CameraArea : MonoBehaviour {
     Transform playerTransform;
     GameController gc;
 
-    Camera camera;
     CameraFollow cameraFollow;
     Transform cameraTransform;
 
@@ -43,9 +42,8 @@ public class CameraArea : MonoBehaviour {
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
-        camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        cameraFollow = camera.transform.GetComponent<CameraFollow>();
-        cameraTransform = camera.transform;
+        cameraFollow = Camera.main.transform.GetComponent<CameraFollow>();
+        cameraTransform = Camera.main.transform;
 
         roomCenter = transform.parent.Find("CameraPosition").transform;
 
@@ -78,13 +76,13 @@ public class CameraArea : MonoBehaviour {
                                                         roomCenter.position.y,
                                                         cameraTransform.position.z);
 
-                if (roomAspect > camera.aspect)
+                if (roomAspect > Camera.main.aspect)
                 {
-                    cameraFollow.zoomEndValue = cameraZoom / camera.aspect;                
+                    cameraFollow.zoomEndValue = cameraZoom / Camera.main.aspect;                
                 }
-                else if (roomAspect < camera.aspect)
+                else if (roomAspect < Camera.main.aspect)
                 {
-                    cameraFollow.zoomEndValue = cameraZoom / camera.aspect; //en tajuu miten tän pitäs toimii lol
+                    cameraFollow.zoomEndValue = cameraZoom / Camera.main.aspect; //en tajuu miten tän pitäs toimii lol
                 }
 
                 currentRoom = true;
