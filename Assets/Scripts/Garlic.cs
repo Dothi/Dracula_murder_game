@@ -4,6 +4,7 @@ using System.Collections;
 public class Garlic : MonoBehaviour {
 
     public float bloodDecreaseValue = 3;
+    bool playerInRange = false;
 
     GameObject player;
     Collider2D playerFeet;
@@ -27,19 +28,20 @@ public class Garlic : MonoBehaviour {
         bloodSprite = GameObject.Find("BloodSlider").transform.Find("Fill Area").transform.Find("Fill").GetComponent<UnityEngine.UI.Image>();
 	}
 
+    void Update()
+    {
+        if (playerInRange)
+        {
+            bb.BloodDecrease(bloodDecreaseValue);
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other == playerFeet)
         {
             bloodSprite.sprite = garlicBlood;
-        }
-    }
-
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (other == playerFeet)
-        {
-            bb.BloodDecrease(bloodDecreaseValue);
+            playerInRange = true;
         }
     }
 
@@ -48,6 +50,7 @@ public class Garlic : MonoBehaviour {
         if (other == playerFeet)
         {
             bloodSprite.sprite = normalBlood;
+            playerInRange = false;
         }
     }
 }

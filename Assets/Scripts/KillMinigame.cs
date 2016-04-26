@@ -17,33 +17,40 @@ public class KillMinigame : MonoBehaviour {
 
     GameObject buttonParent;
 
+    GameObject player;
     KillScript ks;
+
+    bool gameStarted = false;
 
     void Start()
     {
         SetKeyCodesList();
         buttonParent = transform.Find("Buttons").gameObject;
 
-        ks = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
+        player = GameObject.FindGameObjectWithTag("Player");
+        ks = player.GetComponent<KillScript>();
         ks.minigame = gameObject;
 
         SpawnButtons();
         SetButtonPositions();
 
+        gameStarted = true;
         gameObject.SetActive(false);
     }
 
 	void OnEnable ()
     {
-        //TO DO:
-        //Set the minigame above player position here
-        SetButtonPositions();
-        currentButton = 0;
+        if (gameStarted)
+        {            
+            SetButtonPositions();
+            SetAboveCharacters(player, ks.killTarget);
+            currentButton = 0;
 
-        for (int i = 0; i < buttonList.Count; i++)
-        {
-            buttonList[i].GetComponent<Image>().enabled = true;
-            buttonList[i].RandomizeLetter();
+            for (int i = 0; i < buttonList.Count; i++)
+            {
+                buttonList[i].GetComponent<Image>().enabled = true;
+                buttonList[i].RandomizeLetter();
+            }
         }
     }
 
@@ -129,11 +136,18 @@ public class KillMinigame : MonoBehaviour {
             if (button.GetComponent<Image>().enabled == true)
             {
                 button.transform.position = new Vector2(button.transform.position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap),
-                        buttonParent.transform.position.y);
+                                                        buttonParent.transform.position.y);
             }
         }
     }
+    void SetAboveCharacters(GameObject player, GameObject target)
+    {
+        Vector2 pos = Vector2.Lerp(player.transform.position, target.transform.position, 0.5f);
+        Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pos);
 
+        GetComponent<RectTransform>().anchorMax = viewportPoint; 
+        GetComponent<RectTransform>().anchorMin = viewportPoint; 
+    }
     void SetKeyCodesList()
     {
         keyCodes.Add(KeyCode.A);

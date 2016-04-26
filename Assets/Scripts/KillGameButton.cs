@@ -23,7 +23,7 @@ public class KillGameButton : MonoBehaviour {
     Image image;
     KeyCode keyCode = KeyCode.A;
     string letter = "A";
-    //public int r {get {return Random.Range(0, 6);}}
+    public int r {get {return Random.Range(0, 6);}}
 
 	void Update ()
     {
@@ -36,8 +36,6 @@ public class KillGameButton : MonoBehaviour {
         {
             image = GetComponent<Image>();
         }
-
-        int r = Random.Range(0, 6);
           
         switch (r)
         {
