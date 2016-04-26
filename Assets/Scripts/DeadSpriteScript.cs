@@ -3,7 +3,7 @@ using System.Collections;
 
 public class DeadSpriteScript : MonoBehaviour
 {
-    Sprite deadSprite;
+    public Sprite deadSprite;
     SpriteRenderer spriteRend;
     EnemyAI ai;
 
@@ -15,9 +15,11 @@ public class DeadSpriteScript : MonoBehaviour
 
     void Update()
     {
+        
         if (ai.currentEnemyState == EnemyAI.EnemyState.Dead)
         {
             spriteRend.sprite = deadSprite;
         }
+        
     }
 }

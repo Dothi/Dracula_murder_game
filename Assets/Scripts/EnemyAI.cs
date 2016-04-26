@@ -73,7 +73,10 @@ public class EnemyAI : MonoBehaviour
         Patrolling();
         IdleController();
         
-        
+        if (currentEnemyState == EnemyState.Dead)
+        {
+            collider.offset = new Vector2(0, .5f);
+        }
         if (currentEnemyState == EnemyState.Suspicious && !hasGasped)
         {
             PlayGasp();
