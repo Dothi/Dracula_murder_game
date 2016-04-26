@@ -9,6 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 403276}
   - 212: {fileID: 21267780}
+  - 114: {fileID: 11462980}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -309,6 +310,18 @@ MonoBehaviour:
   isCollapsed: 0
   isSuspicious: 0
   collapseDuration: 40
+--- !u!114 &11462980
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100374}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04b90c0f2f677544293b488faead8469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deadSprite: {fileID: 21300000, guid: 9fceacf07dcebb445bb81655d0d24dbf, type: 3}
 --- !u!114 &11467284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -320,9 +333,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f925e9948d1c894886d3f45496499e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deadSprite: {fileID: 0}
   roomStops: 0
   suspiciousSpeed: 6
   patrolSpeed: 3
+  idleTimer: 0
   waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -332,6 +347,7 @@ MonoBehaviour:
   isAtWaypoint: 0
   seePlayer: 0
   targetRoom: {fileID: 0}
+  currentRoom: {fileID: 0}
   gasp: {fileID: 8300000, guid: 1e51b3eedd316c245bb660f620751b63, type: 3}
   currentEnemyState: 0
 --- !u!114 &11467332
