@@ -108,7 +108,6 @@ public class KillScript : MonoBehaviour {
         target.GetComponent<AudioSource>().clip = bodyFall;
         target.GetComponent<EnemyAI>().currentEnemyState = EnemyAI.EnemyState.Dead;
         target.GetComponent<AudioSource>().Play();
-        target.GetComponentInChildren<SpriteRenderer>().color = Color.black;
         enemiesInRange.Remove(target);
         CheckWinForZeroEnemies(target);
         killTarget = null;
