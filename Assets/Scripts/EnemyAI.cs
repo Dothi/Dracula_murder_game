@@ -12,7 +12,7 @@ public class EnemyAI : MonoBehaviour
     public float suspiciousSpeed = 6f;
     public float patrolSpeed = 3f;
     float currWaitTime;
-    float idleTimer;
+    public float idleTimer;
     public Waypoint[] waypoints;
     public Vector3 directionOfTravel;
     Vector3 previous;
@@ -27,6 +27,7 @@ public class EnemyAI : MonoBehaviour
     bool hasGasped;
     GameObject player;
     public GameObject targetRoom;
+    public GameObject currentRoom;
     KillScript ks;
     AudioSource audioSource;
     public AudioClip gasp;
@@ -60,6 +61,8 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
         audioSource = GetComponent<AudioSource>();
+        
+        
     }
     void Update()
     {
@@ -225,6 +228,13 @@ public class EnemyAI : MonoBehaviour
     {
         audioSource.clip = gasp;
         audioSource.Play();
+    }
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other != null && other.gameObject.tag == "CameraArea")
+        {
+            currentRoom = other.gameObject;
+        }
     }
 }
 

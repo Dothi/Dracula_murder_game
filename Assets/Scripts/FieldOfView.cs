@@ -135,23 +135,23 @@ public class FieldOfView : MonoBehaviour
                 }
 
                 //See enemies
-                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject) && hit1.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit1.collider.gameObject);
                 }
-                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject))
+                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject) && hit2.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit2.collider.gameObject);
                 }
-                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject))
+                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject) && hit3.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit3.collider.gameObject);
                 }
-                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject))
+                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject) && hit4.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit4.collider.gameObject);
                 }
-                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject))
+                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject) && hit5.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit5.collider.gameObject);
                 }
@@ -252,23 +252,23 @@ public class FieldOfView : MonoBehaviour
                 }
 
                 //See enemies
-                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject) && hit1.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit1.collider.gameObject);
                 }
-                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject))
+                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject) && hit2.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit2.collider.gameObject);
                 }
-                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject))
+                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject) && hit3.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit3.collider.gameObject);
                 }
-                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject))
+                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject) && hit4.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit4.collider.gameObject);
                 }
-                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject))
+                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject) && hit5.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit5.collider.gameObject);
                 }
@@ -370,23 +370,23 @@ public class FieldOfView : MonoBehaviour
                 }
 
                 //See enemies
-                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject) && hit1.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit1.collider.gameObject);
                 }
-                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject))
+                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject) && hit2.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit2.collider.gameObject);
                 }
-                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject))
+                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject) && hit3.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit3.collider.gameObject);
                 }
-                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject))
+                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject) && hit4.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit4.collider.gameObject);
                 }
-                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject))
+                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject) && hit5.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit5.collider.gameObject);
                 }
@@ -486,23 +486,23 @@ public class FieldOfView : MonoBehaviour
                 }
 
                 //See enemies
-                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject))
+                if (hit1 && hit1.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit1.collider.gameObject) && hit1.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit1.collider.gameObject);
                 }
-                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject))
+                else if (hit2 && hit2.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit2.collider.gameObject) && hit2.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit2.collider.gameObject);
                 }
-                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject))
+                else if (hit3 && hit3.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit3.collider.gameObject) && hit3.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit3.collider.gameObject);
                 }
-                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject))
+                else if (hit4 && hit4.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit4.collider.gameObject) && hit4.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit4.collider.gameObject);
                 }
-                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject))
+                else if (hit5 && hit5.collider.tag == "Enemy" && !enemiesInFOV.Contains<GameObject>(hit5.collider.gameObject) && hit5.collider.gameObject.GetComponent<EnemyAI>().currentRoom == GetComponent<EnemyAI>().currentRoom)
                 {
                     enemiesInFOV.Add(hit5.collider.gameObject);
                 }
