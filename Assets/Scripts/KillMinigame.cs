@@ -17,6 +17,7 @@ public class KillMinigame : MonoBehaviour {
 
     GameObject buttonParent;
 
+    Canvas canvas;
     GameObject player;
     KillScript ks;
 
@@ -27,6 +28,7 @@ public class KillMinigame : MonoBehaviour {
         SetKeyCodesList();
         buttonParent = transform.Find("Buttons").gameObject;
 
+        canvas = FindObjectOfType<Canvas>();
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
         ks.minigame = gameObject;
@@ -41,7 +43,8 @@ public class KillMinigame : MonoBehaviour {
 	void OnEnable ()
     {
         if (gameStarted)
-        {            
+        {
+            player.GetComponentInChildren<Animator>().enabled = false;
             SetButtonPositions();
             SetAboveCharacters(player, ks.killTarget);
             currentButton = 0;
@@ -62,6 +65,7 @@ public class KillMinigame : MonoBehaviour {
             {
                 //Cancel
                 ks.CancelKill();
+                player.GetComponentInChildren<Animator>().enabled = true;
                 Debug.Log("Minigame cancelled");
                 gameObject.SetActive(false);
             }
@@ -78,6 +82,7 @@ public class KillMinigame : MonoBehaviour {
                         {
                             //Win
                             ks.SuccesfulKill();
+                            player.GetComponentInChildren<Animator>().enabled = true;
                             Debug.Log("Minigame won!");
                             gameObject.SetActive(false);
 
@@ -92,6 +97,7 @@ public class KillMinigame : MonoBehaviour {
                     {
                         //Fail
                         ks.CancelKill();
+                        player.GetComponentInChildren<Animator>().enabled = true;
                         Debug.Log("Minigame failed!");
                         gameObject.SetActive(false);
 
@@ -106,6 +112,7 @@ public class KillMinigame : MonoBehaviour {
         for (int i = 0; i < MinigameLength; i++)
         {
             GameObject button = (GameObject)Instantiate(killGameButtonPrefab, buttonParent.transform.position, Quaternion.identity);
+            button.GetComponent<RectTransform>().localScale = Vector3.one;
             button.transform.SetParent(buttonParent.transform);
             buttonList.Add(button.GetComponent<KillGameButton>());
             button.GetComponent<KillGameButton>().SetImageComponent();
@@ -116,27 +123,28 @@ public class KillMinigame : MonoBehaviour {
         for (int i = 0; i < buttonList.Count; i++)
         {
             GameObject button = buttonList[i].gameObject;
+            button.GetComponent<RectTransform>().localScale = Vector3.one;
             if (i == 0)
             {
                 //Set position of first button
-                button.transform.position = buttonParent.transform.position;
+                button.GetComponent<RectTransform>().position = buttonParent.GetComponent<RectTransform>().position;
             }
             else
             {                                          //Position of last button               + width of button                                 + assigned gap
-                button.transform.position = new Vector2(buttonList[i - 1].transform.position.x + button.GetComponent<RectTransform>().rect.width + buttonGap,
-                                                        buttonParent.transform.position.y);
+                button.GetComponent<RectTransform>().position = new Vector2(buttonList[i - 1].GetComponent<RectTransform>().position.x + (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
+                                                                            buttonParent.GetComponent<RectTransform>().position.y);
             }
         }
     }
     void MoveButtons()
     {
-        for (int j = 0; j < buttonList.Count; j++)
+        for (int i = 0; i < buttonList.Count; i++)
         {
-            KillGameButton button = buttonList[j];
+            KillGameButton button = buttonList[i];
             if (button.GetComponent<Image>().enabled == true)
             {
-                button.transform.position = new Vector2(button.transform.position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap),
-                                                        buttonParent.transform.position.y);
+                button.GetComponent<RectTransform>().position = new Vector2(button.GetComponent<RectTransform>().position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
+                                                                            buttonParent.GetComponent<RectTransform>().position.y);
             }
         }
     }

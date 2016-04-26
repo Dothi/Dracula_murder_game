@@ -1274,7 +1274,7 @@ Transform:
   - {fileID: 564881220}
   - {fileID: 1485800143}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 36
 --- !u!1001 &73456975
 Prefab:
   m_ObjectHideFlags: 0
@@ -9570,6 +9570,22 @@ Prefab:
       propertyPath: m_AnchoredPosition.x
       value: -18
       objectReference: {fileID: 0}
+    - target: {fileID: 22450850, guid: ce932e64536664345bea364fdb074b3e, type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 22450850, guid: ce932e64536664345bea364fdb074b3e, type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455190, guid: ce932e64536664345bea364fdb074b3e, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1841097858}
+    - target: {fileID: 11455190, guid: ce932e64536664345bea364fdb074b3e, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: PlayAgain
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce932e64536664345bea364fdb074b3e, type: 2}
   m_IsPrefabParent: 0
@@ -15547,7 +15563,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 36
+  m_RootOrder: 38
 --- !u!1001 &1266630034
 Prefab:
   m_ObjectHideFlags: 0
@@ -21850,7 +21866,7 @@ Transform:
   - {fileID: 1220779457}
   - {fileID: 1779778353}
   m_Father: {fileID: 0}
-  m_RootOrder: 35
+  m_RootOrder: 37
 --- !u!4 &1804073562 stripped
 Transform:
   m_PrefabParentObject: {fileID: 494520, guid: 726eca558d89b41449d9a85b3d7d6405, type: 2}
@@ -22225,6 +22241,12 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 404902, guid: 24cb5395f632d89488c975510a62097e, type: 2}
   m_PrefabInternal: {fileID: 1839787326}
+--- !u!114 &1841097858 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11457678, guid: 256fc1e6f5177ba4b8853401424efa40,
+    type: 2}
+  m_PrefabInternal: {fileID: 268067063}
+  m_Script: {fileID: 11500000, guid: 58302ca1dd173764c99be4049c2c09d1, type: 3}
 --- !u!1001 &1843895615
 Prefab:
   m_ObjectHideFlags: 0
@@ -22462,7 +22484,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 38
+  m_RootOrder: 0
 --- !u!4 &1858231294 stripped
 Transform:
   m_PrefabParentObject: {fileID: 494334, guid: 8abf186d2f893ef448dfbdc0dbef0da1, type: 2}
