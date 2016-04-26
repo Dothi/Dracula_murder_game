@@ -8,9 +8,7 @@ public class Garlic : MonoBehaviour {
 
     GameObject player;
     Collider2D playerFeet;
-    KillScript killScript;
 
-    GameController gc;
     BloodBar bb;
     UnityEngine.UI.Image bloodSprite;
 
@@ -21,9 +19,7 @@ public class Garlic : MonoBehaviour {
     {
         player = GameObject.FindGameObjectWithTag("Player");
         playerFeet = player.transform.Find("Collider").GetComponent<BoxCollider2D>();
-        killScript = player.GetComponent<KillScript>();
 
-        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         bb = GameObject.FindGameObjectWithTag("GameController").GetComponent<BloodBar>();
         bloodSprite = GameObject.Find("BloodSlider").transform.Find("Fill Area").transform.Find("Fill").GetComponent<UnityEngine.UI.Image>();
 	}

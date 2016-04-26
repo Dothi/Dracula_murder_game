@@ -3,8 +3,6 @@ using System.Collections;
 
 public class CameraFollow : MonoBehaviour {
 
-    PlayerMovement playerMovement;
-
     float lerpTime = 0.6f;
     float currentLerpTime;
     Vector3 cameraStartPos;
@@ -17,7 +15,6 @@ public class CameraFollow : MonoBehaviour {
 
 	void Start ()
     {
-        playerMovement = GameObject.Find("Player").GetComponent<PlayerMovement>();
         cameraStartPos = transform.position;
         cameraEndPos = transform.position;
         camera = GetComponent<Camera>();

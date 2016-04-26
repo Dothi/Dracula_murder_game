@@ -22,7 +22,6 @@ public class KillGameButton : MonoBehaviour {
 
     Image image;
     KeyCode keyCode = KeyCode.A;
-    string letter = "A";
     public int r {get {return Random.Range(0, 6);}}
 
 	void Update ()
@@ -42,32 +41,26 @@ public class KillGameButton : MonoBehaviour {
             case 0:
                 image.sprite = sprites.A;
                 keyCode = KeyCode.A;
-                letter = "A";
                 break;
             case 1:
                 image.sprite = sprites.S;
                 keyCode = KeyCode.S;
-                letter = "S";
                 break;
             case 2:
                 image.sprite = sprites.D;
                 keyCode = KeyCode.D;
-                letter = "D";
                 break;
             case 3:
                 image.sprite = sprites.Z;
                 keyCode = KeyCode.Z;
-                letter = "Z";
                 break;
             case 4:
                 image.sprite = sprites.X;
                 keyCode = KeyCode.X;
-                letter = "X";
                 break;
             case 5:
                 image.sprite = sprites.C;
                 keyCode = KeyCode.C;
-                letter = "C";
                 break;
             default:
                 break;

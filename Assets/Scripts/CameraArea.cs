@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class CameraArea : MonoBehaviour {
 
-    Transform playerTransform;
     GameController gc;
 
     CameraFollow cameraFollow;
@@ -39,7 +38,6 @@ public class CameraArea : MonoBehaviour {
 
     void Start()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
 
         cameraFollow = Camera.main.transform.GetComponent<CameraFollow>();
