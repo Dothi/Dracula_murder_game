@@ -10,6 +10,7 @@ public class FieldOfView : MonoBehaviour
     EnemyAI AI;
     public List<GameObject> enemiesInFOV;
     public bool inSight;
+    public bool seeDeadEnemy;
     CollapseScript collapseScript;
     public RaycastHit2D[] hits;
     public Sprite[] sprites;
@@ -30,6 +31,7 @@ public class FieldOfView : MonoBehaviour
     public void Awake()
     {
         inSight = false;
+        seeDeadEnemy = false;
         collapseScript = GetComponent<CollapseScript>();
         AI = GetComponent<EnemyAI>();
         sightDist = 10f;
@@ -55,6 +57,10 @@ public class FieldOfView : MonoBehaviour
         {
             InSight();
             Investigate();
+            if (seeDeadEnemy)
+            {
+                AI.currentEnemyState = EnemyAI.EnemyState.Investigating;
+            }
         }
         else
         {
@@ -167,7 +173,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -175,7 +182,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -183,7 +191,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -191,7 +200,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -199,13 +209,15 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
                     else
                     {
                         enemiesInFOV.Remove(enemiesInFOV[i]);
+                        
                     }
                 }
 
@@ -285,7 +297,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -293,7 +306,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -301,7 +315,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -309,7 +324,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -317,13 +333,15 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
                     else
                     {
                         enemiesInFOV.Remove(enemiesInFOV[i]);
+                        seeDeadEnemy = false;
                     }
                 }
 
@@ -402,7 +420,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -410,7 +429,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -418,7 +438,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -426,7 +447,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -434,13 +456,15 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
                     else
                     {
                         enemiesInFOV.Remove(enemiesInFOV[i]);
+                        seeDeadEnemy = false;
                     }
                 }
 
@@ -518,7 +542,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -526,7 +551,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -534,7 +560,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -542,7 +569,8 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
@@ -550,13 +578,15 @@ public class FieldOfView : MonoBehaviour
                     {
                         if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
                         {
-                            collapseScript.isSuspicious = true;
+                            seeDeadEnemy = true;
+                            //collapseScript.isSuspicious = true;
                             AI.isWaiting = false;
                         }
                     }
                     else
                     {
                         enemiesInFOV.Remove(enemiesInFOV[i]);
+                        seeDeadEnemy = false;
                     }
                 }
 

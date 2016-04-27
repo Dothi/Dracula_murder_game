@@ -8,7 +8,7 @@ public class EnemyAI : MonoBehaviour
     public Sprite deadSprite;
     int targetIndex;
     public int roomStops;
-    float speed;
+    public float speed;
     public float suspiciousSpeed = 6f;
     public float patrolSpeed = 3f;
     float currWaitTime;
@@ -28,16 +28,21 @@ public class EnemyAI : MonoBehaviour
     GameObject player;
     public GameObject targetRoom;
     public GameObject currentRoom;
+    public GameObject target;
     KillScript ks;
     AudioSource audioSource;
     public AudioClip gasp;
     SpriteRenderer spriteRend;
     Collider2D collider;
+    FieldOfView fov;
+    CollapseScript cs;
+    TriggerAreaScript tas;
     #endregion
     public enum EnemyState
     {
         Patrolling,
         Waiting,
+        Investigating,
         Suspicious,
         IsBeingKilled,
         Collapsed,
@@ -65,27 +70,83 @@ public class EnemyAI : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
+        fov = GetComponent<FieldOfView>();
+        cs = GetComponent<CollapseScript>();
+        
         
         
     }
     void Update()
     {
-        Patrolling();
-        IdleController();
-        
+        if (currentEnemyState == EnemyState.Patrolling)
+        {
+            Patrolling();
+            IdleController();
+            if (fov.seeDeadEnemy)
+            {
+                currentEnemyState = EnemyAI.EnemyState.Investigating;
+                
+            }
+        }
+        if (currentEnemyState == EnemyState.Suspicious)
+        {
+            targetRoom = waypoints[currentIndex].gameObject;
+            Patrolling();
+            IdleController();
+            if (!hasGasped)
+            {
+                PlayGasp();
+                hasGasped = true;
+            }
+        }
+        if (currentEnemyState == EnemyState.Investigating)
+        {
+            IsBeingKilled();
+            SpeedController();
+            IdleController();
+
+            
+
+            if (target == null)
+            {
+                for (int i = 0; i < fov.enemiesInFOV.Count; i++)
+                {
+                    if (fov.enemiesInFOV[i].GetComponent<EnemyAI>().currentEnemyState == EnemyState.Dead)
+                    {
+                        target = fov.enemiesInFOV[i];
+
+                    }
+                }
+            }
+            else
+            {
+                if (!isAtWaypoint)
+                PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound);
+                
+            }
+            if (isAtWaypoint)
+            {
+                
+                
+                currWaitTime += 1 * Time.deltaTime;
+                if (currWaitTime >= 2f)
+                {
+                    cs.isSuspicious = true;
+                    currWaitTime = 0f;
+                    
+                }
+            }
+        }
         if (currentEnemyState == EnemyState.Dead)
         {
             collider.offset = new Vector2(0, .5f);
         }
-        if (currentEnemyState == EnemyState.Suspicious && !hasGasped)
-        {
-            PlayGasp();
-            hasGasped = true;
-        }
+        
         if (currentEnemyState != EnemyState.Suspicious)
         {
             hasGasped = false;
         }
+        
         
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
@@ -109,22 +170,31 @@ public class EnemyAI : MonoBehaviour
                     targetIndex++;
                     if (targetIndex >= path.Length)
                     {
-                        targetIndex = 0;
+                        
                         isAtWaypoint = true;
+                        
                         roomStops++;
                         isWaiting = true;
+                        targetIndex = 0;
                         yield break;
                     }
                     currentWaypoint = path[targetIndex];
                 }
                 if (currentWaypoint != null)
                 {
-                    if (currentEnemyState == EnemyState.Patrolling || currentEnemyState == EnemyState.Suspicious)
+                    if (currentEnemyState == EnemyState.Patrolling || currentEnemyState == EnemyState.Suspicious || currentEnemyState == EnemyState.Investigating)
                     {
-                        transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-                        directionOfTravel = (currentWaypoint - transform.position).normalized;   
+                        if (!isAtWaypoint)
+                        {
+                            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                            directionOfTravel = (currentWaypoint - transform.position).normalized;
+                        }
+                        
+                            
+                        
                     }
                 }
+                
                 yield return null;
             }
         }
@@ -136,7 +206,7 @@ public class EnemyAI : MonoBehaviour
             if (directionOfTravel == Vector3.zero && !isWaiting)
             {
                 idleTimer += 1 * Time.deltaTime;
-                if (idleTimer >= 3f)
+                if (idleTimer >= 2f)
                 {
                     isAtWaypoint = true;
                 }
@@ -220,6 +290,10 @@ public class EnemyAI : MonoBehaviour
         else if (currentEnemyState == EnemyState.Suspicious)
         {
             speed = suspiciousSpeed;
+        }
+        else if (currentEnemyState == EnemyState.Investigating)
+        {
+            speed = 1f;
         }
         else
         {

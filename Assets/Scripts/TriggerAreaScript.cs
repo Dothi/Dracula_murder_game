@@ -12,7 +12,10 @@ public class TriggerAreaScript : MonoBehaviour
     GameObject player;
     GameObject gamecontroller;
     GameController gc;
+
     
+    
+
 
     void Start()
     {
@@ -24,6 +27,7 @@ public class TriggerAreaScript : MonoBehaviour
         gc = gamecontroller.GetComponent<GameController>();
         fov = GetComponentInParent<FieldOfView>();
         cs = GetComponentInParent<CollapseScript>();
+        
         
     }
 
@@ -105,7 +109,7 @@ public class TriggerAreaScript : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (this.triggerArea.enabled == true && other.tag == "Player" && !ClosetScript.playerIsHiding)
         {
@@ -139,6 +143,17 @@ public class TriggerAreaScript : MonoBehaviour
                     break;
             }
         }
+        else if (this.triggerArea.enabled == true && other.tag == "Enemy")
+        {
+            switch (this.AI.currentEnemyState)
+            {
+                case EnemyAI.EnemyState.Dead:
+                    if (other.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Investigating)
+                    other.GetComponent<EnemyAI>().isAtWaypoint = true;
+                    break;
+            }
+        }
+       
     }
     void OnTriggerExit2D(Collider2D other)
     {
