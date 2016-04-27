@@ -112,10 +112,12 @@ public class KillMinigame : MonoBehaviour {
         for (int i = 0; i < MinigameLength; i++)
         {
             GameObject button = (GameObject)Instantiate(killGameButtonPrefab, buttonParent.transform.position, Quaternion.identity);
+
             button.GetComponent<RectTransform>().localScale = Vector3.one;
             button.transform.SetParent(buttonParent.transform);
-            buttonList.Add(button.GetComponent<KillGameButton>());
             button.GetComponent<KillGameButton>().SetImageComponent();
+
+            buttonList.Add(button.GetComponent<KillGameButton>());
         }
     }
     void SetButtonPositions()
@@ -134,6 +136,7 @@ public class KillMinigame : MonoBehaviour {
                 button.GetComponent<RectTransform>().position = new Vector2(buttonList[i - 1].GetComponent<RectTransform>().position.x + (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
                                                                             buttonParent.GetComponent<RectTransform>().position.y);
             }
+            button.GetComponent<KillGameButton>().SetMovementLerp(button.GetComponent<RectTransform>().position);
         }
     }
     void MoveButtons()
@@ -143,8 +146,10 @@ public class KillMinigame : MonoBehaviour {
             KillGameButton button = buttonList[i];
             if (button.GetComponent<Image>().enabled == true)
             {
-                button.GetComponent<RectTransform>().position = new Vector2(button.GetComponent<RectTransform>().position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
-                                                                            buttonParent.GetComponent<RectTransform>().position.y);
+                //button.GetComponent<RectTransform>().position = new Vector2(button.GetComponent<RectTransform>().position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
+                                                                            //buttonParent.GetComponent<RectTransform>().position.y);
+                button.SetMovementLerp(new Vector2( button.GetComponent<RectTransform>().position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
+                                                    buttonParent.GetComponent<RectTransform>().position.y));
             }
         }
     }

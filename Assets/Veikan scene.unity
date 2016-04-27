@@ -1415,11 +1415,11 @@ Prefab:
       objectReference: {fileID: 1201634334}
     - target: {fileID: 22450850, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22450850, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 11485204, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_UiScaleMode
@@ -2611,7 +2611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f49da2847a2d842a01a554e871ecf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bloodDecreaseSpeed: 3
+  bloodDecreaseSpeed: 0
   bloodFromKill: 65
 --- !u!1001 &1213061620
 Prefab:
