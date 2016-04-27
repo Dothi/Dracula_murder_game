@@ -4,6 +4,7 @@ using System.Collections;
 public class Doorway : MonoBehaviour {
 
     GameController gc;
+    KillScript ks;
 
     Transform cameraTransform;
     CameraArea camArea;
@@ -17,6 +18,7 @@ public class Doorway : MonoBehaviour {
     void Start()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        ks = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
         doorSprite = door.transform.Find("Sprite (door)").GetComponent<SpriteRenderer>();
 
         camArea = transform.parent.GetComponentInChildren<CameraArea>();
@@ -51,7 +53,7 @@ public class Doorway : MonoBehaviour {
     
     void Update()
     {
-        if (Input.GetButton("Hide / Peek"))
+        if (Input.GetButton("Hide / Peek") && !ks.isSuckingBlood)
         {
             if (playerInTrigger)
             {

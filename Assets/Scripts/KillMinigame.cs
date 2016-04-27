@@ -44,9 +44,9 @@ public class KillMinigame : MonoBehaviour {
     {
         if (gameStarted)
         {
+            SetAboveCharacters(player, ks.killTarget);
             player.GetComponentInChildren<Animator>().enabled = false;
             SetButtonPositions();
-            SetAboveCharacters(player, ks.killTarget);
             currentButton = 0;
 
             for (int i = 0; i < buttonList.Count; i++)
@@ -89,7 +89,6 @@ public class KillMinigame : MonoBehaviour {
                             break;
                         }
 
-                        //TO DO: Maybe add smooth movement (lerp)?
                         MoveButtons();
                         break;
                     }
@@ -132,11 +131,12 @@ public class KillMinigame : MonoBehaviour {
                 button.GetComponent<RectTransform>().position = buttonParent.GetComponent<RectTransform>().position;
             }
             else
-            {                                          //Position of last button               + width of button                                 + assigned gap
+            {
+                                                                            //Position of last button                                  + width of button                                  + assigned gap
                 button.GetComponent<RectTransform>().position = new Vector2(buttonList[i - 1].GetComponent<RectTransform>().position.x + (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
                                                                             buttonParent.GetComponent<RectTransform>().position.y);
             }
-            button.GetComponent<KillGameButton>().SetMovementLerp(button.GetComponent<RectTransform>().position);
+            button.GetComponent<KillGameButton>().shouldEndHere = button.GetComponent<RectTransform>().position;
         }
     }
     void MoveButtons()
@@ -144,13 +144,15 @@ public class KillMinigame : MonoBehaviour {
         for (int i = 0; i < buttonList.Count; i++)
         {
             KillGameButton button = buttonList[i];
-            if (button.GetComponent<Image>().enabled == true)
-            {
-                //button.GetComponent<RectTransform>().position = new Vector2(button.GetComponent<RectTransform>().position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
-                                                                            //buttonParent.GetComponent<RectTransform>().position.y);
-                button.SetMovementLerp(new Vector2( button.GetComponent<RectTransform>().position.x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
-                                                    buttonParent.GetComponent<RectTransform>().position.y));
-            }
+
+            button.GetComponent<KillGameButton>().shouldEndHere = new Vector2(button.GetComponent<KillGameButton>().shouldEndHere.x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
+                                                                              buttonParent.GetComponent<RectTransform>().position.y);
+
+            button.smoothMove = StartCoroutine(button.SmoothMovement(   button.GetComponent<RectTransform>().position,
+
+                                                                        button.GetComponent<KillGameButton>().shouldEndHere,
+
+                                                                        0.2f));
         }
     }
     void SetAboveCharacters(GameObject player, GameObject target)

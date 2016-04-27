@@ -24,13 +24,15 @@ public class KillGameButton : MonoBehaviour {
     KeyCode keyCode = KeyCode.A;
     public int r {get {return Random.Range(0, 6);}}
 
+    public Coroutine smoothMove = null;
+    bool moving = false;
     Vector2 lerpStart;
     Vector2 lerpDestination;
+    public Vector2 shouldEndHere;
 
 	void Update ()
     {
         ColorFade();
-        SmoothMovement();
 	}
 
     public void RandomizeLetter()          //Maybe implement it so that it doesn't random same letter many times in a row
@@ -80,17 +82,25 @@ public class KillGameButton : MonoBehaviour {
     {
         image.color = new Color(image.color.r, image.color.g, image.color.b, 1 - (transform.localPosition.x / fadeRange));
     }
-    void SmoothMovement()
+    public IEnumerator SmoothMovement(Vector2 lerpStart, Vector2 lerpEnd, float time)
     {
-        GetComponent<RectTransform>().position = Vector2.Lerp(lerpStart, lerpDestination, 0.5f);
+        if (!moving)
+        {                                                               // Do nothing if already moving
+            moving = true;                                                  // Set flag to true
+            float t = 0f;
+
+            while (t < 1.0f)
+            {
+                t += Time.deltaTime / time;                                   // Sweeps from 0 to 1 in time seconds
+                transform.position = Vector3.Lerp(lerpStart, lerpEnd, t);     // Set position proportional to t
+                yield return null;                                              // Leave the routine and return here in the next frame
+            }
+
+            moving = false;                                                 // Finished moving
+        }
     }
     public void SetImageComponent()
     {
         image = GetComponent<Image>();
-    }
-    public void SetMovementLerp(Vector2 destination)
-    {
-        lerpDestination = destination;
-        lerpStart = GetComponent<RectTransform>().position;
     }
 }
