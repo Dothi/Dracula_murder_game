@@ -48,7 +48,7 @@ public class KillScript : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !isSuckingBlood)
+        if (Input.GetButtonDown("Attack") && !isSuckingBlood)
         {
             killTarget = GetClosestEnemy(enemiesInRange);
 

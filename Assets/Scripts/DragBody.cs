@@ -26,11 +26,11 @@ public class DragBody : MonoBehaviour {
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetButtonDown("Drag Body"))
         {
             dragTarget = GetClosestEnemy(enemiesInRange);
         }
-        else if (Input.GetKey(KeyCode.Space))
+        else if (Input.GetButton("Drag Body"))
         {
             if (dragTarget != null && dragTarget.activeInHierarchy)
             {
@@ -56,7 +56,7 @@ public class DragBody : MonoBehaviour {
                 }
             }
         }
-        else if (Input.GetKeyUp(KeyCode.Space))
+        else if (Input.GetButtonUp("Drag Body"))
         {
             if (dragTarget != null && dragTarget.activeInHierarchy &&
                 dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)

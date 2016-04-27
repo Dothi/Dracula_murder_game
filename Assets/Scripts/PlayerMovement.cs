@@ -13,11 +13,6 @@ public class PlayerMovement : MonoBehaviour {
     bool moveDown;
     bool moveRight;
 
-    public KeyCode upKey;
-    public KeyCode leftKey;
-    public KeyCode downKey;
-    public KeyCode rightKey;
-
     void Start()
     {
         anim = GetComponentInChildren<Animator>();
@@ -39,7 +34,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //Move up
-        if (Input.GetKey(upKey) && canMove)
+        if (Input.GetAxis("Vertical") > 0 && canMove)
         {
             moveUp = true;          
         }
@@ -49,7 +44,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //Move down
-        if (Input.GetKey(downKey) && canMove)
+        if (Input.GetAxis("Vertical") < 0 && canMove)
         {
             moveDown = true;
         }
@@ -59,7 +54,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //Move left
-        if (Input.GetKey(leftKey) && canMove)
+        if (Input.GetAxis("Horizontal") < 0 && canMove)
         {
             moveLeft = true;
         }
@@ -69,7 +64,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //Move right
-        if (Input.GetKey(rightKey) && canMove)
+        if (Input.GetAxis("Horizontal") > 0 && canMove)
         {
             moveRight = true;
         }

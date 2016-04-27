@@ -2960,6 +2960,68 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 495384, guid: 54062fa6e1c95de4787c52f246e294e3, type: 2}
   m_PrefabInternal: {fileID: 1274932601}
+--- !u!1001 &1297405711
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 11467284, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: waypoints.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 477410, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 18.49
+      objectReference: {fileID: 0}
+    - target: {fileID: 477410, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 477410, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477410, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477410, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477410, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 477410, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 477410, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 11467284, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: waypoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 354006785}
+    - target: {fileID: 11467284, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: roomStops
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11467284, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: waypoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1427928119}
+    - target: {fileID: 149894, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+      propertyPath: m_Name
+      value: Enemy (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: b38272581192f0b4cbb26b2411b776a8, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1300436683
 Prefab:
   m_ObjectHideFlags: 0

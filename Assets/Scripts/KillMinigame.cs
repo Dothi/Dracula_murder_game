@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class KillMinigame : MonoBehaviour {
 
     List<KeyCode> keyCodes = new List<KeyCode>();
-    KeyCode CancelKey = KeyCode.Space;
+    KeyCode CancelKey = KeyCode.Q;
 
     int MinigameLength = 10;
     int currentButton = 0;

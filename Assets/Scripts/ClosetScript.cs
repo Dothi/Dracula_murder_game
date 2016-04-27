@@ -55,7 +55,7 @@ public class ClosetScript : MonoBehaviour {
 	}
     void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetButtonDown("Hide / Peek"))
         {
             if (!ObjectsInside.Contains(player))
             {
@@ -73,7 +73,7 @@ public class ClosetScript : MonoBehaviour {
                 UnhidePlayer(player);
             } 
         }
-        if (Input.GetKeyUp(KeyCode.Space))
+        if (Input.GetButtonUp("Drag Body"))
         {
             GameObject dragTarget = player.GetComponent<DragBody>().dragTarget;
             if (dragTarget != null && dragTarget.activeInHierarchy && dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)

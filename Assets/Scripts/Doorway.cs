@@ -51,7 +51,7 @@ public class Doorway : MonoBehaviour {
     
     void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
+        if (Input.GetButton("Hide / Peek"))
         {
             if (playerInTrigger)
             {
