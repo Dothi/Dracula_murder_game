@@ -5,7 +5,7 @@ public class EnemyAI : MonoBehaviour
 {
     #region Variables
     Vector3[] path;
-
+    public Sprite deadSprite;
     int targetIndex;
     public int roomStops;
     float speed;
@@ -31,6 +31,8 @@ public class EnemyAI : MonoBehaviour
     KillScript ks;
     AudioSource audioSource;
     public AudioClip gasp;
+    SpriteRenderer spriteRend;
+    Collider2D collider;
     #endregion
     public enum EnemyState
     {
@@ -61,6 +63,8 @@ public class EnemyAI : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         ks = player.GetComponent<KillScript>();
         audioSource = GetComponent<AudioSource>();
+        spriteRend = GetComponentInChildren<SpriteRenderer>();
+        collider = GetComponent<Collider2D>();
         
         
     }
@@ -68,7 +72,11 @@ public class EnemyAI : MonoBehaviour
     {
         Patrolling();
         IdleController();
-
+        
+        if (currentEnemyState == EnemyState.Dead)
+        {
+            collider.offset = new Vector2(0, .5f);
+        }
         if (currentEnemyState == EnemyState.Suspicious && !hasGasped)
         {
             PlayGasp();
@@ -78,6 +86,7 @@ public class EnemyAI : MonoBehaviour
         {
             hasGasped = false;
         }
+        
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {

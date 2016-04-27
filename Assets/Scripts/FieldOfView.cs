@@ -47,7 +47,10 @@ public class FieldOfView : MonoBehaviour
     public void Update()
     {
         Facing();
-        SpriteRend();
+        if (AI.currentEnemyState != EnemyAI.EnemyState.Dead)
+        {
+            SpriteRend();
+        }
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
         {
             InSight();
@@ -274,8 +277,8 @@ public class FieldOfView : MonoBehaviour
                 }
 
                 //"unsee" enemies
-               
-                    for (int i = 0; i < enemiesInFOV.Count; i++)
+
+                for (int i = 0; i < enemiesInFOV.Count; i++)
                 {
                     EnemyAI _ai = enemiesInFOV[i].GetComponent<EnemyAI>();
                     if (hit1 && hit1.collider.gameObject == enemiesInFOV[i])

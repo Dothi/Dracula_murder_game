@@ -74,14 +74,7 @@ public class KillGameButton : MonoBehaviour {
 
     void ColorFade()
     {
-        if (transform.position.x == transform.parent.position.x)
-        {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, 1f);
-        }
-        else if (transform.position.x < transform.position.x + fadeRange && transform.position.x > transform.parent.position.x)
-        {
-            image.color = new Color(image.color.r, image.color.g, image.color.b, 1 - (transform.localPosition.x / fadeRange));
-        }
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 1 - (transform.localPosition.x / fadeRange));
     }
     public void SetImageComponent()
     {

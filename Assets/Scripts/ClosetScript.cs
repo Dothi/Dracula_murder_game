@@ -131,9 +131,9 @@ public class ClosetScript : MonoBehaviour {
                 if (ObjectsInside[i].CompareTag("Enemy"))
                 {
                     ObjectsInside[i].SetActive(true);
-                    ObjectsInside.Remove(ObjectsInside[i]);
                     ObjectsInside[i].transform.Find("Collider").GetComponent<BoxCollider2D>().isTrigger = true;
                     ObjectsInside[i].GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                    ObjectsInside.Remove(ObjectsInside[i]);
                     statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
                     audioSource.clip = closetClose;
                     audioSource.Play();
