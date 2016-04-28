@@ -17,7 +17,7 @@ public class FieldOfView : MonoBehaviour
     public RaycastHit2D[] hits;
     public Sprite[] sprites;
     SpriteRenderer spriteRend;
-    LayerMask layerMask;
+    public LayerMask layerMask;
     LayerMask lineCastIgnoreMask;
     GameObject player;
     PlayerMovement pm;
@@ -41,10 +41,9 @@ public class FieldOfView : MonoBehaviour
         sightDist = 10f;
         currentFacingState = FacingState.UP;
         enemiesInFOV = new List<GameObject>();
-
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
-        layerMask = 1 << LayerMask.NameToLayer("TriggerArea");
+        layerMask = 1 << LayerMask.NameToLayer("TriggerArea") | 1 << LayerMask.NameToLayer("Furniture");
         lineCastIgnoreMask = 1 << LayerMask.NameToLayer("LinecastIgnore") | 1 << LayerMask.NameToLayer("TriggerArea");
         layerMask = ~layerMask;
         lineCastIgnoreMask = ~lineCastIgnoreMask;
@@ -100,19 +99,24 @@ public class FieldOfView : MonoBehaviour
             currentFacingState = FacingState.RIGHT;
 
         }
-
-
     }
 
     void FoV()
     {
-
+         Color color;
+        if (AI.seePlayer)
+        {
+            color = Color.green;
+        }
+        else
+        {
+            color = Color.red;
+        }
         switch (currentFacingState)
         {
             case FacingState.UP:
                 Vector3 targetDir = player.transform.position - transform.position;
                 Vector3 sightDir = transform.up;
-
                 for (int i = 0; i < enemies.Count; i++)
                 {
                     if (enemies[i].GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
@@ -122,7 +126,7 @@ public class FieldOfView : MonoBehaviour
 
                         if (angler < fieldOfViewAngle * .5f)
                         {
-                            RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDire.normalized, Mathf.Infinity, layerMask);
+                            RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDire.normalized, Mathf.Infinity, layerMask);
                             Debug.DrawLine(transform.position, enemies[i].transform.position, Color.red);
 
                             if (hit && hit.collider.tag == "Enemy" && hit.collider.gameObject.GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
@@ -139,7 +143,6 @@ public class FieldOfView : MonoBehaviour
                             }
                         }
                     }
-
                 }
 
                 float angle = Vector3.Angle(targetDir, sightDir);
@@ -148,20 +151,29 @@ public class FieldOfView : MonoBehaviour
                 {
                     if (player.GetComponent<PlayerMovement>().currentRoom == AI.currentRoom)
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDir.normalized, Mathf.Infinity, layerMask);
-                        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, layerMask);
+                        Debug.DrawLine(transform.position, player.transform.position, color);
 
                         if (hit && hit.collider.gameObject == player)
                         {
                             Debug.Log("Player hit");
                             AI.seePlayer = true;
+                            
+                        }
+                        else if (hit && hit.collider.tag == "PlayerFeet")
+                        {
+                            Debug.Log("Player hit");
+                            AI.seePlayer = true;
+                        }
+                        else if (hit && !AI.seePlayer)
+                        {
+                            Debug.Log(hit.collider.transform);
                         }
                         else
                         {
                             AI.seePlayer = false;
                         }
                     }
-
                 }
                 break;
             case FacingState.RIGHT:
@@ -179,7 +191,7 @@ public class FieldOfView : MonoBehaviour
 
                         if (angler < fieldOfViewAngle * .5f)
                         {
-                            RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDire.normalized, Mathf.Infinity, layerMask);
+                            RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDire.normalized, Mathf.Infinity, layerMask);
                             Debug.DrawLine(transform.position, enemies[i].transform.position, Color.red);
 
                             if (hit && hit.collider.tag == "Enemy" && hit.collider.gameObject.GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
@@ -188,7 +200,6 @@ public class FieldOfView : MonoBehaviour
                                 {
                                     enemiesInFOV.Add(enemies[i]);
                                 }
-
                             }
                             else
                             {
@@ -196,20 +207,28 @@ public class FieldOfView : MonoBehaviour
                             }
                         }
                     }
-
                 }
 
                 if (angle < fieldOfViewAngle * .5f)
                 {
                     if (player.GetComponent<PlayerMovement>().currentRoom == AI.currentRoom)
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDir.normalized, Mathf.Infinity, layerMask);
-                        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, layerMask);
+                        Debug.DrawLine(transform.position, player.transform.position, color);
 
                         if (hit && hit.collider.gameObject == player)
                         {
                             Debug.Log("Player hit");
                             AI.seePlayer = true;
+                        }
+                        else if (hit && hit.collider.tag == "PlayerFeet")
+                        {
+                            Debug.Log("Player hit");
+                            AI.seePlayer = true;
+                        }
+                        else if (hit && !AI.seePlayer)
+                        {
+                            Debug.Log(hit.collider.transform);
                         }
                         else
                         {
@@ -233,7 +252,7 @@ public class FieldOfView : MonoBehaviour
 
                         if (angler < fieldOfViewAngle * .5f)
                         {
-                            RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDire.normalized, Mathf.Infinity, layerMask);
+                            RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDire.normalized, Mathf.Infinity, layerMask);
                             Debug.DrawLine(transform.position, enemies[i].transform.position, Color.red);
 
                             if (hit && hit.collider.tag == "Enemy")
@@ -242,7 +261,6 @@ public class FieldOfView : MonoBehaviour
                                 {
                                     enemiesInFOV.Add(enemies[i]);
                                 }
-
                             }
                             else
                             {
@@ -250,20 +268,28 @@ public class FieldOfView : MonoBehaviour
                             }
                         }
                     }
-
                 }
 
                 if (angle < fieldOfViewAngle * .5f)
                 {
                     if (player.GetComponent<PlayerMovement>().currentRoom == AI.currentRoom)
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDir.normalized, Mathf.Infinity, layerMask);
-                        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, layerMask);
+                        Debug.DrawLine(transform.position, player.transform.position, color);
 
                         if (hit && hit.collider.gameObject == player)
                         {
                             Debug.Log("Player hit");
                             AI.seePlayer = true;
+                        }
+                        else if (hit && hit.collider.tag == "PlayerFeet")
+                        {
+                            Debug.Log("Player hit");
+                            AI.seePlayer = true;
+                        }
+                        else if (hit && !AI.seePlayer)
+                        {
+                            Debug.Log(hit.collider.transform);
                         }
                         else
                         {
@@ -287,7 +313,7 @@ public class FieldOfView : MonoBehaviour
 
                         if (angler < fieldOfViewAngle * .5f)
                         {
-                            RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDire.normalized, Mathf.Infinity, layerMask);
+                            RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDire.normalized, Mathf.Infinity, layerMask);
                             Debug.DrawLine(transform.position, enemies[i].transform.position, Color.red);
 
                             if (hit && hit.collider.tag == "Enemy")
@@ -304,20 +330,28 @@ public class FieldOfView : MonoBehaviour
                             }
                         }
                     }
-
                 }
 
                 if (angle < fieldOfViewAngle * .5f)
                 {
                     if (player.GetComponent<PlayerMovement>().currentRoom == AI.currentRoom)
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDir.normalized, Mathf.Infinity, layerMask);
-                        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, layerMask);
+                        Debug.DrawLine(transform.position, player.transform.position, color);
 
                         if (hit && hit.collider.gameObject == player)
                         {
                             Debug.Log("Player hit");
                             AI.seePlayer = true;
+                        }
+                        else if (hit && hit.collider.tag == "PlayerFeet")
+                        {
+                            Debug.Log("Player hit");
+                            AI.seePlayer = true;
+                        }
+                        else if (hit && !AI.seePlayer)
+                        {
+                            Debug.Log(hit.collider.transform);
                         }
                         else
                         {

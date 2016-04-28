@@ -24,6 +24,7 @@ public class Grid : MonoBehaviour
         gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
         gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
         CreateGrid();
+        unwalkableMask = (1 << LayerMask.NameToLayer("Unwalkable")) | (1 << LayerMask.NameToLayer("Furniture"));
     }
 
     public int MaxSize
