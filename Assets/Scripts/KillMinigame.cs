@@ -136,7 +136,7 @@ public class KillMinigame : MonoBehaviour {
                 button.GetComponent<RectTransform>().position = new Vector2(buttonList[i - 1].GetComponent<RectTransform>().position.x + (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
                                                                             buttonParent.GetComponent<RectTransform>().position.y);
             }
-            button.GetComponent<KillGameButton>().shouldEndHere = button.GetComponent<RectTransform>().position;
+            button.GetComponent<KillGameButton>().SetLerpValues(button.GetComponent<RectTransform>().position);
         }
     }
     void MoveButtons()
@@ -144,15 +144,9 @@ public class KillMinigame : MonoBehaviour {
         for (int i = 0; i < buttonList.Count; i++)
         {
             KillGameButton button = buttonList[i];
-
-            button.GetComponent<KillGameButton>().shouldEndHere = new Vector2(button.GetComponent<KillGameButton>().shouldEndHere.x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
-                                                                              buttonParent.GetComponent<RectTransform>().position.y);
-
-            button.smoothMove = StartCoroutine(button.SmoothMovement(   button.GetComponent<RectTransform>().position,
-
-                                                                        button.GetComponent<KillGameButton>().shouldEndHere,
-
-                                                                        0.2f));
+            
+            button.GetComponent<KillGameButton>().SetLerpValues(new Vector2(button.GetComponent<KillGameButton>().GetLerpDestination().x - (button.GetComponent<RectTransform>().rect.width + buttonGap) * canvas.scaleFactor,
+                                                                            buttonParent.GetComponent<RectTransform>().position.y));
         }
     }
     void SetAboveCharacters(GameObject player, GameObject target)

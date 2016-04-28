@@ -24,18 +24,17 @@ public class KillGameButton : MonoBehaviour {
     KeyCode keyCode = KeyCode.A;
     public int r {get {return Random.Range(0, 6);}}
 
-    public Coroutine smoothMove = null;
-    bool moving = false;
+    float currentLerpTime = 0f;
     Vector2 lerpStart;
     Vector2 lerpDestination;
-    public Vector2 shouldEndHere;
 
 	void Update ()
     {
         ColorFade();
+        SmoothMovement(lerpStart, lerpDestination, 0.2f);
 	}
 
-    public void RandomizeLetter()          //Maybe implement it so that it doesn't random same letter many times in a row
+    public void RandomizeLetter()
     {
         if (image != null)
         {
@@ -82,25 +81,28 @@ public class KillGameButton : MonoBehaviour {
     {
         image.color = new Color(image.color.r, image.color.g, image.color.b, 1 - (transform.localPosition.x / fadeRange));
     }
-    public IEnumerator SmoothMovement(Vector2 lerpStart, Vector2 lerpEnd, float time)
+    void SmoothMovement(Vector2 lerpStart, Vector2 lerpEnd, float time)
     {
-        if (!moving)
-        {                                                               // Do nothing if already moving
-            moving = true;                                                  // Set flag to true
-            float t = 0f;
-
-            while (t < 1.0f)
-            {
-                t += Time.deltaTime / time;                                   // Sweeps from 0 to 1 in time seconds
-                transform.position = Vector3.Lerp(lerpStart, lerpEnd, t);     // Set position proportional to t
-                yield return null;                                              // Leave the routine and return here in the next frame
-            }
-
-            moving = false;                                                 // Finished moving
+        currentLerpTime += Time.deltaTime;
+        if (currentLerpTime > time)
+        {
+            currentLerpTime = time;
         }
+        float perc = currentLerpTime / time;
+        GetComponent<RectTransform>().position = Vector3.Lerp(lerpStart, lerpEnd, perc); 
     }
     public void SetImageComponent()
     {
         image = GetComponent<Image>();
+    }
+    public void SetLerpValues(Vector2 lerpEnd)
+    {
+        lerpStart = GetComponent<RectTransform>().position;
+        lerpDestination = lerpEnd;
+        currentLerpTime = 0;
+    }
+    public Vector2 GetLerpDestination()
+    {
+        return lerpDestination;
     }
 }

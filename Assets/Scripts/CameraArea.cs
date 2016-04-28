@@ -28,6 +28,7 @@ public class CameraArea : MonoBehaviour {
     Color wallFadeEndValue;
     
     SpriteRenderer fade;
+    SpriteRenderer fade2;
     public bool currentRoom;
     float lerpTime = 0.6f;
     float currentLerpTime;
@@ -56,6 +57,7 @@ public class CameraArea : MonoBehaviour {
         }
 
         fade = transform.parent.FindChild("Fade").GetComponent<SpriteRenderer>();
+        fade2 = transform.parent.FindChild("Fade2").GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -125,6 +127,7 @@ public class CameraArea : MonoBehaviour {
             Color newFadeValue = Color.Lerp(fadeStartValue, fadeEndValue, perc);
 
             fade.color = newFadeValue;
+            fade2.color = newFadeValue;
 
             for (int i = 0; i < bottomWallSprites.Count; i++)
             {
@@ -165,6 +168,7 @@ public class CameraArea : MonoBehaviour {
             Color newFadeValue = Color.Lerp(fadeStartValue, fadeEndValue, perc);
 
             fade.color = newFadeValue;
+            fade2.color = newFadeValue;
 
             for (int i = 0; i < bottomWallSprites.Count; i++)
             {
