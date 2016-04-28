@@ -25,7 +25,7 @@ GameObject:
   - 4: {fileID: 462118}
   - 60: {fileID: 6040954}
   - 114: {fileID: 11409500}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
