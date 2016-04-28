@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour {
     bool moveLeft;
     bool moveDown;
     bool moveRight;
+    public GameObject currentRoom;
 
     void Start()
     {
@@ -106,6 +107,13 @@ public class PlayerMovement : MonoBehaviour {
         else if (!moveLeft)
         {
             rb.velocity = new Vector2(0, rb.velocity.y);
+        }
+    }
+    void OnTriggerStay2D(Collider2D other)
+    {
+        if (other != null && other.gameObject.tag == "CameraArea")
+        {
+            currentRoom = other.gameObject;
         }
     }
 }

@@ -6,9 +6,11 @@ using System.Linq;
 public class FieldOfView : MonoBehaviour
 {
     #region Variables
+    public float fieldOfViewAngle;
     public float sightDist;
     EnemyAI AI;
     public List<GameObject> enemiesInFOV;
+    public List<GameObject> enemies;
     public bool inSight;
     public bool seeDeadEnemy;
     CollapseScript collapseScript;
@@ -18,6 +20,7 @@ public class FieldOfView : MonoBehaviour
     LayerMask layerMask;
     LayerMask lineCastIgnoreMask;
     GameObject player;
+    PlayerMovement pm;
     #endregion
     public enum FacingState
     {
@@ -30,6 +33,7 @@ public class FieldOfView : MonoBehaviour
     public FacingState currentFacingState;
     public void Awake()
     {
+        fieldOfViewAngle = 160f;
         inSight = false;
         seeDeadEnemy = false;
         collapseScript = GetComponent<CollapseScript>();
@@ -37,12 +41,15 @@ public class FieldOfView : MonoBehaviour
         sightDist = 10f;
         currentFacingState = FacingState.UP;
         enemiesInFOV = new List<GameObject>();
+
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player");
         layerMask = 1 << LayerMask.NameToLayer("TriggerArea");
         lineCastIgnoreMask = 1 << LayerMask.NameToLayer("LinecastIgnore") | 1 << LayerMask.NameToLayer("TriggerArea");
         layerMask = ~layerMask;
         lineCastIgnoreMask = ~lineCastIgnoreMask;
+        pm = player.GetComponent<PlayerMovement>();
+        enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
 
     }
 
@@ -56,7 +63,8 @@ public class FieldOfView : MonoBehaviour
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
         {
             InSight();
-            Investigate();
+            //Investigate();
+            FoV();
             if (seeDeadEnemy)
             {
                 AI.currentEnemyState = EnemyAI.EnemyState.Investigating;
@@ -96,6 +104,241 @@ public class FieldOfView : MonoBehaviour
 
     }
 
+    void FoV()
+    {
+
+        switch (currentFacingState)
+        {
+            case FacingState.UP:
+                Vector3 targetDir = player.transform.position - transform.position;
+                Vector3 sightDir = transform.up;
+
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    if (enemies[i].GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
+                    {
+                        Vector3 targetDire = enemies[i].transform.position - transform.position;
+                        float angler = Vector3.Angle(targetDire, sightDir);
+
+                        if (angler < fieldOfViewAngle * .5f)
+                        {
+                            RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDire.normalized, Mathf.Infinity, layerMask);
+                            Debug.DrawLine(transform.position, enemies[i].transform.position, Color.red);
+
+                            if (hit && hit.collider.tag == "Enemy" && hit.collider.gameObject.GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
+                            {
+                                if (!enemiesInFOV.Contains(enemies[i]))
+                                {
+                                    enemiesInFOV.Add(enemies[i]);
+                                }
+
+                            }
+                            else
+                            {
+                                enemiesInFOV.Remove(enemies[i]);
+                            }
+                        }
+                    }
+
+                }
+
+                float angle = Vector3.Angle(targetDir, sightDir);
+
+                if (angle < fieldOfViewAngle * .5f)
+                {
+                    if (player.GetComponent<PlayerMovement>().currentRoom == AI.currentRoom)
+                    {
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDir.normalized, Mathf.Infinity, layerMask);
+                        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+
+                        if (hit && hit.collider.gameObject == player)
+                        {
+                            Debug.Log("Player hit");
+                            AI.seePlayer = true;
+                        }
+                        else
+                        {
+                            AI.seePlayer = false;
+                        }
+                    }
+
+                }
+                break;
+            case FacingState.RIGHT:
+                targetDir = player.transform.position - transform.position;
+                sightDir = transform.right;
+
+                angle = Vector3.Angle(targetDir, sightDir);
+
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    if (enemies[i].GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
+                    {
+                        Vector3 targetDire = enemies[i].transform.position - transform.position;
+                        float angler = Vector3.Angle(targetDire, sightDir);
+
+                        if (angler < fieldOfViewAngle * .5f)
+                        {
+                            RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDire.normalized, Mathf.Infinity, layerMask);
+                            Debug.DrawLine(transform.position, enemies[i].transform.position, Color.red);
+
+                            if (hit && hit.collider.tag == "Enemy" && hit.collider.gameObject.GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
+                            {
+                                if (!enemiesInFOV.Contains(enemies[i]))
+                                {
+                                    enemiesInFOV.Add(enemies[i]);
+                                }
+
+                            }
+                            else
+                            {
+                                enemiesInFOV.Remove(enemies[i]);
+                            }
+                        }
+                    }
+
+                }
+
+                if (angle < fieldOfViewAngle * .5f)
+                {
+                    if (player.GetComponent<PlayerMovement>().currentRoom == AI.currentRoom)
+                    {
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDir.normalized, Mathf.Infinity, layerMask);
+                        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+
+                        if (hit && hit.collider.gameObject == player)
+                        {
+                            Debug.Log("Player hit");
+                            AI.seePlayer = true;
+                        }
+                        else
+                        {
+                            AI.seePlayer = false;
+                        }
+                    }
+                }
+                break;
+            case FacingState.DOWN:
+                targetDir = player.transform.position - transform.position;
+                sightDir = -transform.up;
+
+                angle = Vector3.Angle(targetDir, sightDir);
+
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    if (enemies[i].GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
+                    {
+                        Vector3 targetDire = enemies[i].transform.position - transform.position;
+                        float angler = Vector3.Angle(targetDire, sightDir);
+
+                        if (angler < fieldOfViewAngle * .5f)
+                        {
+                            RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDire.normalized, Mathf.Infinity, layerMask);
+                            Debug.DrawLine(transform.position, enemies[i].transform.position, Color.red);
+
+                            if (hit && hit.collider.tag == "Enemy")
+                            {
+                                if (!enemiesInFOV.Contains(enemies[i]))
+                                {
+                                    enemiesInFOV.Add(enemies[i]);
+                                }
+
+                            }
+                            else
+                            {
+                                enemiesInFOV.Remove(enemies[i]);
+                            }
+                        }
+                    }
+
+                }
+
+                if (angle < fieldOfViewAngle * .5f)
+                {
+                    if (player.GetComponent<PlayerMovement>().currentRoom == AI.currentRoom)
+                    {
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDir.normalized, Mathf.Infinity, layerMask);
+                        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+
+                        if (hit && hit.collider.gameObject == player)
+                        {
+                            Debug.Log("Player hit");
+                            AI.seePlayer = true;
+                        }
+                        else
+                        {
+                            AI.seePlayer = false;
+                        }
+                    }
+                }
+                break;
+            case FacingState.LEFT:
+                targetDir = player.transform.position - transform.position;
+                sightDir = -transform.right;
+
+                angle = Vector3.Angle(targetDir, sightDir);
+
+                for (int i = 0; i < enemies.Count; i++)
+                {
+                    if (enemies[i].GetComponent<EnemyAI>().currentRoom == AI.currentRoom)
+                    {
+                        Vector3 targetDire = enemies[i].transform.position - transform.position;
+                        float angler = Vector3.Angle(targetDire, sightDir);
+
+                        if (angler < fieldOfViewAngle * .5f)
+                        {
+                            RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDire.normalized, Mathf.Infinity, layerMask);
+                            Debug.DrawLine(transform.position, enemies[i].transform.position, Color.red);
+
+                            if (hit && hit.collider.tag == "Enemy")
+                            {
+                                if (!enemiesInFOV.Contains(enemies[i]))
+                                {
+                                    enemiesInFOV.Add(enemies[i]);
+                                }
+
+                            }
+                            else
+                            {
+                                enemiesInFOV.Remove(enemies[i]);
+                            }
+                        }
+                    }
+
+                }
+
+                if (angle < fieldOfViewAngle * .5f)
+                {
+                    if (player.GetComponent<PlayerMovement>().currentRoom == AI.currentRoom)
+                    {
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position + sightDir, targetDir.normalized, Mathf.Infinity, layerMask);
+                        Debug.DrawLine(transform.position, player.transform.position, Color.red);
+
+                        if (hit && hit.collider.gameObject == player)
+                        {
+                            Debug.Log("Player hit");
+                            AI.seePlayer = true;
+                        }
+                        else
+                        {
+                            AI.seePlayer = false;
+                        }
+                    }
+                }
+                break;
+        }
+        for (int i = 0; i < enemiesInFOV.Count; i++)
+        {
+            EnemyAI _ai = enemiesInFOV[i].GetComponent<EnemyAI>();
+
+            if (_ai.currentEnemyState == EnemyAI.EnemyState.Dead && !collapseScript.isSuspicious)
+            {
+                seeDeadEnemy = true;
+                //collapseScript.isSuspicious = true;
+                AI.isWaiting = false;
+            }
+        }
+    }
     void Investigate()
     {
         Vector3 rayPos = transform.position + new Vector3(0, 1, 0);
@@ -107,12 +350,17 @@ public class FieldOfView : MonoBehaviour
                 RaycastHit2D hit3 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(.3f, 0, 0)), (sightDist + .6f), layerMask);
                 RaycastHit2D hit4 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(.65f, 0, 0)), (sightDist + .6f), layerMask);
                 RaycastHit2D hit5 = Physics2D.Raycast(rayPos, (transform.up + transform.right + new Vector3(-.65f, 0, 0)), (sightDist + .6f), layerMask);
+                RaycastHit2D hit6 = Physics2D.Raycast(rayPos, (transform.up + transform.right + new Vector3(-2.1f, 0, 0)), (sightDist), layerMask);
+                RaycastHit2D hit7 = Physics2D.Raycast(rayPos, (transform.up - transform.right + new Vector3(2.1f, 0, 0)), (sightDist), layerMask);
 
-                Debug.DrawRay(rayPos, (transform.up + transform.right + new Vector3(-.3f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(rayPos, (transform.up - transform.right + new Vector3(.3f, 0, 0)) * sightDist, Color.green);
+
+                Debug.DrawRay(rayPos, (transform.up + transform.right + new Vector3(-.3f, 0, 0)) * (sightDist - 2f), Color.green);
+                Debug.DrawRay(rayPos, (transform.up - transform.right + new Vector3(.3f, 0, 0)) * (sightDist - 2f), Color.green);
                 Debug.DrawRay(rayPos, (transform.up - transform.right + new Vector3(.65f, 0, 0)) * sightDist, Color.green);
                 Debug.DrawRay(rayPos, (transform.up + transform.right + new Vector3(-.65f, 0, 0)) * sightDist, Color.green);
-                Debug.DrawRay(rayPos, transform.up * (sightDist + .2f), Color.green);
+                Debug.DrawRay(rayPos, (transform.up + transform.right + new Vector3(-2.1f, 0, 0)) * (sightDist - 4f), Color.green);
+                Debug.DrawRay(rayPos, (transform.up - transform.right + new Vector3(2.1f, 0, 0)) * (sightDist - 4f), Color.green);
+                Debug.DrawRay(rayPos, transform.up * (sightDist + 1f), Color.green);
 
                 //See player                                                                 
                 if (hit1 && hit1.collider.tag == "Player" && inSight)
@@ -217,7 +465,7 @@ public class FieldOfView : MonoBehaviour
                     else
                     {
                         enemiesInFOV.Remove(enemiesInFOV[i]);
-                        
+
                     }
                 }
 
