@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 429234}
   - 61: {fileID: 6198516}
-  m_Layer: 9
+  m_Layer: 14
   m_Name: Table
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}

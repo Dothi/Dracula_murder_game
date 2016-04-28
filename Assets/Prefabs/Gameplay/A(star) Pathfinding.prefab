@@ -55,7 +55,7 @@ MonoBehaviour:
   displayGridGizmos: 0
   unwalkableMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 16896
   gridWorldSize: {x: 85.56, y: 47.16}
   nodeRadius: 0.5
 --- !u!114 &11462066
