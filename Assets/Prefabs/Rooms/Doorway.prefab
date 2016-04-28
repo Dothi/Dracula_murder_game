@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 418336}
   - 61: {fileID: 6116218}
   - 114: {fileID: 11471022}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Doorway
   m_TagString: Untagged
   m_Icon: {fileID: 0}
