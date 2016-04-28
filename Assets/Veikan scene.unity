@@ -1431,11 +1431,11 @@ Prefab:
       objectReference: {fileID: 1201634334}
     - target: {fileID: 22450850, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 22450850, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 11485204, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_UiScaleMode
