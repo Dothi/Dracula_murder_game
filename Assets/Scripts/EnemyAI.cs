@@ -80,6 +80,8 @@ public class EnemyAI : MonoBehaviour
     {
         if (currentEnemyState == EnemyState.Patrolling)
         {
+            IsBeingKilled();
+            SpeedController();
             Patrolling();
             IdleController();
             if (fov.seeDeadEnemy)
@@ -90,6 +92,8 @@ public class EnemyAI : MonoBehaviour
         }
         if (currentEnemyState == EnemyState.Suspicious)
         {
+            IsBeingKilled();
+            SpeedController();
             targetRoom = waypoints[currentIndex].gameObject;
             Patrolling();
             IdleController();
@@ -215,8 +219,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (currentEnemyState != EnemyState.Dead)
         {
-            IsBeingKilled();
-            SpeedController();
+            
 
             if (currentEnemyState == EnemyState.Patrolling)
             {

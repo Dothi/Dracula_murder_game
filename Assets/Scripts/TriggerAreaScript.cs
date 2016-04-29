@@ -57,12 +57,31 @@ public class TriggerAreaScript : MonoBehaviour
                             cs.isSuspicious = true;
                             break;
                         case EnemyAI.EnemyState.Dead:
-                            gc.gameOver = true;
+                            timer += 1 * Time.deltaTime;
+                            Debug.Log("Time for bust: " + timer);
+                            if (timer >= 2f)
+                            {
+                                gc.gameOver = true;
+                                timer = 0f;
+                            }
                             break;
                         case EnemyAI.EnemyState.IsBeingKilled:
-                            gc.gameOver = true;
+                            timer += 1 * Time.deltaTime;
+                            Debug.Log("Time for bust: " + timer);
+                            if (timer >= 2f)
+                            {
+                                gc.gameOver = true;
+                                timer = 0f;
+                            }
+                            break;
+                        default:
+                            timer = 0f;
                             break;
                     }
+                }
+                else
+                {
+                    
                 }
             }
         }
@@ -82,6 +101,7 @@ public class TriggerAreaScript : MonoBehaviour
                     if (timer >= 2f)
                     {
                         gc.gameOver = true;
+                        timer = 0f;
                         
                     }
                 }
@@ -123,7 +143,7 @@ public class TriggerAreaScript : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (this.triggerArea.enabled == true && other.tag == "Player" && !ClosetScript.playerIsHiding)
         {

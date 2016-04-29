@@ -10,6 +10,7 @@ GameObject:
   - 4: {fileID: 403276}
   - 212: {fileID: 21267780}
   - 114: {fileID: 11462980}
+  - 95: {fileID: 9565664}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -285,6 +286,23 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!95 &9565664
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100374}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c8f43ef972c2cee4187d6fe1f9530228, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11400042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -335,6 +353,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   deadSprite: {fileID: 0}
   roomStops: 0
+  speed: 0
   suspiciousSpeed: 6
   patrolSpeed: 3
   idleTimer: 0
@@ -348,6 +367,7 @@ MonoBehaviour:
   seePlayer: 0
   targetRoom: {fileID: 0}
   currentRoom: {fileID: 0}
+  target: {fileID: 0}
   gasp: {fileID: 8300000, guid: 1e51b3eedd316c245bb660f620751b63, type: 3}
   currentEnemyState: 0
 --- !u!114 &11467332
@@ -361,14 +381,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d92966ac76260046a742fabdbd5f92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fieldOfViewAngle: 0
   sightDist: 8
   enemiesInFOV: []
+  enemies: []
   inSight: 0
+  seeDeadEnemy: 0
   sprites:
   - {fileID: 21300000, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
   - {fileID: 21300002, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
   - {fileID: 21300004, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
   - {fileID: 21300006, guid: 772fb8890f69dab43acb7cc691fef67d, type: 3}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
   currentFacingState: 0
 --- !u!114 &11482308
 MonoBehaviour:
