@@ -13,6 +13,8 @@ public class TriggerAreaScript : MonoBehaviour
     GameObject gamecontroller;
     GameController gc;
 
+    float timer;
+
     
     
 
@@ -27,7 +29,8 @@ public class TriggerAreaScript : MonoBehaviour
         gc = gamecontroller.GetComponent<GameController>();
         fov = GetComponentInParent<FieldOfView>();
         cs = GetComponentInParent<CollapseScript>();
-        
+
+        timer = 0f;
         
     }
 
@@ -73,13 +76,24 @@ public class TriggerAreaScript : MonoBehaviour
                 EnemyAI currentEnemyAI = nearbyEnemiesScript.nearbyEnemies[i].GetComponent<EnemyAI>();
                 if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Dead || currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.IsBeingKilled)
                 {
-                    gc.gameOver = true;
+                    
+                    timer += 1 * Time.deltaTime;
+                    Debug.Log("Time for bust: " + timer);
+                    if (timer >= 2f)
+                    {
+                        gc.gameOver = true;
+                        
+                    }
                 }
                 else if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
                 {
                     cs.isSuspicious = true;
                 }
             }
+        }
+        else
+        {
+            timer = 0f;
         }
     }
     void EnableTrigger()

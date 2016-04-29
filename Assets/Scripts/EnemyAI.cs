@@ -126,8 +126,6 @@ public class EnemyAI : MonoBehaviour
             }
             if (isAtWaypoint)
             {
-                
-                
                 currWaitTime += 1 * Time.deltaTime;
                 if (currWaitTime >= 2f)
                 {

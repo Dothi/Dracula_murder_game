@@ -63,7 +63,7 @@ public class FieldOfView : MonoBehaviour
         }
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
         {
-            InSight();
+            //InSight();
             //Investigate();
             FoV();
             if (seeDeadEnemy)
@@ -167,10 +167,6 @@ public class FieldOfView : MonoBehaviour
                             Debug.Log("Player hit");
                             AI.seePlayer = true;
                         }
-                        else if (hit && !AI.seePlayer)
-                        {
-                            Debug.Log(hit.collider.transform);
-                        }
                         else
                         {
                             AI.seePlayer = false;
@@ -227,10 +223,6 @@ public class FieldOfView : MonoBehaviour
                         {
                             Debug.Log("Player hit");
                             AI.seePlayer = true;
-                        }
-                        else if (hit && !AI.seePlayer)
-                        {
-                            Debug.Log(hit.collider.transform);
                         }
                         else
                         {
@@ -289,10 +281,6 @@ public class FieldOfView : MonoBehaviour
                             Debug.Log("Player hit");
                             AI.seePlayer = true;
                         }
-                        else if (hit && !AI.seePlayer)
-                        {
-                            Debug.Log(hit.collider.transform);
-                        }
                         else
                         {
                             AI.seePlayer = false;
@@ -324,7 +312,6 @@ public class FieldOfView : MonoBehaviour
                                 {
                                     enemiesInFOV.Add(enemies[i]);
                                 }
-
                             }
                             else
                             {
@@ -351,10 +338,7 @@ public class FieldOfView : MonoBehaviour
                             Debug.Log("Player hit");
                             AI.seePlayer = true;
                         }
-                        else if (hit && !AI.seePlayer)
-                        {
-                            Debug.Log(hit.collider.transform);
-                        }
+                        
                         else
                         {
                             AI.seePlayer = false;
