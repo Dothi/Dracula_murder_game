@@ -879,22 +879,41 @@ public class FieldOfView : MonoBehaviour
     }
     void SpriteRend()
     {
-
-        switch (currentFacingState)
+        if (AI.currentEnemyState == EnemyAI.EnemyState.Dead)
         {
-            case FacingState.LEFT:
-                
-                spriteRend.sprite = sprites[0];
-                break;
-            case FacingState.UP:
-                spriteRend.sprite = sprites[1];
-                break;
-            case FacingState.DOWN:
-                spriteRend.sprite = sprites[2];
-                break;
-            case FacingState.RIGHT:
-                spriteRend.sprite = sprites[3];
-                break;
+            anim.SetBool("Walking", false);
+            anim.SetBool("Dead", true);
+        }
+        else
+        {
+            if (AI.directionOfTravel == Vector3.zero)
+            {
+                anim.SetBool("Walking", false);
+            }
+            else
+            {
+                anim.SetBool("Walking", true);
+            }
+
+            switch (currentFacingState)
+            {
+                case FacingState.LEFT:
+                    anim.SetInteger("FacingState", 3);
+                    //spriteRend.sprite = sprites[0];
+                    break;
+                case FacingState.UP:
+                    anim.SetInteger("FacingState", 2);
+                    //spriteRend.sprite = sprites[1];
+                    break;
+                case FacingState.DOWN:
+                    anim.SetInteger("FacingState", 1);
+                    //spriteRend.sprite = sprites[2];
+                    break;
+                case FacingState.RIGHT:
+                    anim.SetInteger("FacingState", 4);
+                    //spriteRend.sprite = sprites[3];
+                    break;
+            }
         }
     }
     void InSight()
