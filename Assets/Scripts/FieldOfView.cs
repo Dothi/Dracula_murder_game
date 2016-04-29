@@ -17,6 +17,7 @@ public class FieldOfView : MonoBehaviour
     public RaycastHit2D[] hits;
     public Sprite[] sprites;
     SpriteRenderer spriteRend;
+    Animator anim;
     public LayerMask layerMask;
     LayerMask lineCastIgnoreMask;
     GameObject player;
@@ -42,6 +43,7 @@ public class FieldOfView : MonoBehaviour
         currentFacingState = FacingState.UP;
         enemiesInFOV = new List<GameObject>();
         spriteRend = GetComponentInChildren<SpriteRenderer>();
+        anim = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
         layerMask = 1 << LayerMask.NameToLayer("TriggerArea") | 1 << LayerMask.NameToLayer("Furniture");
         lineCastIgnoreMask = 1 << LayerMask.NameToLayer("LinecastIgnore") | 1 << LayerMask.NameToLayer("TriggerArea");
@@ -877,9 +879,11 @@ public class FieldOfView : MonoBehaviour
     }
     void SpriteRend()
     {
+
         switch (currentFacingState)
         {
             case FacingState.LEFT:
+                
                 spriteRend.sprite = sprites[0];
                 break;
             case FacingState.UP:

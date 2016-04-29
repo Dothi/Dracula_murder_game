@@ -26,6 +26,11 @@ public class DragBody : MonoBehaviour {
 
     void Update()
     {
+        
+    }
+
+    void FixedUpdate()
+    {
         if (Input.GetButtonDown("Drag Body"))
         {
             dragTarget = GetClosestEnemy(enemiesInRange);
@@ -37,9 +42,9 @@ public class DragBody : MonoBehaviour {
                 BoxCollider2D enemyCol = dragTarget.transform.Find("Collider").GetComponent<BoxCollider2D>();
 
                 if (dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead &&
-                    !Physics2D.Linecast(transform.position, dragTarget.transform.position, unwalkableMask) &&
+                    //!Physics2D.Linecast(transform.position, dragTarget.transform.position, unwalkableMask) &&
                     Vector3.Distance(dragTarget.transform.position, transform.position) < 3)
-                {                 
+                {
                     if (enemyCol.isTrigger)
                     {
                         enemyCol.isTrigger = false;
@@ -71,7 +76,6 @@ public class DragBody : MonoBehaviour {
             dragTarget = null;
         }
     }
-
     GameObject GetClosestEnemy(List<GameObject> enemies)
     {
         GameObject bestTarget = null;
