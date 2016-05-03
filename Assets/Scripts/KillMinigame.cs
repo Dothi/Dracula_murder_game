@@ -151,11 +151,11 @@ public class KillMinigame : MonoBehaviour {
     }
     void SetAboveCharacters(GameObject player, GameObject target)
     {
-        Vector2 pos = Vector2.Lerp(player.transform.position, target.transform.position, 0.5f);
+        /*Vector2 pos = Vector2.Lerp(player.transform.position, target.transform.position, 0.5f);
         Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pos);
 
         GetComponent<RectTransform>().anchorMax = viewportPoint; 
-        GetComponent<RectTransform>().anchorMin = viewportPoint; 
+        GetComponent<RectTransform>().anchorMin = viewportPoint;*/ 
     }
     void SetKeyCodesList()
     {

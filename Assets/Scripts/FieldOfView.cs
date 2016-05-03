@@ -15,6 +15,7 @@ public class FieldOfView : MonoBehaviour
     public bool seeDeadEnemy;
     CollapseScript collapseScript;
     SpriteRenderer spriteRend;
+    public Sprite deadSprite;
     Animator anim;
     public LayerMask layerMask;
     LayerMask lineCastIgnoreMask;
@@ -903,6 +904,8 @@ public class FieldOfView : MonoBehaviour
         {
             anim.SetBool("Walking", false);
             anim.SetBool("Dead", true);
+            anim.enabled = false;
+            spriteRend.sprite = deadSprite;
         }
         else
         {
