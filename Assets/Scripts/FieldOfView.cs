@@ -893,7 +893,13 @@ public class FieldOfView : MonoBehaviour
         }
         else
         {
-            if (AI.directionOfTravel == Vector3.zero)
+            if (AI.isWaiting && AI.directionOfTravel == Vector3.zero)
+            {
+                anim.SetBool("Walking", false);
+            }
+            else if (   AI.currentEnemyState == EnemyAI.EnemyState.Collapsed ||
+                        AI.currentEnemyState == EnemyAI.EnemyState.Dead ||
+                        AI.currentEnemyState == EnemyAI.EnemyState.IsBeingKilled    )
             {
                 anim.SetBool("Walking", false);
             }
