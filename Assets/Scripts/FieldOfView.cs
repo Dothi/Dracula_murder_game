@@ -139,10 +139,12 @@ public class FieldOfView : MonoBehaviour
                                 }
 
                             }
-                            else
-                            {
-                                enemiesInFOV.Remove(enemies[i]);
-                            }
+                            
+                            
+                        }
+                        else
+                        {
+                            enemiesInFOV.Remove(enemies[i]);
                         }
                     }
                 }
@@ -171,7 +173,12 @@ public class FieldOfView : MonoBehaviour
                         {
                             AI.seePlayer = false;
                         }
+                        
                     }
+                }
+                else
+                {
+                    AI.seePlayer = false;
                 }
                 break;
             case FacingState.RIGHT:
@@ -199,10 +206,12 @@ public class FieldOfView : MonoBehaviour
                                     enemiesInFOV.Add(enemies[i]);
                                 }
                             }
-                            else
-                            {
-                                enemiesInFOV.Remove(enemies[i]);
-                            }
+                            
+                            
+                        }
+                        else
+                        {
+                            enemiesInFOV.Remove(enemies[i]);
                         }
                     }
                 }
@@ -229,6 +238,10 @@ public class FieldOfView : MonoBehaviour
                             AI.seePlayer = false;
                         }
                     }
+                }
+                else
+                {
+                    AI.seePlayer = false;
                 }
                 break;
             case FacingState.DOWN:
@@ -256,10 +269,11 @@ public class FieldOfView : MonoBehaviour
                                     enemiesInFOV.Add(enemies[i]);
                                 }
                             }
-                            else
-                            {
-                                enemiesInFOV.Remove(enemies[i]);
-                            }
+                            
+                        }
+                        else
+                        {
+                            enemiesInFOV.Remove(enemies[i]);
                         }
                     }
                 }
@@ -286,6 +300,10 @@ public class FieldOfView : MonoBehaviour
                             AI.seePlayer = false;
                         }
                     }
+                }
+                else
+                {
+                    AI.seePlayer = false;
                 }
                 break;
             case FacingState.LEFT:
@@ -313,10 +331,11 @@ public class FieldOfView : MonoBehaviour
                                     enemiesInFOV.Add(enemies[i]);
                                 }
                             }
-                            else
-                            {
-                                enemiesInFOV.Remove(enemies[i]);
-                            }
+                            
+                        }
+                        else
+                        {
+                            enemiesInFOV.Remove(enemies[i]);
                         }
                     }
                 }
@@ -344,6 +363,10 @@ public class FieldOfView : MonoBehaviour
                             AI.seePlayer = false;
                         }
                     }
+                }
+                else
+                {
+                    AI.seePlayer = false;
                 }
                 break;
         }

@@ -143,6 +143,10 @@ public class EnemyAI : MonoBehaviour
         {
             collider.offset = new Vector2(0, .5f);
         }
+        if (currentEnemyState == EnemyState.IsBeingKilled)
+        {
+            seePlayer = false;
+        }
         
         if (currentEnemyState != EnemyState.Suspicious)
         {

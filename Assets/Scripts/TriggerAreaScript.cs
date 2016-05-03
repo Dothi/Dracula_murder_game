@@ -15,8 +15,8 @@ public class TriggerAreaScript : MonoBehaviour
 
     float timer;
 
-    
-    
+
+
 
 
     void Start()
@@ -31,7 +31,7 @@ public class TriggerAreaScript : MonoBehaviour
         cs = GetComponentInParent<CollapseScript>();
 
         timer = 0f;
-        
+
     }
 
     void Update()
@@ -40,7 +40,7 @@ public class TriggerAreaScript : MonoBehaviour
 
         if (ClosetScript.playerIsHiding)
         {
-            
+
             nearbyEnemiesScript.nearbyEnemies.Clear();
         }
 
@@ -74,14 +74,12 @@ public class TriggerAreaScript : MonoBehaviour
                                 timer = 0f;
                             }
                             break;
-                        default:
-                            timer = 0f;
-                            break;
+
                     }
                 }
                 else
                 {
-                    
+                    timer = 0f;
                 }
             }
         }
@@ -95,14 +93,14 @@ public class TriggerAreaScript : MonoBehaviour
                 EnemyAI currentEnemyAI = nearbyEnemiesScript.nearbyEnemies[i].GetComponent<EnemyAI>();
                 if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Dead || currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.IsBeingKilled)
                 {
-                    
+
                     timer += 1 * Time.deltaTime;
                     Debug.Log("Time for bust: " + timer);
                     if (timer >= 2f)
                     {
                         gc.gameOver = true;
                         timer = 0f;
-                        
+
                     }
                 }
                 else if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
@@ -143,7 +141,7 @@ public class TriggerAreaScript : MonoBehaviour
         }
     }
 
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (this.triggerArea.enabled == true && other.tag == "Player" && !ClosetScript.playerIsHiding)
         {
@@ -183,18 +181,20 @@ public class TriggerAreaScript : MonoBehaviour
             {
                 case EnemyAI.EnemyState.Dead:
                     if (other.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Investigating)
-                    other.GetComponent<EnemyAI>().isAtWaypoint = true;
+                        other.GetComponent<EnemyAI>().isAtWaypoint = true;
                     break;
             }
         }
-       
+
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        
-        if (nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
+        if (this.triggerArea.enabled == true && other.tag == "Player")
         {
-            nearbyEnemiesScript.nearbyEnemies.Remove(gameObject.transform.parent.gameObject);
+            if (nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
+            {
+                nearbyEnemiesScript.nearbyEnemies.Remove(gameObject.transform.parent.gameObject);
+            }
         }
     }
 }
