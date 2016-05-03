@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 403276}
   - 212: {fileID: 21267780}
   - 114: {fileID: 11462980}
-  - 95: {fileID: 9565664}
+  - 95: {fileID: 9556108}
   m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
@@ -132,7 +132,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.03, y: -9.32, z: 0}
+  m_LocalPosition: {x: 1.69, y: -9.32, z: 0}
   m_LocalScale: {x: 1.6, y: 1.6, z: 1}
   m_Children:
   - {fileID: 403276}
@@ -286,7 +286,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!95 &9565664
+--- !u!95 &9556108
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
