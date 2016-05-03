@@ -14,8 +14,6 @@ public class FieldOfView : MonoBehaviour
     public bool inSight;
     public bool seeDeadEnemy;
     CollapseScript collapseScript;
-    public RaycastHit2D[] hits;
-    public Sprite[] sprites;
     SpriteRenderer spriteRend;
     Animator anim;
     public LayerMask layerMask;
@@ -87,27 +85,31 @@ public class FieldOfView : MonoBehaviour
         vel = (transform.position - pos).normalized;
         pos = transform.position;
 
-        Debug.Log(vel);
+        
         if (vel != Vector3.zero)
         {
             if (vel.y < 0 && vel.y < vel.x && vel.y < -vel.x)
             {
+                if (currentFacingState != FacingState.DOWN)
                 currentFacingState = FacingState.DOWN;
 
             }
             else if (vel.x < 0 && vel.x < vel.y && vel.x < -vel.y)
             {
+                if (currentFacingState != FacingState.LEFT)
                 currentFacingState = FacingState.LEFT;
 
             }
             else if (vel.y > 0 && vel.y > vel.x && vel.y > -vel.x)
             {
+                if (currentFacingState != FacingState.UP)
                 currentFacingState = FacingState.UP;
 
             }
 
             else if (vel.x > 0 && vel.x > vel.y && vel.x > -vel.y)
             {
+                if (currentFacingState != FacingState.RIGHT)
                 currentFacingState = FacingState.RIGHT;
 
             }
@@ -171,13 +173,13 @@ public class FieldOfView : MonoBehaviour
 
                         if (hit && hit.collider.gameObject == player)
                         {
-                            Debug.Log("Player hit");
+                            
                             AI.seePlayer = true;
                             
                         }
                         else if (hit && hit.collider.tag == "PlayerFeet")
                         {
-                            Debug.Log("Player hit");
+                            
                             AI.seePlayer = true;
                         }
                         else
@@ -236,12 +238,12 @@ public class FieldOfView : MonoBehaviour
 
                         if (hit && hit.collider.gameObject == player)
                         {
-                            Debug.Log("Player hit");
+                            
                             AI.seePlayer = true;
                         }
                         else if (hit && hit.collider.tag == "PlayerFeet")
                         {
-                            Debug.Log("Player hit");
+                            
                             AI.seePlayer = true;
                         }
                         else
@@ -298,12 +300,12 @@ public class FieldOfView : MonoBehaviour
 
                         if (hit && hit.collider.gameObject == player)
                         {
-                            Debug.Log("Player hit");
+                            
                             AI.seePlayer = true;
                         }
                         else if (hit && hit.collider.tag == "PlayerFeet")
                         {
-                            Debug.Log("Player hit");
+                            
                             AI.seePlayer = true;
                         }
                         else
@@ -360,12 +362,12 @@ public class FieldOfView : MonoBehaviour
 
                         if (hit && hit.collider.gameObject == player)
                         {
-                            Debug.Log("Player hit");
+                            
                             AI.seePlayer = true;
                         }
                         else if (hit && hit.collider.tag == "PlayerFeet")
                         {
-                            Debug.Log("Player hit");
+                            
                             AI.seePlayer = true;
                         }
                         
