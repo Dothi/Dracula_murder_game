@@ -196,7 +196,7 @@ public class TriggerAreaScript : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other.tag == "Player")
+        if (this.triggerArea.enabled == true && other.tag == "Player")
         {
             if (nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
             {
