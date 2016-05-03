@@ -82,16 +82,12 @@ public class TriggerAreaScript : MonoBehaviour
 
                     }
                 }
-                else
-                {
-                    
-                    timer = 0f;
-                }
+                
             }
         }
 
 
-        else if (AI.seePlayer && nearbyEnemiesScript.nearbyEnemies.Count > 0)
+        else if (AI.seePlayer)
         {
 
             for (int i = 0; i < nearbyEnemiesScript.nearbyEnemies.Count; i++)
@@ -118,8 +114,8 @@ public class TriggerAreaScript : MonoBehaviour
         else
         {
             timer = 0f;
-            
         }
+       
     }
     void EnableTrigger()
     {
@@ -148,7 +144,7 @@ public class TriggerAreaScript : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (this.triggerArea.enabled == true && other.tag == "Player" && !ClosetScript.playerIsHiding)
         {
@@ -201,6 +197,7 @@ public class TriggerAreaScript : MonoBehaviour
             if (nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
             {
                 nearbyEnemiesScript.nearbyEnemies.Remove(gameObject.transform.parent.gameObject);
+                
             }
         }
     }

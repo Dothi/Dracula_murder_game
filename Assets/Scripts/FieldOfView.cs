@@ -21,7 +21,7 @@ public class FieldOfView : MonoBehaviour
     GameObject player;
     PlayerMovement pm;
     Vector3 pos;
-    Vector3 vel;
+    public Vector3 vel;
     
     #endregion
     public enum FacingState

@@ -197,10 +197,7 @@ public class EnemyAI : MonoBehaviour
                                 transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
                                 directionOfTravel = (currentWaypoint - transform.position).normalized;
                             }
-                            else
-                            {
-                                directionOfTravel = Vector3.zero;
-                            }
+                            
                         }
                     }
                 }
@@ -213,7 +210,7 @@ public class EnemyAI : MonoBehaviour
     {
         if (currentEnemyState != EnemyState.Dead && currentEnemyState != EnemyState.Collapsed)
         {
-            if (directionOfTravel == Vector3.zero && !isWaiting)
+            if (fov.vel == Vector3.zero && !isWaiting)
             {
                 idleTimer += 1 * Time.deltaTime;
                 if (idleTimer >= 2f)
@@ -241,13 +238,7 @@ public class EnemyAI : MonoBehaviour
                     }
                 }
             }
-            if (currentEnemyState == EnemyState.Suspicious)
-            {
-                if (isWaiting)
-                {
-                    isWaiting = false;
-                }
-            }
+            
             if (currentEnemyState != EnemyState.Collapsed)
             {
                 if (isAtWaypoint && !isWaiting)
@@ -324,7 +315,7 @@ public class EnemyAI : MonoBehaviour
         audioSource.clip = gasp;
         audioSource.Play();
     }
-    void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerStay2D(Collider2D other)
     {
         if (currentRoom != other)
         {
