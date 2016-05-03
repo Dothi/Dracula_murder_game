@@ -57,6 +57,7 @@ public class TriggerAreaScript : MonoBehaviour
                             cs.isSuspicious = true;
                             break;
                         case EnemyAI.EnemyState.Dead:
+                            AI.isWaiting = true;
                             timer += 1 * Time.deltaTime;
                             Debug.Log("Time for bust: " + timer);
                             if (timer >= 2f)
@@ -66,6 +67,7 @@ public class TriggerAreaScript : MonoBehaviour
                             }
                             break;
                         case EnemyAI.EnemyState.IsBeingKilled:
+                            AI.isWaiting = true;
                             timer += 1 * Time.deltaTime;
                             Debug.Log("Time for bust: " + timer);
                             if (timer >= 2f)
@@ -79,13 +81,14 @@ public class TriggerAreaScript : MonoBehaviour
                 }
                 else
                 {
+                    AI.isWaiting = false;
                     timer = 0f;
                 }
             }
         }
 
 
-        if (AI.seePlayer)
+        else if (AI.seePlayer)
         {
 
             for (int i = 0; i < nearbyEnemiesScript.nearbyEnemies.Count; i++)
@@ -93,7 +96,7 @@ public class TriggerAreaScript : MonoBehaviour
                 EnemyAI currentEnemyAI = nearbyEnemiesScript.nearbyEnemies[i].GetComponent<EnemyAI>();
                 if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Dead || currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.IsBeingKilled)
                 {
-
+                    AI.isWaiting = true;
                     timer += 1 * Time.deltaTime;
                     Debug.Log("Time for bust: " + timer);
                     if (timer >= 2f)
@@ -112,6 +115,7 @@ public class TriggerAreaScript : MonoBehaviour
         else
         {
             timer = 0f;
+            AI.isWaiting = false;
         }
     }
     void EnableTrigger()

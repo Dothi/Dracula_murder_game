@@ -192,12 +192,16 @@ public class EnemyAI : MonoBehaviour
                     {
                         if (!isAtWaypoint)
                         {
-                            transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
-                            directionOfTravel = (currentWaypoint - transform.position).normalized;
+                            if (!isWaiting)
+                            {
+                                transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
+                                directionOfTravel = (currentWaypoint - transform.position).normalized;
+                            }
+                            else
+                            {
+                                directionOfTravel = Vector3.zero;
+                            }
                         }
-                        
-                            
-                        
                     }
                 }
                 
@@ -237,9 +241,9 @@ public class EnemyAI : MonoBehaviour
                     }
                 }
             }
-            else
+            if (currentEnemyState == EnemyState.Suspicious)
             {
-                isWaiting = false;
+                
             }
             if (currentEnemyState != EnemyState.Collapsed)
             {

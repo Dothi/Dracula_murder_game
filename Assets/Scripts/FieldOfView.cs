@@ -22,6 +22,9 @@ public class FieldOfView : MonoBehaviour
     LayerMask lineCastIgnoreMask;
     GameObject player;
     PlayerMovement pm;
+    Vector3 pos;
+    Vector3 vel;
+    
     #endregion
     public enum FacingState
     {
@@ -51,11 +54,12 @@ public class FieldOfView : MonoBehaviour
         lineCastIgnoreMask = ~lineCastIgnoreMask;
         pm = player.GetComponent<PlayerMovement>();
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
-
+        
     }
 
     public void Update()
     {
+        
         Facing();
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead)
         {
@@ -80,23 +84,27 @@ public class FieldOfView : MonoBehaviour
 
     void Facing()
     {
-        if (AI.directionOfTravel.y < 0 && AI.directionOfTravel.y < AI.directionOfTravel.x && AI.directionOfTravel.y < -AI.directionOfTravel.x)
+        vel = (transform.position - pos).normalized;
+        pos = transform.position;
+
+        Debug.Log(vel);
+        if (vel.y < 0 && vel.y < vel.x && vel.y < -vel.x)
         {
             currentFacingState = FacingState.DOWN;
 
         }
-        else if (AI.directionOfTravel.x < 0 && AI.directionOfTravel.x < AI.directionOfTravel.y && AI.directionOfTravel.x < -AI.directionOfTravel.y)
+        else if (vel.x < 0 && vel.x < vel.y && vel.x < -vel.y)
         {
             currentFacingState = FacingState.LEFT;
 
         }
-        else if (AI.directionOfTravel.y > 0 && AI.directionOfTravel.y > AI.directionOfTravel.x && AI.directionOfTravel.y > -AI.directionOfTravel.x)
+        else if (vel.y > 0 && vel.y > vel.x && vel.y > -vel.x)
         {
             currentFacingState = FacingState.UP;
 
         }
 
-        else if (AI.directionOfTravel.x > 0 && AI.directionOfTravel.x > AI.directionOfTravel.y && AI.directionOfTravel.x > -AI.directionOfTravel.y)
+        else if (vel.x > 0 && vel.x > vel.y && vel.x > -vel.y)
         {
             currentFacingState = FacingState.RIGHT;
 
@@ -893,7 +901,7 @@ public class FieldOfView : MonoBehaviour
         }
         else
         {
-            if (AI.isWaiting && AI.directionOfTravel == Vector3.zero)
+            if (vel == Vector3.zero)
             {
                 anim.SetBool("Walking", false);
             }
