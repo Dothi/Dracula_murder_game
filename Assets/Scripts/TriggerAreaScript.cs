@@ -36,7 +36,10 @@ public class TriggerAreaScript : MonoBehaviour
 
     void Update()
     {
-        EnableTrigger();
+        if (AI.currentEnemyState != EnemyAI.EnemyState.Patrolling)
+        {
+            EnableTrigger();
+        }
 
         if (ClosetScript.playerIsHiding)
         {
@@ -81,14 +84,14 @@ public class TriggerAreaScript : MonoBehaviour
                 }
                 else
                 {
-                    AI.isWaiting = false;
+                    
                     timer = 0f;
                 }
             }
         }
 
 
-        else if (AI.seePlayer)
+        else if (AI.seePlayer && nearbyEnemiesScript.nearbyEnemies.Count > 0)
         {
 
             for (int i = 0; i < nearbyEnemiesScript.nearbyEnemies.Count; i++)
@@ -115,7 +118,7 @@ public class TriggerAreaScript : MonoBehaviour
         else
         {
             timer = 0f;
-            AI.isWaiting = false;
+            
         }
     }
     void EnableTrigger()
@@ -193,7 +196,7 @@ public class TriggerAreaScript : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (this.triggerArea.enabled == true && other.tag == "Player")
+        if (other.tag == "Player")
         {
             if (nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
             {

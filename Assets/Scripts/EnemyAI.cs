@@ -243,7 +243,10 @@ public class EnemyAI : MonoBehaviour
             }
             if (currentEnemyState == EnemyState.Suspicious)
             {
-                
+                if (isWaiting)
+                {
+                    isWaiting = false;
+                }
             }
             if (currentEnemyState != EnemyState.Collapsed)
             {
@@ -321,11 +324,14 @@ public class EnemyAI : MonoBehaviour
         audioSource.clip = gasp;
         audioSource.Play();
     }
-    void OnTriggerStay2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (other != null && other.gameObject.tag == "CameraArea")
+        if (currentRoom != other)
         {
-            currentRoom = other.gameObject;
+            if (other != null && other.gameObject.tag == "CameraArea")
+            {
+                currentRoom = other.gameObject;
+            }
         }
     }
 }

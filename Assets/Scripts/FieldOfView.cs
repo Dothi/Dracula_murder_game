@@ -60,16 +60,16 @@ public class FieldOfView : MonoBehaviour
     public void Update()
     {
         
-        Facing();
-        if (AI.currentEnemyState != EnemyAI.EnemyState.Dead)
-        {
-            SpriteRend();
-        }
+        
+        
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
         {
             //InSight();
             //Investigate();
+            SpriteRend();
+            Facing();
             FoV();
+
             if (seeDeadEnemy)
             {
                 AI.currentEnemyState = EnemyAI.EnemyState.Investigating;
@@ -78,7 +78,7 @@ public class FieldOfView : MonoBehaviour
         else
         {
             AI.seePlayer = false;
-            enemiesInFOV.Clear();
+            
         }
     }
 
@@ -88,26 +88,29 @@ public class FieldOfView : MonoBehaviour
         pos = transform.position;
 
         Debug.Log(vel);
-        if (vel.y < 0 && vel.y < vel.x && vel.y < -vel.x)
+        if (vel != Vector3.zero)
         {
-            currentFacingState = FacingState.DOWN;
+            if (vel.y < 0 && vel.y < vel.x && vel.y < -vel.x)
+            {
+                currentFacingState = FacingState.DOWN;
 
-        }
-        else if (vel.x < 0 && vel.x < vel.y && vel.x < -vel.y)
-        {
-            currentFacingState = FacingState.LEFT;
+            }
+            else if (vel.x < 0 && vel.x < vel.y && vel.x < -vel.y)
+            {
+                currentFacingState = FacingState.LEFT;
 
-        }
-        else if (vel.y > 0 && vel.y > vel.x && vel.y > -vel.x)
-        {
-            currentFacingState = FacingState.UP;
+            }
+            else if (vel.y > 0 && vel.y > vel.x && vel.y > -vel.x)
+            {
+                currentFacingState = FacingState.UP;
 
-        }
+            }
 
-        else if (vel.x > 0 && vel.x > vel.y && vel.x > -vel.y)
-        {
-            currentFacingState = FacingState.RIGHT;
+            else if (vel.x > 0 && vel.x > vel.y && vel.x > -vel.y)
+            {
+                currentFacingState = FacingState.RIGHT;
 
+            }
         }
     }
 
@@ -390,7 +393,7 @@ public class FieldOfView : MonoBehaviour
             }
         }
     }
-    void Investigate()
+   /* void Investigate()
     {
         Vector3 rayPos = transform.position + new Vector3(0, 1, 0);
         switch (currentFacingState)
@@ -891,7 +894,7 @@ public class FieldOfView : MonoBehaviour
 
                 break;
         }
-    }
+    }*/
     void SpriteRend()
     {
         if (AI.currentEnemyState == EnemyAI.EnemyState.Dead)
@@ -937,19 +940,7 @@ public class FieldOfView : MonoBehaviour
             }
         }
     }
-    void InSight()
-    {
-        RaycastHit2D lineHit = Physics2D.Linecast(transform.position, player.transform.position, lineCastIgnoreMask);
-
-        if (lineHit && lineHit.collider.tag != "PlayerFeet")
-        {
-            inSight = false;
-        }
-        else
-        {
-            inSight = true;
-        }
-    }
+    
 }
 
 
