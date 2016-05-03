@@ -12,6 +12,7 @@ TagManager:
   - FadeOverlay
   - Door
   - EnemyFeet
+  - RoomCamera
   layers:
   - Default
   - TransparentFX
