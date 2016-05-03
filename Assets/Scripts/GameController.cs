@@ -15,6 +15,7 @@ public class GameController : MonoBehaviour {
     public bool playerInCloset = false;
     public bool playerNearCloset = false;
 
+    GameObject killMinigame;
 
     void Awake()
     {
@@ -25,6 +26,7 @@ public class GameController : MonoBehaviour {
         playAgainButton = GameObject.Find("Button_PlayAgain");
         enemies = new List<GameObject>();
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        killMinigame = GameObject.Find("Canvas").transform.Find("Kill_Minigame").gameObject;
 	}
 	
 
@@ -32,6 +34,11 @@ public class GameController : MonoBehaviour {
     {
         if (gameOver)
         {
+            if (killMinigame.activeInHierarchy)
+            {
+                killMinigame.SetActive(false);   
+            }
+
             if (Time.timeScale != 0)
             {
                 Time.timeScale = 0;
