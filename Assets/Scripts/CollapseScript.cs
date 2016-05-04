@@ -41,7 +41,7 @@ public class CollapseScript : MonoBehaviour {
             {
                 transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.white;
             }
-            if (isSuspicious && !isCollapsed)
+            if (isSuspicious && !isCollapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
             {
                 AI.isWaiting = false;
                 suspiciousTime += 10 * Time.deltaTime;

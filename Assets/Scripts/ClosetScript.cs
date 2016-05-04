@@ -87,35 +87,38 @@ public class ClosetScript : MonoBehaviour {
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other == playerFeet)
+        if (other != null && other == playerFeet)
         {
             playerInRange = true;
             gc.playerNearCloset = true;
             textMesh.enabled = true;
             transform.parent.GetComponentInChildren<SpriteRenderer>().sprite = highlightSprite;
+            Debug.Log("Player in range: " + playerInRange);
         }
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        if (other == playerFeet)
+        if (other != null && other == playerFeet)
         {
             playerInRange = false;
             gc.playerNearCloset = false;
             textMesh.enabled = false;
             transform.parent.GetComponentInChildren<SpriteRenderer>().sprite = normalSprite;
+            Debug.Log("Player in range: " + playerInRange);
         }
     }
 
     public void HideBody(GameObject enemy)
     {
-        if (playerInRange && ObjectsInside.Count < ClosetSize)
+        if (playerInRange)
         {
-            if (!ObjectsInside.Contains(enemy))
+            if (!ObjectsInside.Contains(enemy) && ObjectsInside.Count < ClosetSize)
             {
-                player.GetComponent<DragBody>().enemiesInRange.Remove(enemy);
-                player.GetComponent<NearbyEnemiesScript>().nearbyEnemies.Remove(enemy);
                 ObjectsInside.Add(enemy);
                 enemy.SetActive(false);
+                player.GetComponent<DragBody>().enemiesInRange.Remove(enemy);
+                player.GetComponent<NearbyEnemiesScript>().nearbyEnemies.Remove(enemy);
+                
                 statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
                 audioSource.clip = closetOpen;
                 audioSource.Play();

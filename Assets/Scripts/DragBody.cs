@@ -7,7 +7,13 @@ public class DragBody : MonoBehaviour {
     public LayerMask unwalkableMask;
     public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject dragTarget = null;
+    GameController gc;
+    
 
+    void Awake()
+    {
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+    }
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Enemy") && !enemiesInRange.Contains(other.gameObject))
@@ -61,7 +67,7 @@ public class DragBody : MonoBehaviour {
                 }
             }
         }
-        else if (Input.GetButtonUp("Drag Body"))
+        else if (Input.GetButtonUp("Drag Body") && !gc.playerNearCloset)
         {
             if (dragTarget != null && dragTarget.activeInHierarchy &&
                 dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
