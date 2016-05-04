@@ -6,6 +6,7 @@ public class KillScript : MonoBehaviour {
 
     public BloodBar bloodBar;
     GameController gameController;
+    EnemyCounter enemyCounter;
 
     public List<GameObject> enemiesInRange = new List<GameObject>();
     public GameObject killTarget = null;
@@ -21,6 +22,7 @@ public class KillScript : MonoBehaviour {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         bloodBar = gameController.GetComponent<BloodBar>();
         pMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        enemyCounter = GameObject.Find("Enemy Counter").GetComponent<EnemyCounter>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -105,6 +107,7 @@ public class KillScript : MonoBehaviour {
     }
     public void KillEnemy(GameObject target)
     {
+        enemyCounter.DecreaseEnemiesRemaining();
         target.GetComponent<AudioSource>().clip = bodyFall;
         target.GetComponent<EnemyAI>().currentEnemyState = EnemyAI.EnemyState.Dead;
         target.GetComponent<AudioSource>().Play();

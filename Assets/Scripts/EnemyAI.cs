@@ -71,10 +71,7 @@ public class EnemyAI : MonoBehaviour
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         fov = GetComponent<FieldOfView>();
-        cs = GetComponent<CollapseScript>();
-        
-        
-        
+        cs = GetComponent<CollapseScript>();   
     }
     void Update()
     {
@@ -314,16 +311,6 @@ public class EnemyAI : MonoBehaviour
     {
         audioSource.clip = gasp;
         audioSource.Play();
-    }
-    void OnTriggerStay2D(Collider2D other)
-    {
-        if (currentRoom != other)
-        {
-            if (other != null && other.gameObject.tag == "CameraArea")
-            {
-                currentRoom = other.gameObject;
-            }
-        }
     }
 }
 
