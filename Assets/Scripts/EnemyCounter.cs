@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class EnemyCounter : MonoBehaviour {
 
-    int enemiesRemaining;
+    public int enemiesRemaining;
 
 	void Start ()
     {
@@ -17,6 +17,11 @@ public class EnemyCounter : MonoBehaviour {
 
     public void DecreaseEnemiesRemaining()
     {
-        GetComponent<Text>().text = "Enemies remaining: " + (enemiesRemaining - 1).ToString();
+        enemiesRemaining -= 1;
+        GetComponent<Text>().text = "Enemies remaining: " + (enemiesRemaining).ToString();
+    }
+    public int GetEnemiesRemaining()
+    {
+        return enemiesRemaining;
     }
 }
