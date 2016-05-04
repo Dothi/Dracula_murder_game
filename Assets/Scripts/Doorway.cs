@@ -8,6 +8,7 @@ public class Doorway : MonoBehaviour {
 
     Transform cameraTransform;
     CameraArea camArea;
+    Transform camPos;
     CameraFollow camFollow;
 
     public GameObject door;
@@ -22,6 +23,7 @@ public class Doorway : MonoBehaviour {
         doorSprite = door.transform.Find("Sprite (door)").GetComponent<SpriteRenderer>();
 
         camArea = transform.parent.GetComponentInChildren<CameraArea>();
+        camPos = camArea.transform.parent.Find("CameraPosition");
         camFollow = Camera.main.GetComponent<CameraFollow>();
         cameraTransform = Camera.main.transform;
     }
@@ -57,8 +59,8 @@ public class Doorway : MonoBehaviour {
         {
             if (playerInTrigger)
             {
-                camFollow.cameraEndPos = new Vector3(transform.parent.position.x,
-                                        transform.parent.position.y,
+                camFollow.cameraEndPos = new Vector3(camPos.position.x,
+                                        camPos.position.y,
                                         cameraTransform.position.z);
                 camFollow.zoomEndValue = camArea.cameraZoom / Camera.main.aspect;
 

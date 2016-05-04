@@ -58,14 +58,13 @@ public class FieldOfView : MonoBehaviour
 
     public void Update()
     {
-        
-        
-        
+
+        SpriteRend();
+
         if (AI.currentEnemyState != EnemyAI.EnemyState.Dead && AI.currentEnemyState != EnemyAI.EnemyState.Collapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
         {
             //InSight();
             //Investigate();
-            SpriteRend();
             Facing();
             FoV();
 
@@ -902,10 +901,9 @@ public class FieldOfView : MonoBehaviour
     {
         if (AI.currentEnemyState == EnemyAI.EnemyState.Dead)
         {
-            anim.SetBool("Walking", false);
             anim.SetBool("Dead", true);
-            anim.enabled = false;
-            spriteRend.sprite = deadSprite;
+            //anim.enabled = false;
+            //spriteRend.sprite = deadSprite;
         }
         else
         {
