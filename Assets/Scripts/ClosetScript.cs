@@ -118,7 +118,10 @@ public class ClosetScript : MonoBehaviour {
                 enemy.SetActive(false);
                 player.GetComponent<DragBody>().enemiesInRange.Remove(enemy);
                 player.GetComponent<NearbyEnemiesScript>().nearbyEnemies.Remove(enemy);
-                
+                if (!enemy.activeInHierarchy)
+                {
+                    player.GetComponent<DragBody>().dragTarget = null;
+                }
                 statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
                 audioSource.clip = closetOpen;
                 audioSource.Play();
