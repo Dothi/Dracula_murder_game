@@ -13,11 +13,12 @@ public class IndicatorOverlay : MonoBehaviour {
 	void Start ()
     {
         image = GetComponent<Image>();
+        image.enabled = false;
 
         enemyTASList = new List<TriggerAreaScript>();
         foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
         {
-            enemyTASList.Add(enemy.GetComponent<TriggerAreaScript>());
+            enemyTASList.Add(enemy.transform.Find("TriggerArea").GetComponent/*InChildren*/<TriggerAreaScript>());
         }
 	}
 	

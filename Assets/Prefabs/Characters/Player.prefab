@@ -26,6 +26,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 490642}
   - 61: {fileID: 6146922}
+  - 114: {fileID: 11424734}
   m_Layer: 8
   m_Name: Collider
   m_TagString: PlayerFeet
@@ -184,6 +185,18 @@ MonoBehaviour:
     m_Bits: 512
   enemiesInRange: []
   dragTarget: {fileID: 0}
+--- !u!114 &11424734
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cacae3fb1ac1a944aed9556de04085e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentRoom: {fileID: 0}
 --- !u!114 &11475520
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -219,10 +232,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 39152998137bbfe4a82f1739ba51b6fc, type: 3}
   - {fileID: 21300000, guid: 9d19421c8dd03e841a4981662b305b47, type: 3}
   - {fileID: 21300000, guid: 8c99066cd2ff11c4faa44fdeb6fcef48, type: 3}
-  upKey: 273
-  leftKey: 276
-  downKey: 274
-  rightKey: 275
 --- !u!212 &21206074
 SpriteRenderer:
   m_ObjectHideFlags: 1
