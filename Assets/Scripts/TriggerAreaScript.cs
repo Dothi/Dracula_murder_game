@@ -201,5 +201,10 @@ public class TriggerAreaScript : MonoBehaviour
             }
         }
     }
+
+    public float GetTimerValue()
+    {
+        return timer;
+    }
 }
 
