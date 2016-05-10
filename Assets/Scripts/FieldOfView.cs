@@ -23,6 +23,7 @@ public class FieldOfView : MonoBehaviour
     PlayerCurrentRoomScript playerCurrentRoom;
     Vector3 pos;
     public Vector3 vel;
+    
 
     #endregion
     public enum FacingState
@@ -409,6 +410,7 @@ public class FieldOfView : MonoBehaviour
         else
         {
             seeDeadEnemy = false;
+            
         }
     }
     /* void Investigate()

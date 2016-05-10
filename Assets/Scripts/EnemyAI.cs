@@ -187,7 +187,10 @@ public class EnemyAI : MonoBehaviour
                         isAtWaypoint = true;
                         
                         roomStops++;
-                        isWaiting = true;
+                        if (currentEnemyState == EnemyState.Patrolling)
+                        {
+                            isWaiting = true;
+                        }
                         targetIndex = 0;
                         yield break;
                     }
@@ -245,6 +248,14 @@ public class EnemyAI : MonoBehaviour
                         currWaitTime = 0f;
                     }
                 }
+            }
+            if (currentEnemyState == EnemyState.Suspicious)
+            {
+                if (isAtWaypoint)
+                {
+                    isWaiting = false;
+                }
+                
             }
             
             if (currentEnemyState != EnemyState.Collapsed)

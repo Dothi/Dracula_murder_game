@@ -13,7 +13,7 @@ public class TriggerAreaScript : MonoBehaviour
     GameObject gamecontroller;
     GameController gc;
 
-    float timer;
+    public float timer;
 
 
 
@@ -36,6 +36,10 @@ public class TriggerAreaScript : MonoBehaviour
 
     void Update()
     {
+        if (timer == 0f)
+        {
+            AI.isWaiting = false;
+        }
         if (AI.currentEnemyState == EnemyAI.EnemyState.Dead || AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
         {
             timer = 0f;
