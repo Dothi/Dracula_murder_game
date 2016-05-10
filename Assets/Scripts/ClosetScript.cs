@@ -126,6 +126,20 @@ public class ClosetScript : MonoBehaviour {
                 audioSource.clip = closetOpen;
                 audioSource.Play();
             }
+            else
+            {
+                if (enemy != null && enemy.activeInHierarchy &&
+                enemy.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
+                {
+                    BoxCollider2D enemyCol = enemy.transform.Find("Collider").GetComponent<BoxCollider2D>();
+                    if (!enemyCol.isTrigger)
+                    {
+                        enemyCol.isTrigger = true;
+                    }
+                    enemy.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                }
+                enemy = null;
+            }
         }
     }
     public void UnhideBody()
@@ -160,6 +174,20 @@ public class ClosetScript : MonoBehaviour {
             statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
             audioSource.clip = closetOpen;
             audioSource.Play();
+
+            GameObject dragTarget = player.GetComponent<DragBody>().dragTarget;
+
+            if (dragTarget != null && dragTarget.activeInHierarchy &&
+                dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
+            {
+                BoxCollider2D enemyCol = dragTarget.transform.Find("Collider").GetComponent<BoxCollider2D>();
+                if (!enemyCol.isTrigger)
+                {
+                    enemyCol.isTrigger = true;
+                }
+                dragTarget.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+            }
+            dragTarget = null;
         }
     }
     public void UnhidePlayer(GameObject player)
