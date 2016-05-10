@@ -36,6 +36,10 @@ public class TriggerAreaScript : MonoBehaviour
 
     void Update()
     {
+        if (AI.currentEnemyState == EnemyAI.EnemyState.Dead || AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
+        {
+            timer = 0f;
+        }
         if (AI.currentEnemyState != EnemyAI.EnemyState.Patrolling)
         {
             EnableTrigger();
