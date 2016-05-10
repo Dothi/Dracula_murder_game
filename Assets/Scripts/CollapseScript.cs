@@ -43,7 +43,7 @@ public class CollapseScript : MonoBehaviour {
             }
             if (isSuspicious && !isCollapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
             {
-                AI.isWaiting = false;
+                
                 suspiciousTime += 10 * Time.deltaTime;
                 
                 AI.currentEnemyState = EnemyAI.EnemyState.Suspicious;

@@ -112,11 +112,11 @@ public class EnemyAI : MonoBehaviour
             {
                 for (int i = 0; i < fov.enemiesInFOV.Count; i++)
                 {
-                    if (fov.enemiesInFOV[i].GetComponent<EnemyAI>().currentEnemyState == EnemyState.Dead)
+                    if (fov.enemiesInFOV[i].GetComponent<EnemyAI>().currentEnemyState == EnemyState.Dead && fov.enemiesInFOV[i].activeInHierarchy)
                     {
                         target = fov.enemiesInFOV[i];
-
                     }
+                   
                 }
             }
             else
@@ -130,7 +130,16 @@ public class EnemyAI : MonoBehaviour
                 currWaitTime += 1 * Time.deltaTime;
                 if (currWaitTime >= 2f)
                 {
-                    cs.isSuspicious = true;
+                    if (target.activeInHierarchy)
+                    {
+                        cs.isSuspicious = true;
+                    }
+                    else
+                    {
+                        target = null;
+                        currentEnemyState = EnemyState.Patrolling;
+                        StopCoroutine("FollowPath");
+                    }
                     currWaitTime = 0f;
                     
                 }
@@ -143,6 +152,7 @@ public class EnemyAI : MonoBehaviour
         if (currentEnemyState == EnemyState.IsBeingKilled)
         {
             seePlayer = false;
+            fov.enemiesInFOV.Clear();
         }
         
         if (currentEnemyState != EnemyState.Suspicious)
@@ -212,7 +222,10 @@ public class EnemyAI : MonoBehaviour
                 idleTimer += 1 * Time.deltaTime;
                 if (idleTimer >= 2f)
                 {
+                    StopCoroutine("FollowPath");
                     isAtWaypoint = true;
+                    
+                    
                 }
             }
         }
@@ -221,8 +234,6 @@ public class EnemyAI : MonoBehaviour
     {
         if (currentEnemyState != EnemyState.Dead)
         {
-            
-
             if (currentEnemyState == EnemyState.Patrolling)
             {
                 if (isWaiting)
