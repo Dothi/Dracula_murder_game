@@ -38,6 +38,7 @@ public class Garlic : MonoBehaviour {
         {
             bloodSprite.sprite = garlicBlood;
             playerInRange = true;
+            bb.SetNearGarlic(true);
         }
     }
 
@@ -47,6 +48,7 @@ public class Garlic : MonoBehaviour {
         {
             bloodSprite.sprite = normalBlood;
             playerInRange = false;
+            bb.SetNearGarlic(false);
         }
     }
 }

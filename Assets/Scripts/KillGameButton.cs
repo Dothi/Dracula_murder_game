@@ -34,8 +34,10 @@ public class KillGameButton : MonoBehaviour {
         SmoothMovement(lerpStart, lerpDestination, 0.2f);
 	}
 
-    public void RandomizeLetter()
+    public void RandomizeLetter(int amountOfDifferentLetters)
     {
+        int r = Random.Range(0, amountOfDifferentLetters);
+
         if (image != null)
         {
             image = GetComponent<Image>();

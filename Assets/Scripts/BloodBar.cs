@@ -4,10 +4,17 @@ using System.Collections;
 
 public class BloodBar : MonoBehaviour
 {
-
     GameController gameController;
     KillScript killScript;
     Slider bloodBar;
+
+    Image bloodFlash;
+    float flashTimer = 0;
+    float flashSpeed = 2;
+    bool flashIntensifying = true;
+    public Sprite flashSprite;
+    public Sprite flashSpriteGarlic;
+    bool nearGarlic = false;
 
     private float currentBlood;
     private float maxBlood = 100;
@@ -20,6 +27,7 @@ public class BloodBar : MonoBehaviour
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         killScript = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
         bloodBar = GameObject.Find("BloodSlider").GetComponent<Slider>();
+        bloodFlash = bloodBar.transform.Find("Front_Shining").GetComponent<Image>();
     }
 
 
@@ -41,6 +49,7 @@ public class BloodBar : MonoBehaviour
                 Debug.Log("Game Over");
             }
         }
+        FlashBloodBar();
     }
     public void BloodDecrease(float amount)
     {
@@ -52,5 +61,73 @@ public class BloodBar : MonoBehaviour
     public void GetBloodFromKill(float amount)
     {
         currentBlood += amount;
+    }
+    void FlashBloodBar()
+    {
+        if (currentBlood < (maxBlood * 0.25f))
+        {
+            if (bloodFlash.sprite != flashSprite)
+            {
+                bloodFlash.sprite = flashSprite;
+            }
+            if (flashIntensifying)
+            {
+                flashTimer += Time.deltaTime * flashSpeed;
+
+                if (flashTimer > 1)
+                {
+                    flashTimer = 1;
+                    flashIntensifying = false;
+                }
+            }
+            else if (!flashIntensifying)
+            {
+                flashTimer -= Time.deltaTime * flashSpeed;
+
+                if (flashTimer < 0)
+                {
+                    flashTimer = 0;
+                    flashIntensifying = true;
+                }
+            }
+            bloodFlash.color = new Color(1f, 1f, 1f, flashTimer);
+        }
+        else if (nearGarlic)
+        {
+            if (bloodFlash.sprite != flashSpriteGarlic)
+            {
+                bloodFlash.sprite = flashSpriteGarlic;
+            }
+            if (flashIntensifying)
+            {
+                flashTimer += Time.deltaTime * flashSpeed;
+
+                if (flashTimer > 1)
+                {
+                    flashTimer = 1;
+                    flashIntensifying = false;
+                }
+            }
+            else if (!flashIntensifying)
+            {
+                flashTimer -= Time.deltaTime * flashSpeed;
+
+                if (flashTimer < 0)
+                {
+                    flashTimer = 0;
+                    flashIntensifying = true;
+                }
+            }
+            bloodFlash.color = new Color(1f, 1f, 1f, flashTimer);
+        }
+        else if (bloodFlash.color.a != 0f)
+        {
+            bloodFlash.color = new Color(1f, 1f, 1f, 0f);
+            flashIntensifying = true;
+        }
+    }
+    public void SetNearGarlic(bool boolean)
+    {
+        nearGarlic = boolean;
     }
 }

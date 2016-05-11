@@ -8,7 +8,7 @@ public class KillMinigame : MonoBehaviour {
     List<KeyCode> keyCodes = new List<KeyCode>();
     KeyCode CancelKey = KeyCode.Q;
 
-    int MinigameLength = 10;
+    int MinigameLength = 4;
     int currentButton = 0;
     float buttonGap = 2;
 
@@ -25,6 +25,8 @@ public class KillMinigame : MonoBehaviour {
 
     void Start()
     {
+        MinigameLength = 4;
+
         SetKeyCodesList();
         buttonParent = transform.Find("Buttons").gameObject;
 
@@ -33,7 +35,7 @@ public class KillMinigame : MonoBehaviour {
         ks = player.GetComponent<KillScript>();
         ks.minigame = gameObject;
 
-        SpawnButtons();
+        ResetButtons();
         SetButtonPositions();
 
         gameStarted = true;
@@ -44,15 +46,16 @@ public class KillMinigame : MonoBehaviour {
     {
         if (gameStarted)
         {
-            SetAboveCharacters(player, ks.killTarget);
+            //SetAboveCharacters(player, ks.killTarget);
             player.GetComponentInChildren<Animator>().enabled = false;
+            ResetButtons();
             SetButtonPositions();
             currentButton = 0;
 
             for (int i = 0; i < buttonList.Count; i++)
             {
                 buttonList[i].GetComponent<Image>().enabled = true;
-                buttonList[i].RandomizeLetter();
+                buttonList[i].RandomizeLetter(keyCodes.Count);
             }
         }
     }
@@ -83,6 +86,7 @@ public class KillMinigame : MonoBehaviour {
                             //Win
                             ks.SuccesfulKill();
                             player.GetComponentInChildren<Animator>().enabled = true;
+                            MinigameLength++;
                             Debug.Log("Minigame won!");
                             gameObject.SetActive(false);
 
@@ -106,8 +110,14 @@ public class KillMinigame : MonoBehaviour {
             }
         }
 	}
-    void SpawnButtons()
+    void ResetButtons()
     {
+        for (int i = 0; i < buttonList.Count; i++)
+        {
+            GameObject.Destroy(buttonList[i].gameObject);
+        }
+        buttonList.Clear();
+
         for (int i = 0; i < MinigameLength; i++)
         {
             GameObject button = (GameObject)Instantiate(killGameButtonPrefab, buttonParent.transform.position, Quaternion.identity);
@@ -151,19 +161,19 @@ public class KillMinigame : MonoBehaviour {
     }
     void SetAboveCharacters(GameObject player, GameObject target)
     {
-        /*Vector2 pos = Vector2.Lerp(player.transform.position, target.transform.position, 0.5f);
+        Vector2 pos = Vector2.Lerp(player.transform.position, target.transform.position, 0.5f);
         Vector2 viewportPoint = Camera.main.WorldToViewportPoint(pos);
 
         GetComponent<RectTransform>().anchorMax = viewportPoint; 
-        GetComponent<RectTransform>().anchorMin = viewportPoint;*/ 
+        GetComponent<RectTransform>().anchorMin = viewportPoint; 
     }
     void SetKeyCodesList()
     {
         keyCodes.Add(KeyCode.A);
         keyCodes.Add(KeyCode.S);
         keyCodes.Add(KeyCode.D);
-        keyCodes.Add(KeyCode.Z);
-        keyCodes.Add(KeyCode.X);
-        keyCodes.Add(KeyCode.C);
+        //keyCodes.Add(KeyCode.Z);
+        //keyCodes.Add(KeyCode.X);
+        //keyCodes.Add(KeyCode.C);
     }
 }
