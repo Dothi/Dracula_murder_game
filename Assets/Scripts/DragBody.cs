@@ -105,11 +105,9 @@ public class DragBody : MonoBehaviour {
             }
             dragTarget.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
             dragTarget = null;
-            Debug.Log("Dropped dragTarget!");
         }
         else if (dragTarget == null)
         {
-            Debug.Log("Looping dead enemies");
             foreach (GameObject enemy in allEnemies)
             {
                 if (enemy != null && enemy.activeInHierarchy && enemy.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
@@ -120,7 +118,6 @@ public class DragBody : MonoBehaviour {
                         enemyCol.isTrigger = true;
                     }
                     enemy.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                    Debug.Log("Dropped enemy from loop!");
                 }
             }
         }
