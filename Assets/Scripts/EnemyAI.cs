@@ -94,6 +94,7 @@ public class EnemyAI : MonoBehaviour
             targetRoom = waypoints[currentIndex].gameObject;
             Patrolling();
             IdleController();
+            
             if (!hasGasped)
             {
                 PlayGasp();
@@ -133,6 +134,7 @@ public class EnemyAI : MonoBehaviour
                     if (target.activeInHierarchy)
                     {
                         cs.isSuspicious = true;
+                        isWaiting = false;
                     }
                     else
                     {
@@ -227,8 +229,14 @@ public class EnemyAI : MonoBehaviour
                 {
                     StopCoroutine("FollowPath");
                     isAtWaypoint = true;
-                    
-                    
+                }
+            }
+            else if (fov.vel == Vector3.zero && currentEnemyState == EnemyState.Suspicious)
+            {
+                idleTimer += 1 * Time.deltaTime;
+                if(idleTimer >= 2f)
+                {
+                    isWaiting = false;
                 }
             }
         }

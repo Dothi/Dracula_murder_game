@@ -69,7 +69,7 @@ public class FieldOfView : MonoBehaviour
             Facing();
             FoV();
 
-            if (seeDeadEnemy)
+            if (seeDeadEnemy && AI.currentEnemyState == EnemyAI.EnemyState.Patrolling)
             {
                 AI.currentEnemyState = EnemyAI.EnemyState.Investigating;
             }
