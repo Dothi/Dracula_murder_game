@@ -128,16 +128,7 @@ public class ClosetScript : MonoBehaviour {
             }
             else
             {
-                if (enemy != null && enemy.activeInHierarchy &&
-                enemy.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
-                {
-                    BoxCollider2D enemyCol = enemy.transform.Find("Collider").GetComponent<BoxCollider2D>();
-                    if (!enemyCol.isTrigger)
-                    {
-                        enemyCol.isTrigger = true;
-                    }
-                    enemy.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-                }
+                player.GetComponent<DragBody>().DropEnemy(enemy);
                 enemy = null;
             }
         }
@@ -151,8 +142,7 @@ public class ClosetScript : MonoBehaviour {
                 if (ObjectsInside[i].CompareTag("Enemy"))
                 {
                     ObjectsInside[i].SetActive(true);
-                    ObjectsInside[i].transform.Find("Collider").GetComponent<BoxCollider2D>().isTrigger = true;
-                    ObjectsInside[i].GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+                    player.GetComponent<DragBody>().DropEnemy(ObjectsInside[i]);
                     ObjectsInside.Remove(ObjectsInside[i]);
                     statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
                     audioSource.clip = closetClose;
@@ -174,20 +164,7 @@ public class ClosetScript : MonoBehaviour {
             statusText.text = ObjectsInside.Count.ToString() + "/" + ClosetSize.ToString();
             audioSource.clip = closetOpen;
             audioSource.Play();
-
-            GameObject dragTarget = player.GetComponent<DragBody>().dragTarget;
-
-            if (dragTarget != null && dragTarget.activeInHierarchy &&
-                dragTarget.GetComponent<EnemyAI>().currentEnemyState == EnemyAI.EnemyState.Dead)
-            {
-                BoxCollider2D enemyCol = dragTarget.transform.Find("Collider").GetComponent<BoxCollider2D>();
-                if (!enemyCol.isTrigger)
-                {
-                    enemyCol.isTrigger = true;
-                }
-                dragTarget.GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            }
-            dragTarget = null;
+            player.GetComponent<DragBody>().DropEnemy();
         }
     }
     public void UnhidePlayer(GameObject player)
