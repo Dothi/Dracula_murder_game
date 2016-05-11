@@ -281,8 +281,6 @@ public class FieldOfView : MonoBehaviour
                                     enemiesInFOV.Add(enemies[i]);
                                 }
                             }
-                            
-
                         }
                         else
                         {

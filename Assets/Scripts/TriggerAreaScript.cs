@@ -3,7 +3,6 @@ using System.Collections;
 
 public class TriggerAreaScript : MonoBehaviour
 {
-
     EnemyAI AI;
     CircleCollider2D triggerArea;
     NearbyEnemiesScript nearbyEnemiesScript;
@@ -14,11 +13,6 @@ public class TriggerAreaScript : MonoBehaviour
     GameController gc;
 
     public float timer;
-
-
-
-
-
     void Start()
     {
         AI = GetComponentInParent<EnemyAI>();
@@ -29,14 +23,11 @@ public class TriggerAreaScript : MonoBehaviour
         gc = gamecontroller.GetComponent<GameController>();
         fov = GetComponentInParent<FieldOfView>();
         cs = GetComponentInParent<CollapseScript>();
-
         timer = 0f;
-
     }
 
     void Update()
     {
-       
         if (AI.currentEnemyState == EnemyAI.EnemyState.Dead || AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
         {
             timer = 0f;
@@ -45,13 +36,11 @@ public class TriggerAreaScript : MonoBehaviour
         {
             EnableTrigger();
         }
-
         if (ClosetScript.playerIsHiding)
         {
 
             nearbyEnemiesScript.nearbyEnemies.Clear();
         }
-
         if (fov.enemiesInFOV.Count > 0)
         {
             for (int i = 0; i < fov.enemiesInFOV.Count; i++)
@@ -84,14 +73,11 @@ public class TriggerAreaScript : MonoBehaviour
                                 timer = 0f;
                             }
                             break;
-
                     }
                 }
                 
             }
         }
-
-
         else if (AI.seePlayer)
         {
 
@@ -107,7 +93,6 @@ public class TriggerAreaScript : MonoBehaviour
                     {
                         gc.gameOver = true;
                         timer = 0f;
-
                     }
                 }
                 else if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Collapsed)

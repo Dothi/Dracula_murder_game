@@ -106,9 +106,6 @@ public class EnemyAI : MonoBehaviour
             IsBeingKilled();
             SpeedController();
             IdleController();
-
-            
-
             if (target == null)
             {
                 for (int i = 0; i < fov.enemiesInFOV.Count; i++)
@@ -143,7 +140,6 @@ public class EnemyAI : MonoBehaviour
                         StopCoroutine("FollowPath");
                     }
                     currWaitTime = 0f;
-                    
                 }
             }
         }
