@@ -15,9 +15,10 @@ public class FieldOfView : MonoBehaviour
     public bool seeDeadEnemy;
     CollapseScript collapseScript;
     SpriteRenderer spriteRend;
-    public Sprite deadSprite;
+    Sprite deadSprite;
     Animator anim;
-    public LayerMask layerMask;
+    LayerMask layerMask;
+    LayerMask playerLayerMask;
     LayerMask lineCastIgnoreMask;
     GameObject player;
     PlayerCurrentRoomScript playerCurrentRoom;
@@ -48,10 +49,12 @@ public class FieldOfView : MonoBehaviour
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         anim = GetComponentInChildren<Animator>();
         player = GameObject.FindGameObjectWithTag("Player");
-        layerMask = 1 << LayerMask.NameToLayer("TriggerArea") | 1 << LayerMask.NameToLayer("Furniture");
+        layerMask = 1 << LayerMask.NameToLayer("TriggerArea") | 1 << LayerMask.NameToLayer("Furniture") | 1 << LayerMask.NameToLayer("Player") | 1 << LayerMask.NameToLayer("LinecastIgnore");
+        playerLayerMask = 1 << LayerMask.NameToLayer("TriggerArea") | 1 << LayerMask.NameToLayer("Furniture") | 1 << LayerMask.NameToLayer("Enemy");
         lineCastIgnoreMask = 1 << LayerMask.NameToLayer("LinecastIgnore") | 1 << LayerMask.NameToLayer("TriggerArea");
         layerMask = ~layerMask;
         lineCastIgnoreMask = ~lineCastIgnoreMask;
+        playerLayerMask = ~playerLayerMask;
         playerCurrentRoom = player.GetComponentInChildren<PlayerCurrentRoomScript>();
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
 
@@ -169,7 +172,7 @@ public class FieldOfView : MonoBehaviour
                 {
                     if (playerCurrentRoom.currentRoom == AI.currentRoom)
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, layerMask);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, playerLayerMask);
                         Debug.DrawLine(transform.position, player.transform.position, color);
 
                         if (hit && hit.collider.gameObject == player)
@@ -232,7 +235,7 @@ public class FieldOfView : MonoBehaviour
                 {
                     if (playerCurrentRoom.currentRoom == AI.currentRoom)
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, layerMask);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, playerLayerMask);
                         Debug.DrawLine(transform.position, player.transform.position, color);
 
                         if (hit && hit.collider.gameObject == player)
@@ -294,7 +297,7 @@ public class FieldOfView : MonoBehaviour
                 {
                     if (playerCurrentRoom.currentRoom == AI.currentRoom)
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, layerMask);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, playerLayerMask);
                         Debug.DrawLine(transform.position, player.transform.position, color);
 
                         if (hit && hit.collider.gameObject == player)
@@ -356,7 +359,7 @@ public class FieldOfView : MonoBehaviour
                 {
                     if (playerCurrentRoom.currentRoom == AI.currentRoom)
                     {
-                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, layerMask);
+                        RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, playerLayerMask);
                         Debug.DrawLine(transform.position, player.transform.position, color);
 
                         if (hit && hit.collider.gameObject == player)
