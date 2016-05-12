@@ -64,40 +64,19 @@ public class BloodBar : MonoBehaviour
     }
     void FlashBloodBar()
     {
-        if (currentBlood < (maxBlood * 0.25f))
+        if (nearGarlic || currentBlood < (maxBlood * 0.25f))
         {
-            if (bloodFlash.sprite != flashSprite)
-            {
-                bloodFlash.sprite = flashSprite;
-            }
-            if (flashIntensifying)
-            {
-                flashTimer += Time.deltaTime * flashSpeed;
-
-                if (flashTimer > 1)
-                {
-                    flashTimer = 1;
-                    flashIntensifying = false;
-                }
-            }
-            else if (!flashIntensifying)
-            {
-                flashTimer -= Time.deltaTime * flashSpeed;
-
-                if (flashTimer < 0)
-                {
-                    flashTimer = 0;
-                    flashIntensifying = true;
-                }
-            }
-            bloodFlash.color = new Color(1f, 1f, 1f, flashTimer);
-        }
-        else if (nearGarlic)
-        {
-            if (bloodFlash.sprite != flashSpriteGarlic)
+            //Change Sprite
+            if (nearGarlic && currentBlood > (maxBlood * 0.25f) && bloodFlash.sprite != flashSpriteGarlic)
             {
                 bloodFlash.sprite = flashSpriteGarlic;
             }
+            else if (!nearGarlic && bloodFlash.sprite != flashSprite)
+            {
+                bloodFlash.sprite = flashSprite;
+            }
+
+            //Flash sprite
             if (flashIntensifying)
             {
                 flashTimer += Time.deltaTime * flashSpeed;

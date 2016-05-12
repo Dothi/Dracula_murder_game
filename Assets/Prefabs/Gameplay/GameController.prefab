@@ -41,6 +41,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f49da2847a2d842a01a554e871ecf6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashSprite: {fileID: 21300000, guid: 3e4cf317f71496743a046883ff494018, type: 3}
+  flashSpriteGarlic: {fileID: 21300000, guid: 96647d4d45c478341baff562d8da9b8a, type: 3}
   bloodDecreaseSpeed: 3
   bloodFromKill: 65
 --- !u!114 &11457678
@@ -59,6 +61,7 @@ MonoBehaviour:
   enemies: []
   playerIsPeeking: 0
   playerInCloset: 0
+  playerNearCloset: 0
 --- !u!114 &11480160
 MonoBehaviour:
   m_ObjectHideFlags: 1
