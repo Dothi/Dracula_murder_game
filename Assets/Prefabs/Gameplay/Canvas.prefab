@@ -648,7 +648,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 11457678, guid: 256fc1e6f5177ba4b8853401424efa40, type: 2}
         m_MethodName: PlayAgain
         m_Mode: 1
         m_Arguments:
