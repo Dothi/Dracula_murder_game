@@ -191,6 +191,10 @@ public class FieldOfView : MonoBehaviour
                             AI.seePlayer = false;
                         }
                     }
+                    else
+                    {
+                        AI.seePlayer = false;
+                    }
                 }
                 else
                 {
@@ -252,6 +256,10 @@ public class FieldOfView : MonoBehaviour
                         {
                             AI.seePlayer = false;
                         }
+                    }
+                    else
+                    {
+                        AI.seePlayer = false;
                     }
                 }
                 else
@@ -315,6 +323,10 @@ public class FieldOfView : MonoBehaviour
                             AI.seePlayer = false;
                         }
                     }
+                    else
+                    {
+                        AI.seePlayer = false;
+                    }
                 }
                 else
                 {
@@ -377,6 +389,10 @@ public class FieldOfView : MonoBehaviour
                         {
                             AI.seePlayer = false;
                         }
+                    }
+                    else
+                    {
+                        AI.seePlayer = false;
                     }
                 }
                 else

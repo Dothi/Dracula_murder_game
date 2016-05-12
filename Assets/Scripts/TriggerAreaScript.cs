@@ -62,6 +62,10 @@ public class TriggerAreaScript : MonoBehaviour
                                 gc.gameOver = true;
                                 timer = 0f;
                             }
+                            else
+                            {
+                                cs.isSuspicious = true;
+                            }
                             break;
                         case EnemyAI.EnemyState.IsBeingKilled:
                             AI.isWaiting = true;
@@ -71,6 +75,10 @@ public class TriggerAreaScript : MonoBehaviour
                             {
                                 gc.gameOver = true;
                                 timer = 0f;
+                            }
+                            else
+                            {
+                                cs.isSuspicious = true;
                             }
                             break;
                     }
@@ -93,6 +101,10 @@ public class TriggerAreaScript : MonoBehaviour
                     {
                         gc.gameOver = true;
                         timer = 0f;
+                    }
+                    else
+                    {
+                        cs.isSuspicious = true;
                     }
                 }
                 else if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Collapsed)

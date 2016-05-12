@@ -24,6 +24,7 @@ public class EnemyAI : MonoBehaviour
     public bool isWaiting;
     public bool isAtWaypoint;
     public bool seePlayer;
+    public bool pathRequested;
     bool hasGasped;
     GameObject player;
     public GameObject targetRoom;
@@ -57,6 +58,7 @@ public class EnemyAI : MonoBehaviour
         idleTimer = 0f;
         roomStops = 0;
         hasGasped = false;
+        pathRequested = false;
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
         currentIndex = randomizer;
@@ -71,7 +73,7 @@ public class EnemyAI : MonoBehaviour
         spriteRend = GetComponentInChildren<SpriteRenderer>();
         collider = GetComponent<Collider2D>();
         fov = GetComponent<FieldOfView>();
-        cs = GetComponent<CollapseScript>();   
+        cs = GetComponent<CollapseScript>();
     }
     void Update()
     {
@@ -83,26 +85,31 @@ public class EnemyAI : MonoBehaviour
             IdleController();
             if (fov.seeDeadEnemy)
             {
+
                 currentEnemyState = EnemyAI.EnemyState.Investigating;
-                
+
             }
         }
         if (currentEnemyState == EnemyState.Suspicious)
         {
             IsBeingKilled();
             SpeedController();
-            targetRoom = waypoints[currentIndex].gameObject;
+
             Patrolling();
             IdleController();
-            
+
             if (!hasGasped)
             {
+
                 PlayGasp();
                 hasGasped = true;
             }
         }
         if (currentEnemyState == EnemyState.Investigating)
         {
+
+
+
             IsBeingKilled();
             SpeedController();
             IdleController();
@@ -114,14 +121,18 @@ public class EnemyAI : MonoBehaviour
                     {
                         target = fov.enemiesInFOV[i];
                     }
-                   
+
                 }
             }
             else
             {
-                if (!isAtWaypoint)
-                PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound);
-                
+                if (!isAtWaypoint && !pathRequested)
+                {
+
+                    PathRequestManager.RequestPath(transform.position, target.transform.position, OnPathFound);
+                    pathRequested = true;
+                }
+
             }
             if (isAtWaypoint)
             {
@@ -152,13 +163,17 @@ public class EnemyAI : MonoBehaviour
             seePlayer = false;
             fov.enemiesInFOV.Clear();
         }
-        
+
         if (currentEnemyState != EnemyState.Suspicious)
         {
             hasGasped = false;
         }
-        
-        
+        if (currentEnemyState != EnemyState.Investigating)
+        {
+            pathRequested = false;
+        }
+
+
     }
     public void OnPathFound(Vector3[] newPath, bool pathSuccessful)
     {
@@ -171,6 +186,7 @@ public class EnemyAI : MonoBehaviour
     }
     IEnumerator FollowPath()
     {
+        targetIndex = 0;
         if (path.Length > 0)
         {
             Vector3 currentWaypoint = path[0];
@@ -181,9 +197,9 @@ public class EnemyAI : MonoBehaviour
                     targetIndex++;
                     if (targetIndex >= path.Length)
                     {
-                        
+
                         isAtWaypoint = true;
-                        
+
                         roomStops++;
                         if (currentEnemyState == EnemyState.Patrolling)
                         {
@@ -205,32 +221,32 @@ public class EnemyAI : MonoBehaviour
                                 transform.position = Vector3.MoveTowards(transform.position, currentWaypoint, speed * Time.deltaTime);
                                 directionOfTravel = (currentWaypoint - transform.position).normalized;
                             }
-                            
+
                         }
                     }
                 }
-                
+
                 yield return null;
             }
         }
     }
     void IdleController()
     {
-        if (currentEnemyState != EnemyState.Dead && currentEnemyState != EnemyState.Collapsed)
+        if (currentEnemyState != EnemyState.Dead && currentEnemyState != EnemyState.Collapsed && currentEnemyState != EnemyState.Investigating)
         {
             if (fov.vel == Vector3.zero && !isWaiting)
             {
                 idleTimer += 1 * Time.deltaTime;
                 if (idleTimer >= 2f)
                 {
-                    StopCoroutine("FollowPath");
+
                     isAtWaypoint = true;
                 }
             }
             else if (fov.vel == Vector3.zero && currentEnemyState == EnemyState.Suspicious)
             {
                 idleTimer += 1 * Time.deltaTime;
-                if(idleTimer >= 2f)
+                if (idleTimer >= 2f)
                 {
                     isWaiting = false;
                 }
@@ -258,10 +274,11 @@ public class EnemyAI : MonoBehaviour
                 if (isAtWaypoint)
                 {
                     isWaiting = false;
+
                 }
-                
+
             }
-            
+
             if (currentEnemyState != EnemyState.Collapsed)
             {
                 if (isAtWaypoint && !isWaiting)
@@ -297,7 +314,7 @@ public class EnemyAI : MonoBehaviour
             {
                 currentEnemyState = EnemyState.IsBeingKilled;
             }
-        }    
+        }
     }
     void SpeedController()
     {
@@ -319,7 +336,7 @@ public class EnemyAI : MonoBehaviour
         }
         else if (currentEnemyState == EnemyState.Investigating)
         {
-            speed = 1f;
+            speed = 1.5f;
         }
         else
         {
@@ -328,8 +345,8 @@ public class EnemyAI : MonoBehaviour
     }
     Vector3 RandomPointInRoom()
     {
-        float x = Random.Range(targetRoom.GetComponent<Transform>().position.x - (int)((targetRoom.transform.localScale.x / 2) - 1), targetRoom.GetComponent<Transform>().position.x + (int)((targetRoom.transform.localScale.x / 2) -1));
-        float y = Random.Range(targetRoom.GetComponent<Transform>().position.y - (int)((targetRoom.transform.localScale.y / 2) - 1), targetRoom.GetComponent<Transform>().position.y + (int)((targetRoom.transform.localScale.y / 2) -1));
+        float x = Random.Range(targetRoom.GetComponent<Transform>().position.x - (int)((targetRoom.transform.localScale.x / 2) - 1), targetRoom.GetComponent<Transform>().position.x + (int)((targetRoom.transform.localScale.x / 2) - 1));
+        float y = Random.Range(targetRoom.GetComponent<Transform>().position.y - (int)((targetRoom.transform.localScale.y / 2) - 1), targetRoom.GetComponent<Transform>().position.y + (int)((targetRoom.transform.localScale.y / 2) - 1));
 
         return new Vector3(x, y);
     }
@@ -340,7 +357,7 @@ public class EnemyAI : MonoBehaviour
     }
 }
 
-    
+
 
 
 
