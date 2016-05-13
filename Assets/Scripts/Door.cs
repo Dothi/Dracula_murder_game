@@ -42,7 +42,6 @@ public class Door : MonoBehaviour
             audio.clip = Close;
             audio.Play();
             doorSprite.color = new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 1.0f);
-            doorText.enabled = true;
         }
     }
 }
