@@ -9,6 +9,7 @@ public class BloodBar : MonoBehaviour
     Slider bloodBar;
 
     Image bloodFlash;
+    Animator bloodWave;
     float flashTimer = 0;
     float flashSpeed = 2;
     bool flashIntensifying = true;
@@ -28,6 +29,7 @@ public class BloodBar : MonoBehaviour
         killScript = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
         bloodBar = GameObject.Find("BloodSlider").GetComponent<Slider>();
         bloodFlash = bloodBar.transform.Find("Front_Shining").GetComponent<Image>();
+        bloodWave = bloodBar.transform.Find("Handle Slide Area").Find("Handle").GetComponent<Animator>();
     }
 
 
@@ -67,9 +69,16 @@ public class BloodBar : MonoBehaviour
         if (nearGarlic || currentBlood < (maxBlood * 0.25f))
         {
             //Change Sprite
-            if (nearGarlic && currentBlood > (maxBlood * 0.25f) && bloodFlash.sprite != flashSpriteGarlic)
+            if (nearGarlic)
             {
-                bloodFlash.sprite = flashSpriteGarlic;
+                if (currentBlood > (maxBlood * 0.25f) && bloodFlash.sprite != flashSpriteGarlic)
+                {
+                    bloodFlash.sprite = flashSpriteGarlic;
+                }
+                else if (currentBlood < (maxBlood * 0.25f) && bloodFlash.sprite != flashSprite)
+                {
+                    bloodFlash.sprite = flashSprite;
+                }
             }
             else if (!nearGarlic && bloodFlash.sprite != flashSprite)
             {
@@ -108,5 +117,9 @@ public class BloodBar : MonoBehaviour
     public void SetNearGarlic(bool boolean)
     {
         nearGarlic = boolean;
+    }
+    public void SetWaveAnim(RuntimeAnimatorController AnimationController)
+    {
+        bloodWave.runtimeAnimatorController = AnimationController;
     }
 }

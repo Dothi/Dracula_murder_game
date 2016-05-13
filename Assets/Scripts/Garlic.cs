@@ -14,6 +14,8 @@ public class Garlic : MonoBehaviour {
 
     public Sprite normalBlood;
     public Sprite garlicBlood;
+    public RuntimeAnimatorController normalWave;
+    public RuntimeAnimatorController garlicBubble;
 
 	void Start ()
     {
@@ -37,6 +39,8 @@ public class Garlic : MonoBehaviour {
         if (other == playerFeet)
         {
             bloodSprite.sprite = garlicBlood;
+            bb.SetWaveAnim(garlicBubble);
+
             playerInRange = true;
             bb.SetNearGarlic(true);
         }
@@ -47,6 +51,8 @@ public class Garlic : MonoBehaviour {
         if (other == playerFeet)
         {
             bloodSprite.sprite = normalBlood;
+            bb.SetWaveAnim(normalWave);
+
             playerInRange = false;
             bb.SetNearGarlic(false);
         }
