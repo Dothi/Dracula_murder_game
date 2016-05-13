@@ -5,6 +5,7 @@ public class Door : MonoBehaviour
 {
 
     SpriteRenderer doorSprite;
+    SpriteRenderer doorText;
     AudioSource audio;
     public AudioClip Open;
     public AudioClip Close;
@@ -14,6 +15,7 @@ public class Door : MonoBehaviour
     void Start()
     {
         doorSprite = transform.Find("Sprite (door)").GetComponent<SpriteRenderer>();
+        doorText = transform.Find("Text").GetComponent<SpriteRenderer>();
         audio = GetComponent<AudioSource>();
     }
 
@@ -27,7 +29,7 @@ public class Door : MonoBehaviour
                 audio.clip = Open;
                 audio.Play();
                 doorSprite.color = new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 0.0f);
-
+                doorText.enabled = false;
             }
         }
     }
@@ -40,6 +42,7 @@ public class Door : MonoBehaviour
             audio.clip = Close;
             audio.Play();
             doorSprite.color = new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 1.0f);
+            doorText.enabled = true;
         }
     }
 }

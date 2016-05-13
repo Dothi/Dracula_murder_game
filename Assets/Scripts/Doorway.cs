@@ -13,6 +13,7 @@ public class Doorway : MonoBehaviour {
 
     public GameObject door;
     SpriteRenderer doorSprite;
+    SpriteRenderer doorText;
 
     public bool playerInTrigger = false;
 
@@ -21,6 +22,8 @@ public class Doorway : MonoBehaviour {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         ks = GameObject.FindGameObjectWithTag("Player").GetComponent<KillScript>();
         doorSprite = door.transform.Find("Sprite (door)").GetComponent<SpriteRenderer>();
+        doorText = door.transform.Find("Text").GetComponent<SpriteRenderer>();
+        doorText.enabled = false;
 
         camArea = transform.parent.GetComponentInChildren<CameraArea>();
         camPos = camArea.transform.parent.Find("CameraPosition");
@@ -35,7 +38,8 @@ public class Doorway : MonoBehaviour {
             if (other.CompareTag("PlayerFeet") && !playerInTrigger)
             {
                 playerInTrigger = true;
-                doorSprite.sprite = door.GetComponent<Door>().highlightSprite;   
+                doorSprite.sprite = door.GetComponent<Door>().highlightSprite;
+                doorText.enabled = true;
             }            
         }
         else
@@ -43,6 +47,8 @@ public class Doorway : MonoBehaviour {
             gc.playerIsPeeking = false;
             playerInTrigger = false;
             doorSprite.sprite = door.GetComponent<Door>().normalSprite;
+            doorText.enabled = false;
+
             if (doorSprite.color != new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 1f))
             {
                 if (doorSprite.color != new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 0.0f)) // = some has opened the door
@@ -96,6 +102,8 @@ public class Doorway : MonoBehaviour {
             gc.playerIsPeeking = false;
             playerInTrigger = false;
             doorSprite.sprite = door.GetComponent<Door>().normalSprite;
+            doorText.enabled = false;
+
             if (doorSprite.color != new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 1f))
             {
                 if (doorSprite.color != new Color(doorSprite.color.r, doorSprite.color.g, doorSprite.color.b, 0.0f)) // = some has opened the door
