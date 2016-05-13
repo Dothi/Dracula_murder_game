@@ -121,6 +121,8 @@ MonoBehaviour:
   bloodDecreaseValue: 3
   normalBlood: {fileID: 21300000, guid: a71a63fec549f7940a188834896cd0dd, type: 3}
   garlicBlood: {fileID: 21300000, guid: f7577afba24c3b845bab6350da57ceec, type: 3}
+  normalWave: {fileID: 9100000, guid: bdc7fdc3daa0fdb4ebacd707a661c994, type: 2}
+  garlicBubble: {fileID: 9100000, guid: 5a4bc76f44fb2254d834795c2326ed67, type: 2}
 --- !u!212 &21264914
 SpriteRenderer:
   m_ObjectHideFlags: 1

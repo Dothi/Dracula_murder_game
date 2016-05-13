@@ -15599,7 +15599,7 @@ Prefab:
     - target: {fileID: 9501604, guid: ce932e64536664345bea364fdb074b3e, type: 2}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 0074604a3baabf54a8127307e216366f, type: 2}
+      objectReference: {fileID: 9100000, guid: bdc7fdc3daa0fdb4ebacd707a661c994, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ce932e64536664345bea364fdb074b3e, type: 2}
   m_IsPrefabParent: 0
