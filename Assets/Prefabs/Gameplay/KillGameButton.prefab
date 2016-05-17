@@ -57,9 +57,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprites:
-    A: {fileID: 21300000, guid: 628cdc3b7cf38594e931ec54b01a0efa, type: 3}
-    S: {fileID: 21300000, guid: d7c38f42eb13cb1488d0d960305ada3b, type: 3}
-    D: {fileID: 21300000, guid: fde8ee66a1d57984993810ab7ea05e06, type: 3}
+    A: {fileID: 21300000, guid: fe9f6f03c82365b44aaf48a49b3f898c, type: 3}
+    S: {fileID: 21300000, guid: 407d3e332d45ea34692a29ae14528643, type: 3}
+    D: {fileID: 21300000, guid: 524db81e4b3fe8141bb20fc3179886a3, type: 3}
     Z: {fileID: 21300000, guid: f49ae5298cf517845a056adc7432bdbf, type: 3}
     X: {fileID: 21300000, guid: 30334d71fb254ce48b5391e9fae13719, type: 3}
     C: {fileID: 21300000, guid: 48f98cded3342ff4ebb46b21e49d0755, type: 3}

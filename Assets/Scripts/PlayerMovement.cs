@@ -13,8 +13,13 @@ public class PlayerMovement : MonoBehaviour {
     bool moveLeft;
     bool moveDown;
     bool moveRight;
-    
 
+    GameObject pauseMenu;
+
+    void Awake()
+    {
+        pauseMenu = GameObject.Find("PauseMenu");
+    }
     void Start()
     {
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -24,7 +29,8 @@ public class PlayerMovement : MonoBehaviour {
 
 	void Update ()
     {
-        if (!gc.gameOver)
+        Debug.Log(Time.timeScale);
+        if (!gc.gameOver || pauseMenu.activeInHierarchy)
         {
             Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             if (movementVector != Vector2.zero)
@@ -39,6 +45,15 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (!GetComponent<KillScript>().isSuckingBlood && !gc.gameOver)
+            {
+                Time.timeScale = 0f;
+                gc.GetComponent<BloodBar>().enabled = false;
+                pauseMenu.SetActive(true);
+            }
+        }  
 
         //Move up
         if (Input.GetAxis("Vertical") > 0 && canMove)
