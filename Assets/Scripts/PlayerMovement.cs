@@ -3,6 +3,7 @@ using System.Collections;
 
 public class PlayerMovement : MonoBehaviour {
 
+    GameController gc;
     public float moveSpeed = 6;
     public bool canMove = true;
     private Rigidbody2D rb;
@@ -16,23 +17,28 @@ public class PlayerMovement : MonoBehaviour {
 
     void Start()
     {
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
 	void Update ()
     {
-        Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
-        if (movementVector != Vector2.zero)
+        if (!gc.gameOver)
         {
-            anim.SetBool("isWalking", true);
-            anim.SetFloat("inputX", movementVector.x);
-            anim.SetFloat("inputY", movementVector.y);
+            Vector2 movementVector = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            if (movementVector != Vector2.zero)
+            {
+                anim.SetBool("isWalking", true);
+                anim.SetFloat("inputX", movementVector.x);
+                anim.SetFloat("inputY", movementVector.y);
+            }
+            else
+            {
+                anim.SetBool("isWalking", false);
+            }
         }
-        else
-        {
-            anim.SetBool("isWalking", false);
-        }
+
 
         //Move up
         if (Input.GetAxis("Vertical") > 0 && canMove)
