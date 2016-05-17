@@ -62,6 +62,8 @@ public class FieldOfView : MonoBehaviour
 
     public void Update()
     {
+        vel = (transform.position - pos).normalized;
+        pos = transform.position;
 
         SpriteRend();
 
@@ -87,8 +89,7 @@ public class FieldOfView : MonoBehaviour
 
     void Facing()
     {
-        vel = (transform.position - pos).normalized;
-        pos = transform.position;
+       
 
 
         if (vel != Vector3.zero)

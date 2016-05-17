@@ -73,6 +73,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &153174
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 495854}
+  - 82: {fileID: 8274750}
+  - 114: {fileID: 11455914}
+  m_Layer: 0
+  m_Name: BodyFallAudio
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &183476
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,13 +150,14 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 149894}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.65, y: -9.1, z: 0}
+  m_LocalPosition: {x: 53.21, y: -17.1, z: 0}
   m_LocalScale: {x: 1.6, y: 1.6, z: 1}
   m_Children:
   - {fileID: 403276}
   - {fileID: 479388}
   - {fileID: 463906}
   - {fileID: 446742}
+  - {fileID: 495854}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &479388
@@ -154,6 +172,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 477410}
   m_RootOrder: 1
+--- !u!4 &495854
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153174}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 477410}
+  m_RootOrder: 4
 --- !u!50 &5005894
 Rigidbody2D:
   serializedVersion: 2
@@ -287,6 +317,80 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
+--- !u!82 &8274750
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153174}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!95 &9556108
 Animator:
   serializedVersion: 3
@@ -315,6 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a191d8b2d44a110419c52f24d1b51004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timer: 0
 --- !u!114 &11437062
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,6 +434,18 @@ MonoBehaviour:
   isCollapsed: 0
   isSuspicious: 0
   collapseDuration: 40
+--- !u!114 &11455914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 153174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d381ca32aacc5e84d893bc8a1c6e1c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyFall: {fileID: 8300000, guid: feefc5ff44a256d478dae72b9ea6cdfa, type: 3}
 --- !u!114 &11462980
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -374,10 +491,14 @@ MonoBehaviour:
   isWaiting: 0
   isAtWaypoint: 0
   seePlayer: 0
+  pathRequested: 0
   targetRoom: {fileID: 0}
   currentRoom: {fileID: 0}
   target: {fileID: 0}
   gasp: {fileID: 8300000, guid: 1e51b3eedd316c245bb660f620751b63, type: 3}
+  humanDying: {fileID: 8300000, guid: 4df7f069578f75b499a03accb21b528a, type: 3}
+  humanDying2: {fileID: 8300000, guid: 481be15b0d89bb7419a2cd137f138e3c, type: 3}
+  bodyDragSound: {fileID: 8300000, guid: ecaff29bafa9ee345a4504e1246cb3ab, type: 3}
   currentEnemyState: 0
 --- !u!114 &11467332
 MonoBehaviour:
@@ -396,10 +517,6 @@ MonoBehaviour:
   enemies: []
   inSight: 0
   seeDeadEnemy: 0
-  deadSprite: {fileID: 21300000, guid: 9fceacf07dcebb445bb81655d0d24dbf, type: 3}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
   vel: {x: 0, y: 0, z: 0}
   currentFacingState: 0
 --- !u!114 &11470790

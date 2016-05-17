@@ -18,6 +18,7 @@ public class EnemyAI : MonoBehaviour
     Vector3 previous;
     public int randomizer { get { return Random.Range(0, waypoints.Length); } }
     public int roomVisitRandomizer { get { return Random.Range(8, 13); } }
+    public int randomSound { get { return Random.Range(0, 2); } }
     private Waypoint currentWP;
     public int currentIndex;
     GameController gc;
@@ -26,6 +27,7 @@ public class EnemyAI : MonoBehaviour
     public bool seePlayer;
     public bool pathRequested;
     bool hasGasped;
+    bool bodyFallSound;
     GameObject player;
     public GameObject targetRoom;
     public GameObject currentRoom;
@@ -33,11 +35,15 @@ public class EnemyAI : MonoBehaviour
     KillScript ks;
     AudioSource audioSource;
     public AudioClip gasp;
+    public AudioClip humanDying;
+    public AudioClip humanDying2;
+    public AudioClip bodyDragSound;
     SpriteRenderer spriteRend;
     Collider2D collider;
     FieldOfView fov;
     CollapseScript cs;
     TriggerAreaScript tas;
+    DragBody dragBodyScript;
     #endregion
     public enum EnemyState
     {
@@ -54,11 +60,13 @@ public class EnemyAI : MonoBehaviour
 
     void Start()
     {
+
         currWaitTime = 0f;
         idleTimer = 0f;
         roomStops = 0;
         hasGasped = false;
         pathRequested = false;
+        bodyFallSound = false;
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
         currentIndex = randomizer;
@@ -74,6 +82,8 @@ public class EnemyAI : MonoBehaviour
         collider = GetComponent<Collider2D>();
         fov = GetComponent<FieldOfView>();
         cs = GetComponent<CollapseScript>();
+        dragBodyScript = player.GetComponent<DragBody>();
+        
     }
     void Update()
     {
@@ -107,9 +117,6 @@ public class EnemyAI : MonoBehaviour
         }
         if (currentEnemyState == EnemyState.Investigating)
         {
-
-
-
             IsBeingKilled();
             SpeedController();
             IdleController();
@@ -156,7 +163,31 @@ public class EnemyAI : MonoBehaviour
         }
         if (currentEnemyState == EnemyState.Dead)
         {
+            
             collider.offset = new Vector2(0, .5f);
+            if (!bodyFallSound)
+            {
+                PlayDying();
+                
+                bodyFallSound = true;    
+            }
+
+            if(dragBodyScript.dragTarget == this.gameObject && fov.vel != Vector3.zero)
+            {
+                
+                if(!audioSource.isPlaying)
+                {
+                    if (audioSource.clip != bodyDragSound)
+                    {
+                        audioSource.clip = bodyDragSound;
+                    }
+                    audioSource.Play();
+
+                }
+            }
+            
+               
+            
         }
         if (currentEnemyState == EnemyState.IsBeingKilled)
         {
@@ -354,6 +385,20 @@ public class EnemyAI : MonoBehaviour
     {
         audioSource.clip = gasp;
         audioSource.Play();
+    }
+    void PlayDying()
+    {
+        int sound = randomSound;
+        if (sound == 0)
+        {
+            audioSource.clip = humanDying;
+            audioSource.Play();
+        }
+        else
+        {
+            audioSource.clip = humanDying2;
+            audioSource.Play();
+        }
     }
 }
 
