@@ -43,7 +43,6 @@ public class MenuController : MonoBehaviour {
     public void ResumeGame()
     {
         Time.timeScale = 1;
-        gc.GetComponent<BloodBar>().enabled = true;
         pauseMenu.SetActive(false);
     }
     public void ToggleCredits()

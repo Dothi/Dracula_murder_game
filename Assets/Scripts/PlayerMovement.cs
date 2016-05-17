@@ -50,7 +50,6 @@ public class PlayerMovement : MonoBehaviour {
             if (!GetComponent<KillScript>().isSuckingBlood && !gc.gameOver)
             {
                 Time.timeScale = 0f;
-                gc.GetComponent<BloodBar>().enabled = false;
                 pauseMenu.SetActive(true);
             }
         }  

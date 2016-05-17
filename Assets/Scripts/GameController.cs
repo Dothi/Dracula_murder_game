@@ -29,6 +29,7 @@ public class GameController : MonoBehaviour {
         enemies = new List<GameObject>();
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
         killMinigame = GameObject.Find("Canvas").transform.Find("Kill_Minigame").gameObject;
+        Time.timeScale = 1;
 	}
 	
 
