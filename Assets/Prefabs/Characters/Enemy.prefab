@@ -267,7 +267,7 @@ AudioSource:
   rolloffMode: 0
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -498,7 +498,8 @@ MonoBehaviour:
   gasp: {fileID: 8300000, guid: 1e51b3eedd316c245bb660f620751b63, type: 3}
   humanDying: {fileID: 8300000, guid: 4df7f069578f75b499a03accb21b528a, type: 3}
   humanDying2: {fileID: 8300000, guid: 481be15b0d89bb7419a2cd137f138e3c, type: 3}
-  bodyDragSound: {fileID: 8300000, guid: ecaff29bafa9ee345a4504e1246cb3ab, type: 3}
+  bodyDragSound: {fileID: 8300000, guid: da4b59a513f27b54181b0bf663832e22, type: 3}
+  bodyDragStart: {fileID: 8300000, guid: 4f62d908b5153544991e932b639f419a, type: 3}
   currentEnemyState: 0
 --- !u!114 &11467332
 MonoBehaviour:

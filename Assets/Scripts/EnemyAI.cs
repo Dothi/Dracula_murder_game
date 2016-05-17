@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour
     public bool pathRequested;
     bool hasGasped;
     bool bodyFallSound;
+    bool bodyDragStarted;
     GameObject player;
     public GameObject targetRoom;
     public GameObject currentRoom;
@@ -38,6 +39,7 @@ public class EnemyAI : MonoBehaviour
     public AudioClip humanDying;
     public AudioClip humanDying2;
     public AudioClip bodyDragSound;
+    public AudioClip bodyDragStart;
     SpriteRenderer spriteRend;
     Collider2D collider;
     FieldOfView fov;
@@ -67,6 +69,7 @@ public class EnemyAI : MonoBehaviour
         hasGasped = false;
         pathRequested = false;
         bodyFallSound = false;
+        bodyDragStarted = false;
         currentEnemyState = EnemyState.Patrolling;
         speed = 1f;
         currentIndex = randomizer;
@@ -172,18 +175,29 @@ public class EnemyAI : MonoBehaviour
                 bodyFallSound = true;    
             }
 
-            if(dragBodyScript.dragTarget == this.gameObject && fov.vel != Vector3.zero)
+            if(dragBodyScript.dragTarget == this.gameObject && !bodyDragStarted)
             {
-                
-                if(!audioSource.isPlaying)
+                if (audioSource.clip != bodyDragStart)
                 {
-                    if (audioSource.clip != bodyDragSound)
-                    {
-                        audioSource.clip = bodyDragSound;
-                    }
-                    audioSource.Play();
-
+                    audioSource.clip = bodyDragStart; 
                 }
+                audioSource.Play();
+                bodyDragStarted = true;
+            }
+            else if (dragBodyScript.dragTarget == this.gameObject && fov.vel != Vector3.zero && bodyDragStarted)
+            {
+                if (!audioSource.isPlaying && audioSource.clip != bodyDragSound)
+                {
+                    audioSource.clip = bodyDragSound;
+                }
+                if (!audioSource.isPlaying)
+                {
+                    audioSource.Play();
+                }
+            }
+            else if (dragBodyScript.dragTarget != this.gameObject)
+            {
+                bodyDragStarted = false;
             }
             
                
