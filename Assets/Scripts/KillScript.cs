@@ -12,7 +12,8 @@ public class KillScript : MonoBehaviour {
     public GameObject killTarget = null;
 
     public bool isSuckingBlood;
-    public AudioClip bodyFall;
+    public AudioClip bloodSuckClip;
+    AudioSource audioSource;
 
     public GameObject minigame;
     PlayerMovement pMove;
@@ -23,6 +24,7 @@ public class KillScript : MonoBehaviour {
         bloodBar = gameController.GetComponent<BloodBar>();
         pMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         enemyCounter = GameObject.Find("Enemy Counter").GetComponent<EnemyCounter>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -56,10 +58,23 @@ public class KillScript : MonoBehaviour {
 
             if (killTarget != null && killTarget.activeInHierarchy)
             {
+                
                 isSuckingBlood = true;
                 pMove.canMove = false;
                 minigame.SetActive(true);
+                if (audioSource.clip != bloodSuckClip && isSuckingBlood)
+                {
+                    audioSource.clip = bloodSuckClip;
+                }
+                if (!audioSource.isPlaying && isSuckingBlood)
+                {
+                    audioSource.Play();
+                }
             }
+        }
+        else if (!isSuckingBlood)
+        {
+            audioSource.Stop();
         }
     }
 
@@ -108,9 +123,7 @@ public class KillScript : MonoBehaviour {
     public void KillEnemy(GameObject target)
     {
         enemyCounter.DecreaseEnemiesRemaining();
-        target.GetComponent<AudioSource>().clip = bodyFall;
         target.GetComponent<EnemyAI>().currentEnemyState = EnemyAI.EnemyState.Dead;
-        target.GetComponent<AudioSource>().Play();
         enemiesInRange.Remove(target);
         CheckWinForZeroEnemies(target);
         killTarget = null;
