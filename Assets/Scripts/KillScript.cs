@@ -69,12 +69,15 @@ public class KillScript : MonoBehaviour {
                 if (!audioSource.isPlaying && isSuckingBlood)
                 {
                     audioSource.Play();
+                    audioSource.loop = true;
                 }
+                
             }
         }
         else if (!isSuckingBlood)
         {
             audioSource.Stop();
+            audioSource.loop = false;
         }
     }
 
