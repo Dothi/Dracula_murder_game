@@ -9,6 +9,7 @@ public class InvisibilitySkill : MonoBehaviour
     public bool isInvisible;
     public bool coolDownReady;
     SpriteRenderer spriteRend;
+    KillScript ks;
 
     void Awake()
     {
@@ -18,11 +19,12 @@ public class InvisibilitySkill : MonoBehaviour
         isInvisible = false;
         coolDownReady = true;
         spriteRend = GetComponentInChildren<SpriteRenderer>();
+        ks = GetComponent<KillScript>();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (!ks.isSuckingBlood && Input.GetKeyDown(KeyCode.C))
         {
             if (coolDownReady)
             {
