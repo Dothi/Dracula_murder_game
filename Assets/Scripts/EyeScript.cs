@@ -30,9 +30,13 @@ public class EyeScript : MonoBehaviour
             {
                 colorTimer = TAS.timer;
             }
-            else
+            else if(NES.nearbyEnemies.Contains(this.transform.parent.gameObject))
             {
                 colorTimer = NES.timer;
+            }
+            else
+            {
+                colorTimer = TAS.timer;
             }
 
             if (colorTimer == 0)
@@ -42,7 +46,7 @@ public class EyeScript : MonoBehaviour
             else if (colorTimer < 1)
             {
                 spriteRend.color = new Color(1, (1 - colorTimer), (1 - colorTimer));
-                if (TAS.timer > 1)
+                if (colorTimer > 1)
                 {
                     spriteRend.color = new Color(1, 0, 0);
                 }
