@@ -9,7 +9,7 @@ public class CollapseScript : MonoBehaviour {
     public float collapseDuration = 40f;
     float suspiciousTime = 0f;
     float suspiciousDuration = 600f;
-    
+    Animator anim;
     
     
     EnemyAI AI;
@@ -17,7 +17,7 @@ public class CollapseScript : MonoBehaviour {
     void Start()
     {
         AI = GetComponent<EnemyAI>();
-        
+        anim = GetComponentInChildren<Animator>();
     }
 
     void Update()
@@ -27,7 +27,12 @@ public class CollapseScript : MonoBehaviour {
             if (isCollapsed)
             {
                 AI.currentEnemyState = EnemyAI.EnemyState.Collapsed;
-                transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.gray;
+                //transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.gray;
+                if (!anim.GetBool("Stunned"))
+                {
+                    anim.transform.localScale = new Vector3(0.16f, 0.16f, 1f);
+                    anim.SetBool("Stunned", true);
+                }
                 collapseTime += 10 * Time.deltaTime;
                 if (collapseTime >= collapseDuration)
                 {
@@ -39,7 +44,12 @@ public class CollapseScript : MonoBehaviour {
             }
             else
             {
-                transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.white;
+                //transform.Find("Sprite").GetComponent<SpriteRenderer>().color = Color.white;
+                if (anim.GetBool("Stunned"))
+                {
+                    anim.transform.localScale = new Vector3(0.21f, 0.21f, 1f);
+                    anim.SetBool("Stunned", false);
+                }
             }
             if (isSuspicious && !isCollapsed && AI.currentEnemyState != EnemyAI.EnemyState.IsBeingKilled)
             {
