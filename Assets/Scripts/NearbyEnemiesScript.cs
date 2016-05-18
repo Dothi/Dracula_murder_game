@@ -9,6 +9,7 @@ public class NearbyEnemiesScript : MonoBehaviour
     public float timer;
     float bustTimer;
     GameController gc;
+    InvisibilitySkill invisSkill;
 
     void Awake()
     {
@@ -16,6 +17,7 @@ public class NearbyEnemiesScript : MonoBehaviour
         timer = 0f;
         bustTimer = 1f;
         gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
+        invisSkill = GetComponent<InvisibilitySkill>();
     }
 
     void Update()
@@ -46,7 +48,7 @@ public class NearbyEnemiesScript : MonoBehaviour
                 suspiciousEnemies.Remove(suspiciousEnemies[i]);
             }
         }
-        if (suspiciousEnemies.Count > 0)
+        if (suspiciousEnemies.Count > 0 && !invisSkill.isInvisible)
         {
             timer += Time.deltaTime;
             if (timer >= bustTimer)

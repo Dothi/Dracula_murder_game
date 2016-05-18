@@ -24,6 +24,7 @@ public class FieldOfView : MonoBehaviour
     PlayerCurrentRoomScript playerCurrentRoom;
     Vector3 pos;
     public Vector3 vel;
+    InvisibilitySkill invisSkill;
     
 
     #endregion
@@ -57,6 +58,7 @@ public class FieldOfView : MonoBehaviour
         playerLayerMask = ~playerLayerMask;
         playerCurrentRoom = player.GetComponentInChildren<PlayerCurrentRoomScript>();
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        invisSkill = player.GetComponent<InvisibilitySkill>();
 
     }
 
@@ -176,13 +178,13 @@ public class FieldOfView : MonoBehaviour
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, playerLayerMask);
                         Debug.DrawLine(transform.position, player.transform.position, color);
 
-                        if (hit && hit.collider.gameObject == player)
+                        if (hit && hit.collider.gameObject == player && !invisSkill.isInvisible)
                         {
 
                             AI.seePlayer = true;
 
                         }
-                        else if (hit && hit.collider.tag == "PlayerFeet")
+                        else if (hit && hit.collider.tag == "PlayerFeet" && !invisSkill.isInvisible)
                         {
 
                             AI.seePlayer = true;
@@ -243,12 +245,12 @@ public class FieldOfView : MonoBehaviour
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, playerLayerMask);
                         Debug.DrawLine(transform.position, player.transform.position, color);
 
-                        if (hit && hit.collider.gameObject == player)
+                        if (hit && hit.collider.gameObject == player && !invisSkill.isInvisible)
                         {
 
                             AI.seePlayer = true;
                         }
-                        else if (hit && hit.collider.tag == "PlayerFeet")
+                        else if (hit && hit.collider.tag == "PlayerFeet" && !invisSkill.isInvisible)
                         {
 
                             AI.seePlayer = true;
@@ -309,12 +311,12 @@ public class FieldOfView : MonoBehaviour
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, playerLayerMask);
                         Debug.DrawLine(transform.position, player.transform.position, color);
 
-                        if (hit && hit.collider.gameObject == player)
+                        if (hit && hit.collider.gameObject == player && !invisSkill.isInvisible)
                         {
 
                             AI.seePlayer = true;
                         }
-                        else if (hit && hit.collider.tag == "PlayerFeet")
+                        else if (hit && hit.collider.tag == "PlayerFeet" && !invisSkill.isInvisible)
                         {
 
                             AI.seePlayer = true;
@@ -375,12 +377,12 @@ public class FieldOfView : MonoBehaviour
                         RaycastHit2D hit = Physics2D.Raycast(transform.position, targetDir.normalized, Mathf.Infinity, playerLayerMask);
                         Debug.DrawLine(transform.position, player.transform.position, color);
 
-                        if (hit && hit.collider.gameObject == player)
+                        if (hit && hit.collider.gameObject == player && !invisSkill.isInvisible)
                         {
 
                             AI.seePlayer = true;
                         }
-                        else if (hit && hit.collider.tag == "PlayerFeet")
+                        else if (hit && hit.collider.tag == "PlayerFeet" && !invisSkill.isInvisible)
                         {
 
                             AI.seePlayer = true;

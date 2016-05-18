@@ -17,6 +17,7 @@ public class KillScript : MonoBehaviour {
 
     public GameObject minigame;
     PlayerMovement pMove;
+    InvisibilitySkill invisSkill;
 
     void Start()
     {
@@ -25,6 +26,7 @@ public class KillScript : MonoBehaviour {
         pMove = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         enemyCounter = GameObject.Find("Enemy Counter").GetComponent<EnemyCounter>();
         audioSource = GetComponent<AudioSource>();
+        invisSkill = GetComponent<InvisibilitySkill>();
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -119,6 +121,13 @@ public class KillScript : MonoBehaviour {
         {
             bloodBar.GetBloodFromKill(bloodBar.bloodFromKill);
             KillEnemy(killTarget);
+
+            //Reduce invis cd
+            if (invisSkill.coolDown < 2)
+            {
+                invisSkill.coolDown++;
+            }
+
         }
         isSuckingBlood = false;
         pMove.canMove = true;
