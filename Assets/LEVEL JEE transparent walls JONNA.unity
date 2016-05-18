@@ -7139,6 +7139,10 @@ Transform:
 GameObject:
   m_PrefabParentObject: {fileID: 157342, guid: c86ce74a9f7ff874cb89b8e4037f7ee7, type: 2}
   m_PrefabInternal: {fileID: 643446715}
+--- !u!1 &436456744 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 153122, guid: d7aa426d5745caf4d94f398d6ccafa9f, type: 2}
+  m_PrefabInternal: {fileID: 1099731588}
 --- !u!1001 &436857476
 Prefab:
   m_ObjectHideFlags: 0
@@ -37782,7 +37786,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 11489566, guid: 0b58cdd47e095b341bc91ea029cdcb6b, type: 2}
       propertyPath: bottomWallPieces.Array.size
-      value: 20
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 460952, guid: 0b58cdd47e095b341bc91ea029cdcb6b, type: 2}
       propertyPath: m_LocalPosition.x
@@ -37973,6 +37977,10 @@ Prefab:
       propertyPath: bottomWallPieces.Array.data[19]
       value: 
       objectReference: {fileID: 214251711}
+    - target: {fileID: 11489566, guid: 0b58cdd47e095b341bc91ea029cdcb6b, type: 2}
+      propertyPath: bottomWallPieces.Array.data[20]
+      value: 
+      objectReference: {fileID: 436456744}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0b58cdd47e095b341bc91ea029cdcb6b, type: 2}
   m_IsPrefabParent: 0
