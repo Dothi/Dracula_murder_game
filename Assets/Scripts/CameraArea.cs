@@ -114,7 +114,7 @@ public class CameraArea : MonoBehaviour {
             fadeEndValue = new Color(fade.color.r, fade.color.g, fade.color.b, 0.0f);
             if (bottomWallSprites.Count > 0)
             {
-                wallFadeEndValue = new Color(1f, 1f, 1f, 0.6f);
+                wallFadeEndValue = new Color(1f, 1f, 1f, 0.3f);
             }
 
             currentLerpTime += Time.deltaTime;
