@@ -13,7 +13,7 @@ public class InvisibilitySkill : MonoBehaviour
 
     void Awake()
     {
-        coolDown = 0;
+        coolDown = 2;
         durationTime = 5f;
         invisTimer = 0f;
         isInvisible = false;
@@ -30,6 +30,7 @@ public class InvisibilitySkill : MonoBehaviour
             {
                 isInvisible = true;
                 coolDownReady = false;
+                coolDown = 0;
             }
         }
         if (isInvisible)
@@ -49,7 +50,6 @@ public class InvisibilitySkill : MonoBehaviour
         if (!coolDownReady && coolDown == 2)
         {
             coolDownReady = true;
-            coolDown = 0;
         }
     }
 }

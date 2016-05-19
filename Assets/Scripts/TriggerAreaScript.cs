@@ -60,7 +60,6 @@ public class TriggerAreaScript : MonoBehaviour
                             if (timer >= 2f)
                             {
                                 gc.gameOver = true;
-                                timer = 0f;
                             }
                             else
                             {
@@ -74,7 +73,6 @@ public class TriggerAreaScript : MonoBehaviour
                             if (timer >= 2f)
                             {
                                 gc.gameOver = true;
-                                timer = 0f;
                             }
                             else
                             {
