@@ -145,8 +145,7 @@ public class KillScript : MonoBehaviour {
         gameController.enemies.Remove(target);
         if (gameController.enemies.Count < 1)
         {
-            gameController.gameOver = true;
-            gameController.gameWon = true;
+            gameController.GameOver("You Win! - Play Again");
         }
     }
 }

@@ -64,7 +64,7 @@ public class KillMinigame : MonoBehaviour {
     {
         if (Input.anyKeyDown)
         {
-            if (Input.GetKeyDown(CancelKey) || Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(CancelKey) || Input.GetKeyDown(KeyCode.Escape) || (Input.GetKeyDown(KeyCode.C) && player.GetComponent<InvisibilitySkill>().isInvisible))
             {
                 //Cancel
                 ks.CancelKill();

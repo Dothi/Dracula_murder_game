@@ -7,7 +7,8 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
     public bool gameOver = false;
-    public bool gameWon = false;
+    //public bool gameWon = false;
+    string gameOverMessage = "-";
     GameObject playAgainButton;
     public List<GameObject> enemies;
     public List<GameObject> pausedEnemies;
@@ -50,14 +51,10 @@ public class GameController : MonoBehaviour {
             {
                 playAgainButton.SetActive(true);
             }
-            if (gameWon)
+            if (playAgainButton.GetComponentInChildren<Text>().text != gameOverMessage)
             {
-                playAgainButton.GetComponentInChildren<Text>().text = "You Win! - Play Again";
-            }
-            else
-            {
-                playAgainButton.GetComponentInChildren<Text>().text = "You Lose - Play Again";
-            }            
+                playAgainButton.GetComponentInChildren<Text>().text = gameOverMessage;
+            }         
         }
         /*
         else if (!gameOver)
@@ -72,6 +69,11 @@ public class GameController : MonoBehaviour {
             }                       
         }*/
 	}
+    public void GameOver(string endMsg)
+    {
+        gameOver = true;
+        this.gameOverMessage = endMsg;
+    }
     public void PlayAgain()
     {
         gameOver = false;
