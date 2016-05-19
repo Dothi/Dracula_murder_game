@@ -37,7 +37,7 @@ public class InvisibilitySkill : MonoBehaviour
         {
             spriteRend.color = new Color(1, 1, 1, .4f);
             invisTimer += 1 * Time.deltaTime;
-            if (invisTimer >= durationTime)
+            if (invisTimer >= durationTime || ks.isSuckingBlood)
             {
                 isInvisible = false;
                 invisTimer = 0f;

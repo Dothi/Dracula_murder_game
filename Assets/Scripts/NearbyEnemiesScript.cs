@@ -51,7 +51,7 @@ public class NearbyEnemiesScript : MonoBehaviour
         if (suspiciousEnemies.Count > 0 && !invisSkill.isInvisible)
         {
             timer += Time.deltaTime;
-            if (timer >= bustTimer)
+            if (this.timer >= bustTimer)
             {
                 gc.gameOver = true;
                 Debug.Log("busteed");
@@ -59,7 +59,7 @@ public class NearbyEnemiesScript : MonoBehaviour
         }
         else
         {
-            timer = 0f;
+            this.timer = 0f;
         }
     }
 }

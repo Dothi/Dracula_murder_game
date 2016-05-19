@@ -28,6 +28,10 @@ public class TriggerAreaScript : MonoBehaviour
 
     void Update()
     {
+        if (this.timer >= 2f)
+        {
+            gc.gameOver = true;
+        }
         if (AI.currentEnemyState == EnemyAI.EnemyState.Dead || AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
         {
             timer = 0f;
@@ -57,31 +61,17 @@ public class TriggerAreaScript : MonoBehaviour
                             AI.isWaiting = true;
                             timer += 1 * Time.deltaTime;
                             Debug.Log("Time for bust: " + timer);
-                            if (timer >= 2f)
-                            {
-                                gc.gameOver = true;
-                            }
-                            else
-                            {
-                                cs.isSuspicious = true;
-                            }
+                            cs.isSuspicious = true;
                             break;
                         case EnemyAI.EnemyState.IsBeingKilled:
                             AI.isWaiting = true;
                             timer += 1 * Time.deltaTime;
                             Debug.Log("Time for bust: " + timer);
-                            if (timer >= 2f)
-                            {
-                                gc.gameOver = true;
-                            }
-                            else
-                            {
-                                cs.isSuspicious = true;
-                            }
+                            cs.isSuspicious = true;
                             break;
                     }
                 }
-                
+
             }
         }
         else if (AI.seePlayer)
@@ -95,15 +85,7 @@ public class TriggerAreaScript : MonoBehaviour
                     AI.isWaiting = true;
                     timer += 1 * Time.deltaTime;
                     Debug.Log("Time for bust: " + timer);
-                    if (timer >= 2f)
-                    {
-                        gc.gameOver = true;
-                        timer = 0f;
-                    }
-                    else
-                    {
-                        cs.isSuspicious = true;
-                    }
+                    cs.isSuspicious = true;
                 }
                 else if (currentEnemyAI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
                 {
@@ -113,9 +95,9 @@ public class TriggerAreaScript : MonoBehaviour
         }
         else
         {
-            timer = 0f;
+            this.timer = 0f;
         }
-       
+
     }
     void EnableTrigger()
     {
@@ -197,7 +179,7 @@ public class TriggerAreaScript : MonoBehaviour
             if (nearbyEnemiesScript.nearbyEnemies.Contains(gameObject.transform.parent.gameObject))
             {
                 nearbyEnemiesScript.nearbyEnemies.Remove(gameObject.transform.parent.gameObject);
-                
+
             }
         }
     }
