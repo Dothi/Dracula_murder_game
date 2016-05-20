@@ -16,10 +16,13 @@ public class KillMinigame : MonoBehaviour {
     List<KillGameButton> buttonList = new List<KillGameButton>();
 
     GameObject buttonParent;
-
+    
     Canvas canvas;
     GameObject player;
     KillScript ks;
+
+    public List<GameObject> playerSeeingEnemies = new List<GameObject>();
+    GameController gc;
 
     bool gameStarted = false;
 
@@ -32,6 +35,7 @@ public class KillMinigame : MonoBehaviour {
 
         canvas = FindObjectOfType<Canvas>();
         player = GameObject.FindGameObjectWithTag("Player");
+        gc = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
         ks = player.GetComponent<KillScript>();
         ks.minigame = gameObject;
 
@@ -62,6 +66,7 @@ public class KillMinigame : MonoBehaviour {
 
     void Update()
     {
+        EnemiesThatSeePlayer();
         if (Input.anyKeyDown)
         {
             if (Input.GetKeyDown(CancelKey) || Input.GetKeyDown(KeyCode.Escape) || (Input.GetKeyDown(KeyCode.C) && player.GetComponent<InvisibilitySkill>().isInvisible))
@@ -89,6 +94,14 @@ public class KillMinigame : MonoBehaviour {
                             MinigameLength++;
                             Debug.Log("Minigame won!");
                             gameObject.SetActive(false);
+                            if (playerSeeingEnemies.Count > 0)
+                            {
+                                for (int x = 0; x < playerSeeingEnemies.Count; x++)
+                                {
+                                    playerSeeingEnemies[x].GetComponentInChildren<TriggerAreaScript>().timer = 2f;
+                                    Debug.Log(playerSeeingEnemies[x] + " saw you kill an enemy.");
+                                }
+                            }
 
                             break;
                         }
@@ -175,5 +188,19 @@ public class KillMinigame : MonoBehaviour {
         //keyCodes.Add(KeyCode.Z);
         //keyCodes.Add(KeyCode.X);
         //keyCodes.Add(KeyCode.C);
+    }
+    void EnemiesThatSeePlayer()
+    {
+        for (int i = 0; i < gc.enemies.Count; i++)
+        {
+            if (gc.enemies[i].GetComponent<EnemyAI>().seePlayer && !playerSeeingEnemies.Contains(gc.enemies[i]))
+            {
+                playerSeeingEnemies.Add(gc.enemies[i]);
+            }
+            else if (playerSeeingEnemies.Contains(gc.enemies[i]) && !gc.enemies[i].GetComponent<EnemyAI>().seePlayer)
+            {
+                playerSeeingEnemies.Remove(gc.enemies[i]);
+            }
+        }
     }
 }
