@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MenuController : MonoBehaviour
 {
@@ -7,6 +9,10 @@ public class MenuController : MonoBehaviour
     GameController gc;
     GameObject pauseMenu;
     GameObject credits;
+    GameObject tutorial;
+    Image tutImg;
+    public List<Sprite> tutorialSprites;
+    int currentTutSprite = 1;
     public AudioClip clickSound;
     AudioSource audioSource;
 
@@ -24,7 +30,10 @@ public class MenuController : MonoBehaviour
         if (Application.loadedLevel == 0)
         {
             credits = GameObject.Find("Credits");
+            tutorial = GameObject.Find("Tutorial");
+            tutImg = tutorial.GetComponent<Image>();
             credits.SetActive(false);
+            tutorial.SetActive(false);
         }
         if (pauseMenu != null)
         {
@@ -42,8 +51,7 @@ public class MenuController : MonoBehaviour
         {
             Time.timeScale = 1;
             PlayClickSound();
-            Invoke("LoadAfterSound", 1f);
-            
+            Invoke("LoadAfterSound", 1f);            
         }
 
         if (Application.loadedLevel == 1)
@@ -80,10 +88,47 @@ public class MenuController : MonoBehaviour
         {
             credits.SetActive(false);
         }
+        CloseTutOrCred(tutorial);
+    }
+    public void ToggleTutorial()
+    {
+        PlayClickSound();
+        if (!tutorial.activeInHierarchy)
+        {
+            tutorial.SetActive(true);
+            currentTutSprite = 0;
+            tutImg.sprite = tutorialSprites[currentTutSprite];
+        }
+        else
+        {
+            tutorial.SetActive(false);
+        }
+        CloseTutOrCred(credits);
     }
     public void PlayClickSound()
     {
         audioSource.clip = clickSound;
         audioSource.Play();
+    }
+    public void NextTutorialSprite()
+    {
+        PlayClickSound();
+
+        if (currentTutSprite == tutorialSprites.Count - 1)
+        {
+            currentTutSprite = 0;
+        }
+        else
+        {
+            currentTutSprite++;
+        }
+        tutImg.sprite = tutorialSprites[currentTutSprite];
+    }
+    void CloseTutOrCred(GameObject tutOrCred)
+    {
+        if (tutOrCred.activeInHierarchy)
+        {
+            tutOrCred.SetActive(false);
+        }
     }
 }

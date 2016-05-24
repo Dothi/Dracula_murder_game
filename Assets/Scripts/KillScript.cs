@@ -19,6 +19,8 @@ public class KillScript : MonoBehaviour {
     PlayerMovement pMove;
     InvisibilitySkill invisSkill;
 
+    Sprite blank = null;
+
     void Start()
     {
         gameController = GameObject.FindGameObjectWithTag("GameController").GetComponent<GameController>();
@@ -145,7 +147,7 @@ public class KillScript : MonoBehaviour {
         gameController.enemies.Remove(target);
         if (gameController.enemies.Count < 1)
         {
-            gameController.GameOver(true, "You slaughtered every single person in da house");
+            gameController.GameOver(true, blank);
         }
     }
 }

@@ -114,6 +114,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a8e7ff3528924334ba87ea054502a0d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialSprites:
+  - {fileID: 21300000, guid: 4908771ee169db24da317b328757a16d, type: 3}
+  - {fileID: 21300000, guid: 7bddf882ac7524b4fa9c2bf90a994924, type: 3}
+  - {fileID: 21300000, guid: d035e8f997444364e89279f2f690fe95, type: 3}
   clickSound: {fileID: 8300000, guid: 8f85a9f168360994fb36c79bff7a2cd6, type: 3}
 --- !u!1001 &100100000
 Prefab:

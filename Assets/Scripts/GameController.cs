@@ -9,10 +9,10 @@ public class GameController : MonoBehaviour {
     public bool gameOver = false;
     bool gameWon = false;
     //public bool gameWon = false;
-    string gameOverMessage = "-";
+    Sprite gameOverMessage;
     GameObject endMenu;
-    Text endMsg;
-    Image gameOverText;
+    Image endMsg;
+    Image gameOverHeadline;
     public List<GameObject> enemies;
     public List<GameObject> pausedEnemies;
     public Sprite youWin;
@@ -32,8 +32,8 @@ public class GameController : MonoBehaviour {
 	void Start ()
     {
         endMenu = GameObject.Find("EndMenu");
-        endMsg = endMenu.transform.Find("EndMessage").GetComponent<Text>();
-        gameOverText = endMenu.transform.Find("GameOverText").GetComponent<Image>();
+        endMsg = endMenu.transform.Find("EndMessage").GetComponent<Image>();
+        gameOverHeadline = endMenu.transform.Find("GameOverText").GetComponent<Image>();
         endMenu.SetActive(false);
         enemies = new List<GameObject>();
         enemies.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
@@ -58,22 +58,22 @@ public class GameController : MonoBehaviour {
             {
                 endMenu.SetActive(true);
             }
-            if (endMsg.text != gameOverMessage)
+            if (endMsg.sprite != gameOverMessage)
             {
-                endMsg.text = gameOverMessage;
+                endMsg.sprite = gameOverMessage;
             }
             if (gameWon)
             {
-                if (gameOverText.sprite != youWin)
+                if (gameOverHeadline.sprite != youWin)
                 {
-                    gameOverText.sprite = youWin;
+                    gameOverHeadline.sprite = youWin;
                 }
             }
             else
             {
-                if (gameOverText.sprite != youLose)
+                if (gameOverHeadline.sprite != youLose)
                 {
-                    gameOverText.sprite = youLose;
+                    gameOverHeadline.sprite = youLose;
                 }
             }
         }
@@ -90,14 +90,15 @@ public class GameController : MonoBehaviour {
             }                       
         }*/
 	}
-    public void GameOver(bool gameWon, string endMsg/*, Vector2 cameraLocation, float cameraZoom*/)
+    public void GameOver(bool gameWon, Sprite endMsg)
     {
         this.gameOver = true;
         this.gameWon = gameWon;
         this.gameOverMessage = endMsg;
-
-        //Camera.main.GetComponent<CameraFollow>().cameraEndPos = cameraLocation;
-        //Camera.main.GetComponent<CameraFollow>().zoomEndValue = cameraZoom;
+        if (this.gameOver == true)
+        {
+            this.endMsg.gameObject.SetActive(false);
+        }
     }
     public void PlayAgain()
     {

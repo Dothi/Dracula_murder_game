@@ -57,8 +57,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOver: 0
-  gameWon: 0
   enemies: []
+  pausedEnemies: []
+  youWin: {fileID: 21300000, guid: c449fbedd96780640bafee305d8b766e, type: 3}
+  youLose: {fileID: 21300000, guid: dccc632ae6e163b42a35a9f7a6b191ed, type: 3}
   playerIsPeeking: 0
   playerInCloset: 0
   playerNearCloset: 0
