@@ -1173,7 +1173,7 @@ Prefab:
     - target: {fileID: 11472840, guid: 3c2583dd46dd1104d9f4af264b3e436e, type: 2}
       propertyPath: tutorialSprites.Array.data[2]
       value: 
-      objectReference: {fileID: 21300000, guid: 55b8f05fa98eca044b45ac8ba9934849,
+      objectReference: {fileID: 21300000, guid: 725e9e101015b1044ba3805f78136cbc,
         type: 3}
     - target: {fileID: 11472840, guid: 3c2583dd46dd1104d9f4af264b3e436e, type: 2}
       propertyPath: tutorialSprites.Array.data[3]
