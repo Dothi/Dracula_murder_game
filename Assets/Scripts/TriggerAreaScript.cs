@@ -31,6 +31,7 @@ public class TriggerAreaScript : MonoBehaviour
     {
         if (this.timer >= 2f)
         {
+            Debug.Log("ay lamo");
             gc.GameOver(false, bustSprite);
         }
         if (AI.currentEnemyState == EnemyAI.EnemyState.Dead || AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
