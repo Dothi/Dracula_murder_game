@@ -5022,7 +5022,7 @@ Prefab:
     - target: {fileID: 11457678, guid: 256fc1e6f5177ba4b8853401424efa40, type: 2}
       propertyPath: youWin
       value: 
-      objectReference: {fileID: 21300000, guid: c449fbedd96780640bafee305d8b766e,
+      objectReference: {fileID: 21300000, guid: e45ff5a20aff35b45af4781a7905b5f6,
         type: 3}
     - target: {fileID: 11457678, guid: 256fc1e6f5177ba4b8853401424efa40, type: 2}
       propertyPath: youLose
@@ -21770,7 +21770,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 9a7005297dfa27f418546c7c8f1fc0a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 243f88b52606fcb4f81d938d242dee28, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
