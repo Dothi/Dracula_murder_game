@@ -8,6 +8,9 @@ public class BloodBar : MonoBehaviour
     KillScript killScript;
     Slider bloodBar;
 
+    public Sprite endMsgNormal;
+    public Sprite endMsgGarlic;
+
     Image bloodFlash;
     Animator bloodWave;
     float flashTimer = 0;
@@ -47,8 +50,14 @@ public class BloodBar : MonoBehaviour
             currentBlood = 0;
             if (!gameController.gameOver)
             {
-                gameController.gameOver = true;
-                Debug.Log("Game Over");
+                if (nearGarlic)
+                {
+                    gameController.GameOver(false, endMsgGarlic);
+                }
+                else
+                {
+                    gameController.GameOver(false, endMsgNormal);
+                }
             }
         }
         FlashBloodBar();

@@ -12,7 +12,6 @@ public class GameController : MonoBehaviour {
     Image endMsgObject;
     Image gameOverHeadline;
     public List<GameObject> enemies;
-    public List<GameObject> pausedEnemies;
     public Sprite youWin;
     public Sprite youLose;
 
@@ -44,6 +43,15 @@ public class GameController : MonoBehaviour {
     {
         if (gameOver)
         {
+            if (killMinigame.activeInHierarchy)
+            {
+                killMinigame.SetActive(false);
+            }
+            if (!endMenu.activeInHierarchy)
+            {
+                endMenu.SetActive(true);
+            }
+
             if (gameWon)
             {
                 if (gameOverHeadline.sprite != youWin)
@@ -74,15 +82,6 @@ public class GameController : MonoBehaviour {
 	}
     public void GameOver(bool gameWon, Sprite endMsg)
     {
-        if (killMinigame.activeInHierarchy)
-        {
-            killMinigame.SetActive(false);
-        }
-        if (!endMenu.activeInHierarchy)
-        {
-            endMenu.SetActive(true);
-        }
-
         this.gameOver = true;
         this.gameWon = gameWon;
         this.endMsgObject.sprite = endMsg;
