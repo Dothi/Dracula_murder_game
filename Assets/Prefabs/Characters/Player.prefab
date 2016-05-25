@@ -245,6 +245,7 @@ MonoBehaviour:
   nearbyEnemies: []
   suspiciousEnemies: []
   timer: 0
+  bustSprite: {fileID: 21300000, guid: 9a7005297dfa27f418546c7c8f1fc0a4, type: 3}
 --- !u!114 &11418694
 MonoBehaviour:
   m_ObjectHideFlags: 1
