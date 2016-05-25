@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a191d8b2d44a110419c52f24d1b51004, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bustSprite: {fileID: 21300000, guid: 9a7005297dfa27f418546c7c8f1fc0a4, type: 3}
+  bustSprite: {fileID: 21300000, guid: efa127d6190de1249966b2e5d5d105a5, type: 3}
   timer: 0
 --- !u!114 &11437062
 MonoBehaviour:

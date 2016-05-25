@@ -10,6 +10,7 @@ public class NearbyEnemiesScript : MonoBehaviour
     float bustTimer;
     GameController gc;
     InvisibilitySkill invisSkill;
+    public Sprite bustSprite;
 
     void Awake()
     {
@@ -53,7 +54,7 @@ public class NearbyEnemiesScript : MonoBehaviour
             timer += Time.deltaTime;
             if (this.timer >= bustTimer)
             {
-                gc.gameOver = true;
+                gc.GameOver(false, bustSprite);
                 Debug.Log("busteed");
             }
         }
