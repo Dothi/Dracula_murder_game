@@ -11,6 +11,7 @@ public class TriggerAreaScript : MonoBehaviour
     GameObject player;
     GameObject gamecontroller;
     GameController gc;
+    public Sprite bustSprite;
 
     public float timer;
     void Start()
@@ -30,7 +31,7 @@ public class TriggerAreaScript : MonoBehaviour
     {
         if (this.timer >= 2f)
         {
-            gc.gameOver = true;
+            gc.GameOver(false, bustSprite);
         }
         if (AI.currentEnemyState == EnemyAI.EnemyState.Dead || AI.currentEnemyState == EnemyAI.EnemyState.Collapsed)
         {
